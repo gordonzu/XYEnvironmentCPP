@@ -21,7 +21,7 @@ private:
 
 class EnvironmentObject {
 public:
-    virtual ~EnvironmentObject() {}
+    virtual ~EnvironmentObject();
 };
 
 class Agent: public EnvironmentObject {
