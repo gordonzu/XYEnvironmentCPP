@@ -32,6 +32,30 @@ MockAgent::~MockAgent()
 {
 }
 
+// LocationPair
+LocationPair::LocationPair(XYLocation* xy, std::vector<EnvironmentObject*>* envs):
+                           xy_{xy}, envs_{envs} 
+{
+} 
+                            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

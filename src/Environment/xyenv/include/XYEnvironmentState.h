@@ -42,8 +42,7 @@ public:
 class LocationPair {
 public:
     LocationPair() {}
-    LocationPair(XYLocation* xy, std::vector<EnvironmentObject*>* envs)
-                : xy_{xy}, envs_{envs} {}
+    LocationPair(XYLocation* xy, std::vector<EnvironmentObject*>* envs);
 
     XYLocation* xy_;
     std::vector<EnvironmentObject*>* envs_;    
