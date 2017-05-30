@@ -69,16 +69,8 @@ private:
 
 class AbstractEnvironment {
 public:
-    std::vector<Agent*> getAgents() {
-        return agents;
-    }
-
-    void addEnvironmentObject(EnvironmentObject* eo) {
-        envObjects.push_back(eo);
-        if (Agent* a = dynamic_cast<Agent*>(eo)) {
-            agents.push_back(a);            
-        }          
-    }
+    std::vector<Agent*> getAgents(); 
+    void addEnvironmentObject(EnvironmentObject* eo); 
 
 protected:
     std::vector<EnvironmentObject*> envObjects;
