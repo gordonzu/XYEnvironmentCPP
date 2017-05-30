@@ -26,7 +26,7 @@ public:
 
 class Agent: public EnvironmentObject {
 public:
-    virtual ~Agent() {}
+    virtual ~Agent();
 };
 
 class AbstractAgent: public Agent {
