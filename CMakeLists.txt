@@ -4,7 +4,8 @@ cmake_minimum_required(VERSION 2.6)
 include_directories("$ENV{GMOCK_HOME}/include" 
                     "$ENV{GMOCK_HOME}/gtest/include"
                     "$ENV{BOOST_INCLUDE}" 
-                    "$ENV{HOME}/src/cpp/XYEnvironment/src") 
+                    "$ENV{HOME}/src/cpp/XYEnvironment/src" 
+                    "$ENV{HOME}/src/cpp/XYEnvironment/tests") 
 link_directories   ("$ENV{GMOCK_HOME}/mybuild" 
                     "$ENV{GMOCK_HOME}/gtest/mybuild"
                     "$ENV{BOOST_LIB}")
@@ -12,10 +13,13 @@ link_directories   ("$ENV{GMOCK_HOME}/mybuild"
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -g -Wall -O0 -fmax-errors=1")
 
 set(sources
+    tests/AgentTest/impl/cpp/MockAgent.cpp
+    src/Agent/impl/cpp/AbstractAgent.cpp
+    src/Agent/cpp/Agent.cpp
     src/Agent/cpp/EnvironmentObject.cpp
     src/Util/datastructure/cpp/XYLocation.cpp
     src/Environment/xyenv/cpp/XYEnvironmentState.cpp
-    tests/Environment/XYEnvironmentTest.cpp
+    tests/EnvironmentTest/XYEnvironmentTest.cpp
     main.cpp
   )
 

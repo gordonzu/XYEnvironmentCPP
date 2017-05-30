@@ -8,21 +8,9 @@
 #include <cassert>
 #include "Util/datastructure/include/XYLocation.h"
 #include "Agent/include/EnvironmentObject.h"
+#include "Agent/include/Agent.h"
+#include "Agent/impl/include/AbstractAgent.h"
 
-class Agent: public EnvironmentObject {
-public:
-    virtual ~Agent();
-};
-
-class AbstractAgent: public Agent {
-public:
-    virtual ~AbstractAgent();
-};
-
-class MockAgent: public AbstractAgent {
-public:
-    virtual ~MockAgent(); 
-};
 
 class LocationPair {
 public:

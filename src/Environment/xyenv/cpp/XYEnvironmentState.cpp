@@ -1,21 +1,6 @@
 // XYEnvironmentState.cpp
 #include "Environment/xyenv/include/XYEnvironmentState.h"
 
-// Agent
-Agent::~Agent()
-{
-}
-
-// AbstractAgent
-AbstractAgent::~AbstractAgent()
-{
-}
-
-// MockAgent
-MockAgent::~MockAgent()
-{
-}
-
 // LocationPair
 LocationPair::LocationPair(XYLocation* xy, std::vector<EnvironmentObject*>* envs):
                            xy_{xy}, envs_{envs} 
