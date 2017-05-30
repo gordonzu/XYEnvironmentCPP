@@ -13,6 +13,7 @@ link_directories   ("$ENV{GMOCK_HOME}/mybuild"
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -g -Wall -O0 -fmax-errors=1")
 
 set(sources
+    src/Environment/xyenv/cpp/XYEnvironmentState.cpp
     tests/Environment/XYEnvironmentTest.cpp
     main.cpp
   )

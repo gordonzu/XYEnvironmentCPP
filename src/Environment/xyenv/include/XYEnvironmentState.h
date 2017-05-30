@@ -11,14 +11,8 @@ class XYLocation {
 public:
     XYLocation() {}
     XYLocation(int w, int h): width_{w}, height_{h} {}
-
-    void xylocation() {
-        std::cout << "XYLocation: width= " << width_ << " height= " << height_ << std::endl;
-    }
-
-    bool operator==(const XYLocation& rhs) const {
-        return ((width_ == rhs.width_) && (height_ == rhs.height_));
-    }
+    void xylocation(); 
+    bool operator==(const XYLocation& rhs) const; 
 
 private:
     int width_;
