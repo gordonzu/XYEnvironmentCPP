@@ -6,23 +6,8 @@
 #include <typeinfo>
 #include <algorithm>
 #include <cassert>
-
-class XYLocation {
-public:
-    XYLocation() {}
-    XYLocation(int w, int h): width_{w}, height_{h} {}
-    void xylocation(); 
-    bool operator==(const XYLocation& rhs) const; 
-
-private:
-    int width_;
-    int height_;
-};
-
-class EnvironmentObject {
-public:
-    virtual ~EnvironmentObject();
-};
+#include "Util/datastructure/include/XYLocation.h"
+#include "Agent/include/EnvironmentObject.h"
 
 class Agent: public EnvironmentObject {
 public:
