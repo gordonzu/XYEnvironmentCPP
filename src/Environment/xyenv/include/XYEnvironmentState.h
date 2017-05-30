@@ -79,65 +79,15 @@ protected:
 
 class XYEnvironment: public AbstractEnvironment {
 public:
-    XYEnvironment() {}
-    XYEnvironment(int w, int h) {
-        assert (w > 0);
-        assert (h > 0);
-
-        envState = new XYEnvironmentState(w, h);        
-    }
-
-    virtual ~XYEnvironment() {}
-
-    void addObjectToLocation(EnvironmentObject* eo, XYLocation* loc) {
-        moveObjectToAbsoluteLocation(eo, loc);
-    }
-
-    void moveObjectToAbsoluteLocation(EnvironmentObject* eo, XYLocation* loc) {
-        envState->moveObjectToAbsoluteLocation(eo, loc);
-        addEnvironmentObject(eo);
-    }
-
-    XYLocation* getCurrentLocationFor(EnvironmentObject* eo) {
-        return envState->getCurrentLocationFor(eo);
-    }
+    XYEnvironment(); 
+    XYEnvironment(int w, int h); 
+    virtual ~XYEnvironment();
+    void addObjectToLocation(EnvironmentObject* eo, XYLocation* loc); 
+    void moveObjectToAbsoluteLocation(EnvironmentObject* eo, XYLocation* loc);
+    XYLocation* getCurrentLocationFor(EnvironmentObject* eo); 
 
 private:
     XYEnvironmentState* envState;
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
