@@ -5,6 +5,7 @@
 #include <memory>
 #include <typeinfo>
 #include <algorithm>
+#include <cassert>
 
 class XYLocation {
 public:
@@ -30,21 +31,19 @@ public:
 };
 
 class Agent: public EnvironmentObject {
-
-
+public:
+    virtual ~Agent() {}
 };
 
 class AbstractAgent: public Agent {
-
-
+public:
+    virtual ~AbstractAgent() {}
 };
 
 class MockAgent: public AbstractAgent {
-
-
-
+public:
+    virtual ~MockAgent() {}
 };
-
 
 class LocationPair {
 public:
@@ -137,6 +136,52 @@ private:
 };
 
 
+class AbstractEnvironment {
+public:
+    std::vector<Agent*> getAgents() {
+        return agents;
+    }
+
+    void addEnvironmentObject(EnvironmentObject* eo) {
+        envObjects.push_back(eo);
+        if (Agent* a = dynamic_cast<Agent*>(eo)) {
+            agents.push_back(a);            
+        }          
+    }
+
+protected:
+    std::vector<EnvironmentObject*> envObjects;
+    std::vector<Agent*> agents;
+};
+
+class XYEnvironment: public AbstractEnvironment {
+public:
+    XYEnvironment() {}
+    XYEnvironment(int w, int h) {
+        assert (w > 0);
+        assert (h > 0);
+
+        envState = new XYEnvironmentState(w, h);        
+    }
+
+    virtual ~XYEnvironment() {}
+
+    void addObjectToLocation(EnvironmentObject* eo, XYLocation* loc) {
+        moveObjectToAbsoluteLocation(eo, loc);
+    }
+
+    void moveObjectToAbsoluteLocation(EnvironmentObject* eo, XYLocation* loc) {
+        envState->moveObjectToAbsoluteLocation(eo, loc);
+        addEnvironmentObject(eo);
+    }
+
+    XYLocation* getCurrentLocationFor(EnvironmentObject* eo) {
+        return envState->getCurrentLocationFor(eo);
+    }
+
+private:
+    XYEnvironmentState* envState;
+};
 
 
 

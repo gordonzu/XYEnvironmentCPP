@@ -12,32 +12,30 @@ public:
     XYEnvironmentTest() {}
     virtual ~XYEnvironmentTest() {}
 
-    XYEnvironmentState*     env;
-    EnvironmentObject*      eo;
-    XYLocation*             loc;
+    XYEnvironment*  env;
+    AbstractAgent*  agent;
 
 protected: 
     virtual void SetUp() {
-        env = new XYEnvironmentState(3, 3);
-        loc = new XYLocation(1, 2);
-        eo = new EnvironmentObject();            
-        env->addObjectToLocation(eo, loc);
+        env     = new XYEnvironment(3, 3);
+        agent   = new MockAgent();            
+        env->addObjectToLocation(agent, new XYLocation(1, 2));
     }
 
     virtual void TearDown() {
         delete env;
-        delete loc;
+        delete agent;
         env = nullptr; 
-        loc = nullptr; 
+        agent = nullptr;
     }
 };
 
 TEST_F(XYEnvironmentTest, testAddObject) {
-    ASSERT_EQ(env->getVector()->size(), size_t(10));
+    ASSERT_EQ(env->getAgents().size(), size_t(1));
 }
 
 TEST_F(XYEnvironmentTest, testGetCurrentLocation) {
-    ASSERT_EQ(*(env->getCurrentLocationFor(eo)), *(new XYLocation(1, 2)));
+    ASSERT_EQ(*(env->getCurrentLocationFor(agent)), *(new XYLocation(1, 2)));
 }
 
 

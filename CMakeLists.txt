@@ -4,7 +4,8 @@ cmake_minimum_required(VERSION 2.6)
 include_directories("$ENV{GMOCK_HOME}/include" 
                     "$ENV{GMOCK_HOME}/gtest/include"
                     "$ENV{BOOST_INCLUDE}" 
-                    "$ENV{HOME}/src/cpp/XYEnvironment/src/Environment") 
+                    "$ENV{HOME}/src/cpp/XYEnvironment/src/Environment" 
+                    "$ENV{HOME}/src/cpp/XYEnvironment/src/Agent") 
 link_directories   ("$ENV{GMOCK_HOME}/mybuild" 
                     "$ENV{GMOCK_HOME}/gtest/mybuild"
                     "$ENV{BOOST_LIB}")
