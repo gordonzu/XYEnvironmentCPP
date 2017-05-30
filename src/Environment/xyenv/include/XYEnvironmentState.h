@@ -36,7 +36,7 @@ public:
 
 class MockAgent: public AbstractAgent {
 public:
-    virtual ~MockAgent() {}
+    virtual ~MockAgent(); 
 };
 
 class LocationPair {

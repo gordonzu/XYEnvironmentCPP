@@ -27,7 +27,10 @@ AbstractAgent::~AbstractAgent()
 {
 }
 
-
+// MockAgent
+MockAgent::~MockAgent()
+{
+}
 
 
 
