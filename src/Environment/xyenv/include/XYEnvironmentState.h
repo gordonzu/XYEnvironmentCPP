@@ -31,7 +31,7 @@ public:
 
 class AbstractAgent: public Agent {
 public:
-    virtual ~AbstractAgent() {}
+    virtual ~AbstractAgent();
 };
 
 class MockAgent: public AbstractAgent {

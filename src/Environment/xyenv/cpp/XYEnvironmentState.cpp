@@ -22,6 +22,11 @@ Agent::~Agent()
 {
 }
 
+// AbstractAgent
+AbstractAgent::~AbstractAgent()
+{
+}
+
 
 
 
