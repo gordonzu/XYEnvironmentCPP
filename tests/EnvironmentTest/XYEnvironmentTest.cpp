@@ -3,7 +3,7 @@
 #include <string>
 #include <iostream>
 #include "gmock/gmock.h"
-#include "Environment/xyenv/include/XYEnvironmentState.h"
+#include "Environment/xyenv/include/XYEnvironment.h"
 #include "AgentTest/impl/include/MockAgent.h"
 
 using namespace::testing;
