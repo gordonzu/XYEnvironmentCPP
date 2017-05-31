@@ -1,5 +1,5 @@
-#ifndef ABSTRACTAGENT_H
-#define ABSTRACTAGENT_H
+#ifndef ABSTRACT_AGENT_H
+#define ABSTRACT_AGENT_H
 
 #include "Agent/include/Agent.h"
 

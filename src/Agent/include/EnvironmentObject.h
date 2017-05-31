@@ -1,5 +1,5 @@
-#ifndef ENVIRONMENTOBJECT_H
-#define ENVIRONMENTOBJECT_H
+#ifndef ENVIRONMENT_OBJECT_H
+#define ENVIRONMENT_OBJECT_H
 
 class EnvironmentObject {
 public:

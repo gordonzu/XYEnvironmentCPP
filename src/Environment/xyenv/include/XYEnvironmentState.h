@@ -1,4 +1,6 @@
 // XYEnvironmentState.h
+#ifndef XY_ENVIRONMENT_STATE_H
+#define XY_ENVIRONMENT_STATE_H
 
 #include <iostream>
 #include <vector>
@@ -25,6 +27,6 @@ private:
     int                                 height_;
     void initState(); 
 };
-
+#endif
 
 
