@@ -1,12 +1,6 @@
 // XYEnvironmentState.cpp
 #include "Environment/xyenv/include/XYEnvironmentState.h"
 
-// LocationPair
-LocationPair::LocationPair(XYLocation* xy, std::vector<EnvironmentObject*>* envs):
-                           xy_{xy}, envs_{envs} 
-{
-} 
-
 // XYEnvironmentstate 
 XYEnvironmentState::XYEnvironmentState(int w, int h): width_{w}, height_{h} 
 {

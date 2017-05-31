@@ -10,16 +10,7 @@
 #include "Agent/include/EnvironmentObject.h"
 #include "Agent/include/Agent.h"
 #include "Agent/impl/include/AbstractAgent.h"
-
-
-class LocationPair {
-public:
-    LocationPair() {}
-    LocationPair(XYLocation* xy, std::vector<EnvironmentObject*>* envs);
-
-    XYLocation* xy_;
-    std::vector<EnvironmentObject*>* envs_;    
-};
+#include "Util/datastructure/include/LocationPair.h"
 
 class XYEnvironmentState {
 public:
