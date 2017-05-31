@@ -11,6 +11,7 @@
 #include "Agent/include/Agent.h"
 #include "Agent/impl/include/AbstractAgent.h"
 #include "Util/datastructure/include/LocationPair.h"
+#include "Agent/impl/include/AbstractEnvironment.h"
 
 class XYEnvironmentState {
 public:
@@ -30,16 +31,6 @@ private:
     void initState(); 
 };
 
-
-class AbstractEnvironment {
-public:
-    std::vector<Agent*> getAgents(); 
-    void addEnvironmentObject(EnvironmentObject* eo); 
-
-protected:
-    std::vector<EnvironmentObject*> envObjects;
-    std::vector<Agent*> agents;
-};
 
 class XYEnvironment: public AbstractEnvironment {
 public:
