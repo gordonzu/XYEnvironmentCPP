@@ -7,18 +7,13 @@ XYEnvironmentState::XYEnvironmentState(int w, int h): width_{w}, height_{h}
     initState();
 }                           
 
-void XYEnvironmentState::addObjectToLocation(EnvironmentObject* eo, XYLocation* loc)
-{
-    moveObjectToAbsoluteLocation(eo, loc);
-}
-
 void XYEnvironmentState::moveObjectToAbsoluteLocation(EnvironmentObject* eo, XYLocation* loc)
 {
     for (auto& x : *vecPairs) {
-        for (auto it = x.envs_->begin(); it != x.envs_->end(); ) {
+        for (auto it = x.get_envs()->begin(); it != x.get_envs()->end(); ) {
             if ((*it) == eo) {
                 delete *it;
-                it = x.envs_->erase(it);
+                it = x.get_envs()->erase(it);
             } else {
                 ++it;
             }
@@ -33,37 +28,34 @@ std::vector<EnvironmentObject*>* XYEnvironmentState::getObjectsAt(XYLocation* lo
     std::vector<EnvironmentObject*>* env_vector;
 
     it = std::find_if(vecPairs->begin(), vecPairs->end(), [loc](LocationPair& mypair) {
-        return mypair.xy_ == loc;
+        return (*(mypair.get_xy()) == *loc);
     });
 
-    if ((env_vector = it->envs_) == nullptr) {
+    if (it != vecPairs->end()) {
+        return it->get_envs();
+    } else {
         env_vector = new std::vector<EnvironmentObject*>();
         vecPairs->push_back(LocationPair(loc, env_vector));
+        return env_vector;
     }
-    return env_vector; 
 }
-
-void XYEnvironmentState::addEnvironmentObject(EnvironmentObject* eo)
-{
-    vecEnvs->push_back(eo);
-}
-
+ 
 XYLocation* XYEnvironmentState::getCurrentLocationFor(EnvironmentObject* eo) 
 {
     std::vector<LocationPair>::iterator itPairs;
     std::vector<EnvironmentObject*>::iterator itEnvs;
 
     for (itPairs = vecPairs->begin(); itPairs!= vecPairs->end(); ++itPairs) {
-        for (itEnvs = itPairs->envs_->begin(); itEnvs != itPairs->envs_->end(); ++itPairs) {
+        for (itEnvs = itPairs->get_envs()->begin(); itEnvs != itPairs->get_envs()->end(); ++itPairs) {
             if (*itEnvs == eo) {
-                return itPairs->xy_;
+                return itPairs->get_xy();
             }
         }
     }
     return nullptr;
 }
 
-std::vector<LocationPair>* XYEnvironmentState::getVector()
+std::vector<LocationPair>* XYEnvironmentState::get_vector()
 {
     return vecPairs;
 }
@@ -71,15 +63,14 @@ std::vector<LocationPair>* XYEnvironmentState::getVector()
 void XYEnvironmentState::initState()
 {
     vecPairs = new std::vector<LocationPair>();
-    vecEnvs  = new std::vector<EnvironmentObject*>();   
 
     for (int x = 1; x <= width_; ++x) {
         for (int y = 1; y <= height_; ++y) {
-            vecPairs->push_back(LocationPair(new XYLocation(x, y), 
-                                     new std::vector<EnvironmentObject*>()));
+            vecPairs->push_back(LocationPair(new XYLocation(x, y), new std::vector<EnvironmentObject*>()));
         }
     }
 }
+
 
 
 

@@ -5,7 +5,6 @@
 
 class XYLocation {
 public:
-    XYLocation();
     XYLocation(int w, int h);
     void xylocation(); 
     bool operator==(const XYLocation& rhs) const; 

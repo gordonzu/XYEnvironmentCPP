@@ -13,12 +13,10 @@
 class XYEnvironmentState {
 public:
     XYEnvironmentState(int w, int h);
-    void addObjectToLocation(EnvironmentObject* eo, XYLocation* loc); 
     void moveObjectToAbsoluteLocation(EnvironmentObject* eo, XYLocation* loc);
     std::vector<EnvironmentObject*>* getObjectsAt(XYLocation* loc); 
-    void addEnvironmentObject(EnvironmentObject* eo); 
     XYLocation* getCurrentLocationFor(EnvironmentObject* eo); 
-    std::vector<LocationPair>* getVector(); 
+    std::vector<LocationPair>* get_vector(); 
 
 private:
     std::vector<LocationPair>*          vecPairs;

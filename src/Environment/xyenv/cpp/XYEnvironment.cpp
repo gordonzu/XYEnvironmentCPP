@@ -34,5 +34,14 @@ XYLocation* XYEnvironment::getCurrentLocationFor(EnvironmentObject* eo)
     return envState->getCurrentLocationFor(eo);
 }
 
+std::vector<EnvironmentObject*>* XYEnvironment::getObjectsAt(XYLocation* loc)
+{
+    return envState->getObjectsAt(loc);
+}
+
+std::vector<LocationPair>* XYEnvironment::get_vector()
+{
+    return envState->get_vector();
+}
 
 

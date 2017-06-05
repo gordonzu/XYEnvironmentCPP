@@ -5,8 +5,10 @@
 #include "gmock/gmock.h"
 #include "Environment/xyenv/include/XYEnvironment.h"
 #include "AgentTest/impl/include/MockAgent.h"
+#include "Environment/xyenv/include/Wall.h"
 
 using namespace::testing;
+
 
 class XYEnvironmentTest: public Test {
 public:
@@ -18,9 +20,9 @@ public:
 
 protected: 
     virtual void SetUp() {
-        env     = new XYEnvironment(3, 3);
-        agent   = new MockAgent();            
-        env->addObjectToLocation(agent, new XYLocation(1, 2));
+        env     = new XYEnvironment(10, 10);
+        agent   = new MockAgent();           
+        env->addObjectToLocation(agent, new XYLocation(3, 4));
     }
 
     virtual void TearDown() {
@@ -33,11 +35,25 @@ protected:
 
 TEST_F(XYEnvironmentTest, testAddObject) {
     ASSERT_EQ(env->getAgents().size(), size_t(1));
+    ASSERT_EQ(*(env->getCurrentLocationFor(agent)), *(new XYLocation(3, 4)));
 }
 
-TEST_F(XYEnvironmentTest, testGetCurrentLocation) {
-    ASSERT_EQ(*(env->getCurrentLocationFor(agent)), *(new XYLocation(1, 2)));
+/*TEST_F(XYEnvironmentTest, testGetCurrentLocation) {
+    ASSERT_EQ(env->getObjectsAt(new XYLocation(3, 4))->size(), size_t(1));
+}*/
+
+/*TEST_F(XYEnvironmentTest, testGetObjectsAt) {
+    env->addObjectToLocation(new Wall(), new XYLocation(9, 9));
+    ASSERT_EQ(env->getObjectsAt(new XYLocation(9, 9))->size(), size_t(1));
 }
+*/
+
+/*TEST_F(XYEnvironmentTest, testAddObject2) {
+    env->addObjectToLocation(new Wall(), new XYLocation(9, 9));
+    ASSERT_EQ(env->getAgents().size(), size_t(1));
+    ASSERT_EQ(env->getEnvironmentObjects().size(), size_t(2));
+    ASSERT_EQ(env->getObjectsAt(new XYLocation(9, 9))->size(), size_t(1));
+}*/
 
 
 
