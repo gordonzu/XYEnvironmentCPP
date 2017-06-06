@@ -54,8 +54,10 @@ TEST_F(XYEnvironmentTest, testAddObjectTwice) {
     ASSERT_EQ(*(env->getCurrentLocationFor(a)), *x);
 }
 
-TEST_F(XYEnvironmentTest, moveObjectToAbsoluteLocation) {
-    ASSERT_EQ();
+TEST_F(XYEnvironmentTest, testMoveObjectToAbsoluteLocation) {
+    XYLocation* loc = new XYLocation(5, 5);
+    env->moveObjectToAbsoluteLocation(agent, loc);
+    ASSERT_EQ(*(env->getCurrentLocationFor(agent)), *(new XYLocation(5, 5)));
 }
 
 /*TEST_F(XYEnvironmentTest, ) {

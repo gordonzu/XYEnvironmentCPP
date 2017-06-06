@@ -12,7 +12,6 @@ void XYEnvironmentState::moveObjectToAbsoluteLocation(EnvironmentObject* eo, XYL
     for (auto& x : *vecPairs) {
         for (auto it = x.get_envs()->begin(); it != x.get_envs()->end(); ) {
             if ((*it) == eo) {
-                delete *it;
                 it = x.get_envs()->erase(it);
             } else {
                 ++it;
