@@ -45,5 +45,48 @@ TEST_F(XYEnvironmentTest, testAddObject2) {
     ASSERT_EQ(env->getObjectsAt(new XYLocation(9, 9))->size(), size_t(1));
 }
 
+TEST_F(XYEnvironmentTest, testAddObjectTwice) {
+    ASSERT_EQ(env->getAgents().size(), size_t(1));
+    XYLocation* x = new XYLocation(5, 5);
+    AbstractAgent* a = new MockAgent();
+    env->addObjectToLocation(a, x);
+    ASSERT_EQ(env->getAgents().size(), size_t(2));
+    ASSERT_EQ(*(env->getCurrentLocationFor(a)), *x);
+}
+
+TEST_F(XYEnvironmentTest, moveObjectToAbsoluteLocation) {
+    ASSERT_EQ();
+}
+
+/*TEST_F(XYEnvironmentTest, ) {
+    ASSERT_EQ();
+}
+
+TEST_F(XYEnvironmentTest, ) {
+    ASSERT_EQ();
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

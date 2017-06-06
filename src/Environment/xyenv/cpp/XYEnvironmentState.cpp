@@ -46,9 +46,10 @@ XYLocation* XYEnvironmentState::getCurrentLocationFor(EnvironmentObject* eo)
     std::vector<EnvironmentObject*>::iterator itEnvs;
 
     for (itPairs = vecPairs->begin(); itPairs!= vecPairs->end(); ++itPairs) {
-        for (itEnvs = itPairs->get_envs()->begin(); itEnvs != itPairs->get_envs()->end(); ++itPairs) {
+        for (itEnvs = itPairs->get_envs()->begin(); itEnvs != itPairs->get_envs()->end(); ++itEnvs) {
             if (*itEnvs == eo) {
-                return itPairs->get_xy();
+                XYLocation* xy = itPairs->get_xy();
+                return xy;
             }
         }
     }
