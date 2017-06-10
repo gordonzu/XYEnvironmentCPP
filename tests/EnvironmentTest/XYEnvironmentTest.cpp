@@ -12,25 +12,20 @@ using namespace::testing;
 
 class XYEnvironmentTest: public Test {
 public:
-    XYEnvironmentTest() {}
-    virtual ~XYEnvironmentTest() {}
-
-    XYEnvironment*  env;
-    AbstractAgent*  agent;
-
-protected: 
-    virtual void SetUp() {
-        env     = new XYEnvironment(10, 10);
-        agent   = new MockAgent();           
+    XYEnvironmentTest(): env{new XYEnvironment(10, 10)}, 
+                         agent{new MockAgent()} {
         env->addObjectToLocation(agent, new XYLocation(3, 4));
     }
 
-    virtual void TearDown() {
+    ~XYEnvironmentTest() {
         delete env;
         delete agent;
-        env = nullptr; 
+        env = nullptr;
         agent = nullptr;
     }
+
+    XYEnvironment*  env;
+    AbstractAgent*  agent;
 };
 
 TEST_F(XYEnvironmentTest, testAddObject) {
