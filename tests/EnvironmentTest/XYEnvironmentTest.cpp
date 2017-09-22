@@ -12,8 +12,7 @@ using namespace::testing;
 
 class XYEnvironmentTest: public Test {
 public:
-    XYEnvironmentTest(): env{new XYEnvironment(10, 10)}, 
-                         agent{new MockAgent()} {
+    XYEnvironmentTest(): env{new XYEnvironment(10, 10)}, agent{new MockAgent()} {
         env->addObjectToLocation(agent, new XYLocation(3, 4));
     }
 
