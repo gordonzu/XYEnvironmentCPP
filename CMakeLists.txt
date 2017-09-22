@@ -1,14 +1,12 @@
 project(XYEnvironment)
 cmake_minimum_required(VERSION 2.6)
 
-include_directories("$ENV{GMOCK_HOME}/include" 
-                    "$ENV{GMOCK_HOME}/gtest/include"
-                    "$ENV{BOOST_INCLUDE}" 
-                    "$ENV{HOME}/src/cpp/XYEnvironment/src" 
-                    "$ENV{HOME}/src/cpp/XYEnvironment/tests") 
-link_directories   ("$ENV{GMOCK_HOME}/mybuild" 
-                    "$ENV{GMOCK_HOME}/gtest/mybuild"
-                    "$ENV{BOOST_LIB}")
+include_directories("$ENV{GMOCK_HOME}/googlemock/include" 
+                    "$ENV{GMOCK_HOME}/googletest/include"
+                    "$ENV{HOME}/src/cpp/XYEnvironmentCPP/src" 
+                    "$ENV{HOME}/src/cpp/XYEnvironmentCPP/tests") 
+link_directories   ("$ENV{GMOCK_HOME}/mybuild/googlemock" 
+                    "$ENV{GMOCK_HOME}/mybuild/googlemock/gtest")
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -g -Wall -O0 -fmax-errors=1")
 
@@ -30,7 +28,6 @@ set(sources
 add_executable(xyenv ${sources})
 target_link_libraries(xyenv gmock)
 target_link_libraries(xyenv gtest)
-target_link_libraries(xyenv boost_container)
 target_link_libraries(xyenv pthread)
 
 add_custom_command(TARGET xyenv 
