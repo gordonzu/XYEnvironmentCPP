@@ -3,8 +3,8 @@ cmake_minimum_required(VERSION 2.6)
 
 include_directories("$ENV{GMOCK_HOME}/googlemock/include" 
                     "$ENV{GMOCK_HOME}/googletest/include"
-                    "$ENV{HOME}/src/cpp/XYEnvironmentCPP/src" 
-                    "$ENV{HOME}/src/cpp/XYEnvironmentCPP/tests") 
+                    "$ENV{HOME}/src/cpp/AICPP/src" 
+                    "$ENV{HOME}/src/cpp/AICPP/tests") 
 link_directories   ("$ENV{GMOCK_HOME}/mybuild/googlemock" 
                     "$ENV{GMOCK_HOME}/mybuild/googlemock/gtest")
 
