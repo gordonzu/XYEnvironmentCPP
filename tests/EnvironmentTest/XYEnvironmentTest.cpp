@@ -39,6 +39,9 @@ public:
 
 
 TEST_F(XYEnvironmentTest, testAddObject) {
+    //env = XYEnvironment{10, 10};
+    //env.addObjectToLocation(agent, new XYLocation(3, 4));
+
     ASSERT_EQ(env->getAgents().size(), size_t(1));
     ASSERT_EQ(*(env->getCurrentLocationFor(agent)), *(new XYLocation(3, 4)));
 }
