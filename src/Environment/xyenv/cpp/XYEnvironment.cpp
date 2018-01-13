@@ -26,7 +26,7 @@ void XYEnvironment::addObjectToLocation(std::shared_ptr<EnvironmentObject> eo, X
 void XYEnvironment::moveObjectToAbsoluteLocation(std::shared_ptr<EnvironmentObject> eo, XYLocation* loc)
 {
     envState->moveObjectToAbsoluteLocation(eo, loc);
-    //addEnvironmentObject(eo);
+    addEnvironmentObject(eo);
 }
 
 XYLocation* XYEnvironment::getCurrentLocationFor(std::shared_ptr<EnvironmentObject> eo)
