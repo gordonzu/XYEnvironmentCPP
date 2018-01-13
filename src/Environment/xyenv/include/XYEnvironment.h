@@ -15,7 +15,7 @@ public:
     XYEnvironment(int w, int h); 
     virtual ~XYEnvironment();
     void addObjectToLocation(std::shared_ptr<EnvironmentObject> eo, XYLocation* loc); 
-    void moveObjectToAbsoluteLocation(EnvironmentObject* eo, XYLocation* loc);
+    void moveObjectToAbsoluteLocation(std::shared_ptr<EnvironmentObject> eo, XYLocation* loc);
     XYLocation* getCurrentLocationFor(EnvironmentObject* eo); 
     std::vector<EnvironmentObject*>* getObjectsAt(XYLocation* loc);
     std::vector<LocationPair>* get_vector();
