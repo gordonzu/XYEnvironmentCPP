@@ -15,35 +15,39 @@ public:
     ~XYEnvironmentTest() {}
 
     virtual void SetUp() {
-        env = new XYEnvironment(10, 10);
         agent = new MockAgent();
-        env->addObjectToLocation(agent, new XYLocation(3,4));
     }
 
     virtual void TearDown() {
-        delete env;
         delete agent;
-        env = nullptr;
         agent = nullptr;
     }
 
-    XYEnvironment*  env;
+    XYEnvironment  env;
     AbstractAgent*  agent;
 };
 
-/*TODO: change XYEnvironment test object from pointer to stack object
- *      change AbstractAgent* to std::shared_ptr<MockAgent>()   
+/*TODO: change AbstractAgent* to std::shared_ptr<MockAgent>()   
  *      change all XYEnvironmentObject* params to std::shared_ptr<XYEnvironmentObject>
- *      change all new XYEnvironmentObject() to std::make_shared<XYEnvironmentObject>();   
+ *      change all new XYEnvironmentObject() to std::make_shared<XYEnvironmentObject>();
+ *      rewrite XYEnvironmentState::moveObjectToAbsoluteLocation with std::find_if?   
+ *      change all vectors to stack-based objects passed by reference.
 */
 
-
 TEST_F(XYEnvironmentTest, testAddObject) {
+<<<<<<< HEAD
     //env = XYEnvironment{10, 10};
     //env.addObjectToLocation(agent, new XYLocation(3, 4));
 
     ASSERT_EQ(env->getAgents().size(), size_t(1));
     ASSERT_EQ(*(env->getCurrentLocationFor(agent)), *(new XYLocation(3, 4)));
+=======
+    env = XYEnvironment{10, 10};
+    env.addObjectToLocation(agent, new XYLocation(3, 4));
+
+    ASSERT_EQ(env.getAgents().size(), size_t(1));
+    ASSERT_EQ(*(env.getCurrentLocationFor(agent)), *(new XYLocation(3, 4)));
+>>>>>>> xyenv
 }
 
 /*
