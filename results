@@ -1,0 +1,106 @@
+-- The C compiler identification is GNU 5.4.0
+-- The CXX compiler identification is GNU 5.4.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/gordonzu/src/cpp/AICPP/build
+Scanning dependencies of target xyenv
+[  7%] Building CXX object CMakeFiles/xyenv.dir/src/Environment/xyenv/cpp/Wall.cpp.o
+[ 15%] Building CXX object CMakeFiles/xyenv.dir/src/Environment/xyenv/cpp/XYEnvironment.cpp.o
+[ 23%] Building CXX object CMakeFiles/xyenv.dir/src/Agent/cpp/EnvironmentObject.cpp.o
+[ 30%] Building CXX object CMakeFiles/xyenv.dir/src/Agent/impl/cpp/AbstractEnvironment.cpp.o
+[ 38%] Building CXX object CMakeFiles/xyenv.dir/src/Util/datastructure/cpp/LocationPair.cpp.o
+[ 46%] Building CXX object CMakeFiles/xyenv.dir/tests/AgentTest/impl/cpp/MockAgent.cpp.o
+[ 53%] Building CXX object CMakeFiles/xyenv.dir/src/Agent/impl/cpp/AbstractAgent.cpp.o
+[ 61%] Building CXX object CMakeFiles/xyenv.dir/src/Agent/cpp/Agent.cpp.o
+[ 69%] Building CXX object CMakeFiles/xyenv.dir/src/Util/datastructure/cpp/XYLocation.cpp.o
+[ 76%] Building CXX object CMakeFiles/xyenv.dir/src/Environment/xyenv/cpp/XYEnvironmentState.cpp.o
+[ 84%] Building CXX object CMakeFiles/xyenv.dir/tests/EnvironmentTest/XYEnvironmentTest.cpp.o
+[ 92%] Building CXX object CMakeFiles/xyenv.dir/main.cpp.o
+[100%] Linking CXX executable xyenv
+[100%] Built target xyenv
+==21830== Memcheck, a memory error detector
+==21830== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==21830== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==21830== Command: ./xyenv
+==21830== 
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from XYEnvironmentTest
+[ RUN      ] XYEnvironmentTest.testAddObject
+[       OK ] XYEnvironmentTest.testAddObject (45 ms)
+[----------] 1 test from XYEnvironmentTest (54 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (96 ms total)
+[  PASSED  ] 1 test.
+==21830== 
+==21830== HEAP SUMMARY:
+==21830==     in use at exit: 78,024 bytes in 207 blocks
+==21830==   total heap usage: 399 allocs, 192 frees, 127,090 bytes allocated
+==21830== 
+==21830== 8 bytes in 1 blocks are definitely lost in loss record 2 of 9
+==21830==    at 0x4C2E0EF: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==21830==    by 0x46F189: XYEnvironmentTest::SetUp() (XYEnvironmentTest.cpp:20)
+==21830==    by 0x49B54E: void testing::internal::HandleSehExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) (in /home/gordonzu/src/cpp/AICPP/build/xyenv)
+==21830==    by 0x494ACE: void testing::internal::HandleExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) (in /home/gordonzu/src/cpp/AICPP/build/xyenv)
+==21830==    by 0x477D98: testing::Test::Run() (in /home/gordonzu/src/cpp/AICPP/build/xyenv)
+==21830==    by 0x478783: testing::TestInfo::Run() (in /home/gordonzu/src/cpp/AICPP/build/xyenv)
+==21830==    by 0x478E76: testing::TestCase::Run() (in /home/gordonzu/src/cpp/AICPP/build/xyenv)
+==21830==    by 0x47FFBD: testing::internal::UnitTestImpl::RunAllTests() (in /home/gordonzu/src/cpp/AICPP/build/xyenv)
+==21830==    by 0x49CB26: bool testing::internal::HandleSehExceptionsInMethodIfSupported<testing::internal::UnitTestImpl, bool>(testing::internal::UnitTestImpl*, bool (testing::internal::UnitTestImpl::*)(), char const*) (in /home/gordonzu/src/cpp/AICPP/build/xyenv)
+==21830==    by 0x495910: bool testing::internal::HandleExceptionsInMethodIfSupported<testing::internal::UnitTestImpl, bool>(testing::internal::UnitTestImpl*, bool (testing::internal::UnitTestImpl::*)(), char const*) (in /home/gordonzu/src/cpp/AICPP/build/xyenv)
+==21830==    by 0x47EA59: testing::UnitTest::Run() (in /home/gordonzu/src/cpp/AICPP/build/xyenv)
+==21830==    by 0x46FF37: RUN_ALL_TESTS() (gtest.h:2233)
+==21830== 
+==21830== 8 bytes in 1 blocks are definitely lost in loss record 3 of 9
+==21830==    at 0x4C2E0EF: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==21830==    by 0x46EB6F: XYEnvironmentTest_testAddObject_Test::TestBody() (XYEnvironmentTest.cpp:43)
+==21830==    by 0x49B54E: void testing::internal::HandleSehExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) (in /home/gordonzu/src/cpp/AICPP/build/xyenv)
+==21830==    by 0x494ACE: void testing::internal::HandleExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) (in /home/gordonzu/src/cpp/AICPP/build/xyenv)
+==21830==    by 0x477DEB: testing::Test::Run() (in /home/gordonzu/src/cpp/AICPP/build/xyenv)
+==21830==    by 0x478783: testing::TestInfo::Run() (in /home/gordonzu/src/cpp/AICPP/build/xyenv)
+==21830==    by 0x478E76: testing::TestCase::Run() (in /home/gordonzu/src/cpp/AICPP/build/xyenv)
+==21830==    by 0x47FFBD: testing::internal::UnitTestImpl::RunAllTests() (in /home/gordonzu/src/cpp/AICPP/build/xyenv)
+==21830==    by 0x49CB26: bool testing::internal::HandleSehExceptionsInMethodIfSupported<testing::internal::UnitTestImpl, bool>(testing::internal::UnitTestImpl*, bool (testing::internal::UnitTestImpl::*)(), char const*) (in /home/gordonzu/src/cpp/AICPP/build/xyenv)
+==21830==    by 0x495910: bool testing::internal::HandleExceptionsInMethodIfSupported<testing::internal::UnitTestImpl, bool>(testing::internal::UnitTestImpl*, bool (testing::internal::UnitTestImpl::*)(), char const*) (in /home/gordonzu/src/cpp/AICPP/build/xyenv)
+==21830==    by 0x47EA59: testing::UnitTest::Run() (in /home/gordonzu/src/cpp/AICPP/build/xyenv)
+==21830==    by 0x46FF37: RUN_ALL_TESTS() (gtest.h:2233)
+==21830== 
+==21830== 5,304 (24 direct, 5,280 indirect) bytes in 1 blocks are definitely lost in loss record 8 of 9
+==21830==    at 0x4C2E0EF: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==21830==    by 0x46B5AA: XYEnvironment::XYEnvironment(int, int) (XYEnvironment.cpp:14)
+==21830==    by 0x46F153: XYEnvironmentTest::SetUp() (XYEnvironmentTest.cpp:18)
+==21830==    by 0x49B54E: void testing::internal::HandleSehExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) (in /home/gordonzu/src/cpp/AICPP/build/xyenv)
+==21830==    by 0x494ACE: void testing::internal::HandleExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) (in /home/gordonzu/src/cpp/AICPP/build/xyenv)
+==21830==    by 0x477D98: testing::Test::Run() (in /home/gordonzu/src/cpp/AICPP/build/xyenv)
+==21830==    by 0x478783: testing::TestInfo::Run() (in /home/gordonzu/src/cpp/AICPP/build/xyenv)
+==21830==    by 0x478E76: testing::TestCase::Run() (in /home/gordonzu/src/cpp/AICPP/build/xyenv)
+==21830==    by 0x47FFBD: testing::internal::UnitTestImpl::RunAllTests() (in /home/gordonzu/src/cpp/AICPP/build/xyenv)
+==21830==    by 0x49CB26: bool testing::internal::HandleSehExceptionsInMethodIfSupported<testing::internal::UnitTestImpl, bool>(testing::internal::UnitTestImpl*, bool (testing::internal::UnitTestImpl::*)(), char const*) (in /home/gordonzu/src/cpp/AICPP/build/xyenv)
+==21830==    by 0x495910: bool testing::internal::HandleExceptionsInMethodIfSupported<testing::internal::UnitTestImpl, bool>(testing::internal::UnitTestImpl*, bool (testing::internal::UnitTestImpl::*)(), char const*) (in /home/gordonzu/src/cpp/AICPP/build/xyenv)
+==21830==    by 0x47EA59: testing::UnitTest::Run() (in /home/gordonzu/src/cpp/AICPP/build/xyenv)
+==21830== 
+==21830== LEAK SUMMARY:
+==21830==    definitely lost: 40 bytes in 3 blocks
+==21830==    indirectly lost: 5,280 bytes in 203 blocks
+==21830==      possibly lost: 0 bytes in 0 blocks
+==21830==    still reachable: 72,704 bytes in 1 blocks
+==21830==         suppressed: 0 bytes in 0 blocks
+==21830== Reachable blocks (those to which a pointer was found) are not shown.
+==21830== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==21830== 
+==21830== For counts of detected and suppressed errors, rerun with: -v
+==21830== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 0 from 0)
+Built target xyenv

@@ -7,13 +7,13 @@
 
 class AbstractEnvironment {
 public:
-    std::vector<Agent*>& getAgents(); 
-    void addEnvironmentObject(EnvironmentObject* eo);
-    const std::vector<EnvironmentObject*>& getEnvironmentObjects() const;  
+    void                                    addEnvironmentObject(EnvironmentObject* eo);
+    std::vector<Agent*>&                    getAgents(); 
+    const std::vector<EnvironmentObject*>&  getEnvironmentObjects() const;  
 
 protected:
     std::vector<EnvironmentObject*> envObjects;
-    std::vector<Agent*> agents;
+    std::vector<Agent*>             agents;
 };
 #endif
 

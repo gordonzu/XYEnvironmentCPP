@@ -5,7 +5,7 @@
 
 class Agent: public EnvironmentObject {
 public:
-    virtual ~Agent();
+    virtual ~Agent()=0;
 };
 #endif
 

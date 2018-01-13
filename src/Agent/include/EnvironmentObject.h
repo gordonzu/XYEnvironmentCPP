@@ -3,7 +3,8 @@
 
 class EnvironmentObject {
 public:
-    virtual ~EnvironmentObject();
+    virtual ~EnvironmentObject()=0;
 };
 #endif
+
 

@@ -1,9 +1,9 @@
-// EnvironmentObject.cpp
+// EnvironmentObject .cpp
+//
 
 #include "Agent/include/EnvironmentObject.h"
 
-EnvironmentObject::~EnvironmentObject() 
+EnvironmentObject::~EnvironmentObject()
 {
 }
-
 
