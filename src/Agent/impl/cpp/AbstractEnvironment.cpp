@@ -2,12 +2,12 @@
 
 #include "Agent/impl/include/AbstractEnvironment.h"
 
-std::vector<std::shared_ptr<Agent>>& AbstractEnvironment::getAgents()
+std::vector<PtrAgt>& AbstractEnvironment::getAgents()
 {
     return agents;
 }
 
-void AbstractEnvironment::addEnvironmentObject(std::shared_ptr<EnvironmentObject> eo)
+void AbstractEnvironment::addEnvironmentObject(PtrEnv eo)
 {
     envObjects.push_back(eo);
     if (Agent* a = dynamic_cast<Agent*>(eo.get())) {
@@ -15,7 +15,7 @@ void AbstractEnvironment::addEnvironmentObject(std::shared_ptr<EnvironmentObject
     }          
 }
 
-const std::vector<std::shared_ptr<EnvironmentObject>>& AbstractEnvironment::getEnvironmentObjects() const 
+const std::vector<PtrEnv>& AbstractEnvironment::getEnvironmentObjects() const 
 {
     return envObjects;    
 }
