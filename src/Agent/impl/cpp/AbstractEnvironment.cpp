@@ -2,7 +2,7 @@
 
 #include "Agent/impl/include/AbstractEnvironment.h"
 
-std::vector<PtrAgt>& AbstractEnvironment::getAgents()
+const std::vector<PtrAgt>& AbstractEnvironment::getAgents() const
 {
     return agents;
 }

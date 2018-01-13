@@ -11,21 +11,23 @@
 #include "Agent/include/EnvironmentObject.h"
 #include "Util/datastructure/include/LocationPair.h"
 
+using PtrEnv = std::shared_ptr<EnvironmentObject>;
+
 class XYEnvironmentState {
 public:
     XYEnvironmentState(int w, int h);
 
-    void                                                moveObjectToAbsoluteLocation(std::shared_ptr<EnvironmentObject> eo, XYLocation* loc);
-    XYLocation*                                         getCurrentLocationFor(std::shared_ptr<EnvironmentObject> eo); 
-    std::vector<LocationPair>*                          get_vector(); 
-    std::vector<std::shared_ptr<EnvironmentObject>>*    getObjectsAt(XYLocation* loc); 
+    void                        moveObjectToAbsoluteLocation(PtrEnv eo, XYLocation* loc);
+    XYLocation*                 getCurrentLocationFor(PtrEnv eo); 
+    std::vector<LocationPair>*  get_vector(); 
+    std::vector<PtrEnv>*        getObjectsAt(XYLocation* loc); 
 
 private:
-    std::vector<std::shared_ptr<EnvironmentObject>>*    vecEnvs;
-    std::vector<LocationPair>*                          vecPairs;
-    int                                                 width_;
-    int                                                 height_;
-    void                                                initState(); 
+    std::vector<PtrEnv>*        vecEnvs;
+    std::vector<LocationPair>*  vecPairs;
+    int                         width_;
+    int                         height_;
+    void                        initState(); 
 };
 #endif
 

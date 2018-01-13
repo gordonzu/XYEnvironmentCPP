@@ -13,7 +13,7 @@ using PtrAgt = std::shared_ptr<Agent>;
 class AbstractEnvironment {
 public:
     void                        addEnvironmentObject(PtrEnv eo);
-    std::vector<PtrAgt>&        getAgents(); 
+    const std::vector<PtrAgt>&  getAgents() const; 
     const std::vector<PtrEnv>&  getEnvironmentObjects() const;  
 
 protected:
