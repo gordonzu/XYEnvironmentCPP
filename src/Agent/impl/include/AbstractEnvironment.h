@@ -2,18 +2,19 @@
 #define ABSTRACT_ENVIRONMENT_H
 
 #include <vector>
+#include <memory>
 #include "Agent/include/Agent.h"
 #include "Agent/include/EnvironmentObject.h"
 
 class AbstractEnvironment {
 public:
-    void                                    addEnvironmentObject(EnvironmentObject* eo);
-    std::vector<Agent*>&                    getAgents(); 
-    const std::vector<EnvironmentObject*>&  getEnvironmentObjects() const;  
+    void                                                    addEnvironmentObject(std::shared_ptr<EnvironmentObject> eo);
+    std::vector<Agent*>&                                    getAgents(); 
+    const std::vector<std::shared_ptr<EnvironmentObject>>&  getEnvironmentObjects() const;  
 
 protected:
-    std::vector<EnvironmentObject*> envObjects;
-    std::vector<Agent*>             agents;
+    std::vector<std::shared_ptr<EnvironmentObject>> envObjects;
+    std::vector<Agent*>                             agents;
 };
 #endif
 

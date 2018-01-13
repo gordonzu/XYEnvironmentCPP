@@ -7,15 +7,15 @@ std::vector<Agent*>& AbstractEnvironment::getAgents()
     return agents;
 }
 
-void AbstractEnvironment::addEnvironmentObject(EnvironmentObject* eo)
+void AbstractEnvironment::addEnvironmentObject(std::shared_ptr<EnvironmentObject> eo)
 {
     envObjects.push_back(eo);
-    if (Agent* a = dynamic_cast<Agent*>(eo)) {
+    if (Agent* a = dynamic_cast<Agent*>(eo.get())) {
         agents.push_back(a);            
     }          
 }
 
-const std::vector<EnvironmentObject*>& AbstractEnvironment::getEnvironmentObjects() const 
+const std::vector<std::shared_ptr<EnvironmentObject>>& AbstractEnvironment::getEnvironmentObjects() const 
 {
     return envObjects;    
 }

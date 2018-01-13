@@ -19,8 +19,6 @@ public:
     }
 
     virtual void TearDown() {
-        //delete agent;
-        //agent = nullptr;
     }
 
     XYEnvironment                   env;
@@ -30,6 +28,8 @@ public:
 /*TODO: change AbstractAgent* to std::shared_ptr<MockAgent>()   
  *      change all XYEnvironmentObject* params to std::shared_ptr<XYEnvironmentObject>
  *      change all new XYEnvironmentObject() to std::make_shared<XYEnvironmentObject>();
+ *
+ *      change LocationPair to std::pair
  *      change all new XYLocation() to smart pointers   
  *      rewrite XYEnvironmentState::moveObjectToAbsoluteLocation with std::find_if?   
  *      change all vectors to stack-based objects passed by reference.
