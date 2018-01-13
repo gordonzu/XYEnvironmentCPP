@@ -1,5 +1,9 @@
 
 
 build/
+cmake-build-debug/
+.git/
+.idea/
 *.o
 *.so
+*.user

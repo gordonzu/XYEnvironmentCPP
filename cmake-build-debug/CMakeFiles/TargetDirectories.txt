@@ -1,3 +1,0 @@
-/home/gordonzu/src/cpp/AICPP/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/gordonzu/src/cpp/AICPP/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/gordonzu/src/cpp/AICPP/cmake-build-debug/CMakeFiles/xyenv.dir
