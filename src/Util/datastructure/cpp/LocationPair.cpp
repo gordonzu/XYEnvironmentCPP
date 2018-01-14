@@ -1,12 +1,12 @@
 // LocationPair.cpp
 #include "Util/datastructure/include/LocationPair.h"
 
-LocationPair::LocationPair(XYLocation* xy, std::vector<PtrEnv>& envs)
+LocationPair::LocationPair(std::shared_ptr<XYLocation> xy, std::vector<PtrEnv>& envs)
                             : xy_{xy}, envs_{envs}
 {
 }
 
-LocationPair::LocationPair(XYLocation* xy, std::vector<PtrEnv>&& envs)
+LocationPair::LocationPair(std::shared_ptr<XYLocation> xy, std::vector<PtrEnv>&& envs)
                             : xy_{xy}, envs_{std::move(envs)}
 {
 }
@@ -21,7 +21,7 @@ std::vector<PtrEnv>& LocationPair::get_envs()
     return envs_;
 } 
 
-XYLocation* LocationPair::get_xy() 
+std::shared_ptr<XYLocation> LocationPair::get_xy() 
 {
     return xy_;
 }

@@ -12,15 +12,15 @@ using PtrEnv = std::shared_ptr<EnvironmentObject>;
 
 class LocationPair {
 public:
-    LocationPair(XYLocation* xy, std::vector<PtrEnv>& envs);
-    LocationPair(XYLocation* xy, std::vector<PtrEnv>&& envs);
+    LocationPair(std::shared_ptr<XYLocation> xy, std::vector<PtrEnv>& envs);
+    LocationPair(std::shared_ptr<XYLocation> xy, std::vector<PtrEnv>&& envs);
 
     size_t                  getEnvsSize();
     std::vector<PtrEnv>&    get_envs();
-    XYLocation*             get_xy();
+    std::shared_ptr<XYLocation>             get_xy();
 
 private:
-    XYLocation*         xy_;
+    std::shared_ptr<XYLocation>         xy_;
     std::vector<PtrEnv> envs_;    
 };
 #endif

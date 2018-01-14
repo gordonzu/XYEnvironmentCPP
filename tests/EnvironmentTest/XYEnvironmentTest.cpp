@@ -37,10 +37,9 @@ TEST_F(XYEnvironmentTest, testAddAgent)
 {
     env = XYEnvironment{10, 10};
     env.addObjectToLocation(agent, std::make_shared<XYLocation>(3, 4));
-    //ASSERT_EQ(env.getAgents().size(), size_t(1));
+    ASSERT_EQ(env.getAgents().size(), size_t(1));
     env.addObjectToLocation(agent, std::make_shared<XYLocation>(8, 7));
-    //ASSERT_EQ(env.getAgents().size(), size_t(2));
-    ASSERT_TRUE(true);
+    ASSERT_EQ(env.getAgents().size(), size_t(2));
 }
 /*
 TEST_F(XYEnvironmentTest, testAddAgentLocation) 

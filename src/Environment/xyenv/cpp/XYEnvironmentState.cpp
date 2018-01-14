@@ -7,7 +7,7 @@ XYEnvironmentState::XYEnvironmentState(int w, int h): width_{w}, height_{h}, vec
     initState();
 }                           
 
-void XYEnvironmentState::moveObjectToAbsoluteLocation(PtrEnv eo, XYLocation* loc)
+void XYEnvironmentState::moveObjectToAbsoluteLocation(PtrEnv eo, std::shared_ptr<XYLocation> loc)
 {
     for (auto& x : vecPairs) {
         for (auto it = x.get_envs().begin(); it != x.get_envs().end(); ) {
@@ -18,10 +18,10 @@ void XYEnvironmentState::moveObjectToAbsoluteLocation(PtrEnv eo, XYLocation* loc
             }
         }
     }
-    getObjectsAt(loc).push_back(eo);
+    //getObjectsAt(loc).push_back(eo);
 }
 
-std::vector<PtrEnv>& XYEnvironmentState::getObjectsAt(XYLocation* loc)
+std::vector<PtrEnv>& XYEnvironmentState::getObjectsAt(std::shared_ptr<XYLocation> loc)
 {
     std::vector<LocationPair>::iterator it;
 
@@ -39,7 +39,7 @@ std::vector<PtrEnv>& XYEnvironmentState::getObjectsAt(XYLocation* loc)
 }
 
  
-XYLocation* XYEnvironmentState::getCurrentLocationFor(PtrEnv eo) 
+std::shared_ptr<XYLocation> XYEnvironmentState::getCurrentLocationFor(PtrEnv eo) 
 {
     std::vector<LocationPair>::iterator itPairs;
     std::vector<PtrEnv>::iterator itEnvs;
@@ -47,7 +47,7 @@ XYLocation* XYEnvironmentState::getCurrentLocationFor(PtrEnv eo)
     for (itPairs = vecPairs.begin(); itPairs!= vecPairs.end(); ++itPairs) {
         for (itEnvs = itPairs->get_envs().begin(); itEnvs != itPairs->get_envs().end(); ++itEnvs) {
             if (*itEnvs == eo) {
-                XYLocation* xy = itPairs->get_xy();
+                std::shared_ptr<XYLocation> xy = itPairs->get_xy();
                 return xy;
             }
         }
@@ -65,7 +65,7 @@ void XYEnvironmentState::initState()
 {
     for (int x = 1; x <= width_; ++x) {
         for (int y = 1; y <= height_; ++y) {
-            vecPairs.push_back(LocationPair(new XYLocation(x, y), std::vector<PtrEnv>()));
+            vecPairs.push_back(LocationPair(std::make_shared<XYLocation>(x, y), std::vector<PtrEnv>()));
         }
     }
 }
