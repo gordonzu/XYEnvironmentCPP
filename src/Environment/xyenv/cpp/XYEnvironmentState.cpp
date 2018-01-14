@@ -39,14 +39,14 @@ std::vector<PtrEnv>& XYEnvironmentState::getObjectsAt(XYLocation* loc)
     }
 }
 
-/* 
+ 
 XYLocation* XYEnvironmentState::getCurrentLocationFor(PtrEnv eo) 
 {
     std::vector<LocationPair>::iterator itPairs;
     std::vector<PtrEnv>::iterator itEnvs;
 
-    for (itPairs = vecPairs->begin(); itPairs!= vecPairs->end(); ++itPairs) {
-        for (itEnvs = itPairs->get_envs()->begin(); itEnvs != itPairs->get_envs()->end(); ++itEnvs) {
+    for (itPairs = vecPairs.begin(); itPairs!= vecPairs.end(); ++itPairs) {
+        for (itEnvs = itPairs->get_envs().begin(); itEnvs != itPairs->get_envs().end(); ++itEnvs) {
             if (*itEnvs == eo) {
                 XYLocation* xy = itPairs->get_xy();
                 return xy;
@@ -55,7 +55,7 @@ XYLocation* XYEnvironmentState::getCurrentLocationFor(PtrEnv eo)
     }
     return nullptr;
 }
-*/
+
 
 std::vector<LocationPair>& XYEnvironmentState::get_vector()
 {
