@@ -26,7 +26,6 @@ private:
     int                         width_;
     int                         height_;
     void                        initState(); 
-    //std::vector<PtrEnv>*        vecEnvs;
     std::vector<PtrEnv>         env_vector;
     std::vector<LocationPair>   vecPairs;
 

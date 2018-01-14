@@ -14,11 +14,13 @@ public:
     XYEnvironmentTest() {}
     ~XYEnvironmentTest() {}
 
-    virtual void SetUp() {
+    virtual void SetUp() 
+    {
         agent = std::make_shared<MockAgent>();
     }
 
-    virtual void TearDown() {
+    virtual void TearDown() 
+    {
     }
 
     XYEnvironment                   env;
@@ -28,10 +30,11 @@ public:
 /* TODO change LocationPair to std::pair
  *      change all new XYLocation() to smart pointers   
  *      rewrite XYEnvironmentState::moveObjectToAbsoluteLocation with std::find_if?   
- *      change all vectors to stack-based objects passed by reference.
+ *      
 */
 
-TEST_F(XYEnvironmentTest, testAddAgent) {
+TEST_F(XYEnvironmentTest, testAddAgent) 
+{
     env = XYEnvironment{10, 10};
     env.addObjectToLocation(agent, new XYLocation(3, 4));
     ASSERT_EQ(env.getAgents().size(), size_t(1));
@@ -39,7 +42,8 @@ TEST_F(XYEnvironmentTest, testAddAgent) {
     ASSERT_EQ(env.getAgents().size(), size_t(2));
 }
 
-TEST_F(XYEnvironmentTest, testAddAgentLocation) {
+TEST_F(XYEnvironmentTest, testAddAgentLocation) 
+{
     env = XYEnvironment{10, 10};
     env.addObjectToLocation(agent, new XYLocation(5, 6));
     ASSERT_EQ(*(env.getCurrentLocationFor(agent)), *(new XYLocation(5, 6)));
