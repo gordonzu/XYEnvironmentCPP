@@ -2,43 +2,44 @@
 
 #include "Environment/xyenv/include/XYEnvironmentState.h"
 
-XYEnvironmentState::XYEnvironmentState(int w, int h): width_{w}, height_{h} 
+XYEnvironmentState::XYEnvironmentState(int w, int h): width_{w}, height_{h}, vecPairs{std::vector<LocationPair>()} 
 {
     initState();
 }                           
 
 void XYEnvironmentState::moveObjectToAbsoluteLocation(PtrEnv eo, XYLocation* loc)
 {
-    for (auto& x : *vecPairs) {
-        for (auto it = x.get_envs()->begin(); it != x.get_envs()->end(); ) {
+    for (auto& x : vecPairs) {
+        for (auto it = x.get_envs().begin(); it != x.get_envs().end(); ) {
             if ((*it) == eo) {
-                it = x.get_envs()->erase(it);
+                it = x.get_envs().erase(it);
             } else {
                 ++it;
             }
         }
     }
-    getObjectsAt(loc)->push_back(eo);
+    getObjectsAt(loc).push_back(eo);
 }
 
-std::vector<PtrEnv>* XYEnvironmentState::getObjectsAt(XYLocation* loc)
+std::vector<PtrEnv>& XYEnvironmentState::getObjectsAt(XYLocation* loc)
 {
     std::vector<LocationPair>::iterator it;
-    std::vector<PtrEnv>* env_vector;
+    //std::vector<PtrEnv>* env_vector;
 
-    it = std::find_if(vecPairs->begin(), vecPairs->end(), [loc](LocationPair& mypair) {
+    it = std::find_if(vecPairs.begin(), vecPairs.end(), [loc](LocationPair& mypair) {
         return (*(mypair.get_xy()) == *loc);
     });
 
-    if (it != vecPairs->end()) {
+    if (it != vecPairs.end()) {
         return it->get_envs();
     } else {
-        env_vector = new std::vector<PtrEnv>();
-        vecPairs->push_back(LocationPair(loc, env_vector));
+        env_vector = std::vector<PtrEnv>();
+        vecPairs.push_back(LocationPair(loc, env_vector));
         return env_vector;
     }
 }
- 
+
+/* 
 XYLocation* XYEnvironmentState::getCurrentLocationFor(PtrEnv eo) 
 {
     std::vector<LocationPair>::iterator itPairs;
@@ -54,19 +55,20 @@ XYLocation* XYEnvironmentState::getCurrentLocationFor(PtrEnv eo)
     }
     return nullptr;
 }
+*/
 
-std::vector<LocationPair>* XYEnvironmentState::get_vector()
+std::vector<LocationPair>& XYEnvironmentState::get_vector()
 {
     return vecPairs;
 }
 
 void XYEnvironmentState::initState()
 {
-    vecPairs = new std::vector<LocationPair>();
+    //vecPairs = new std::vector<LocationPair>();
 
     for (int x = 1; x <= width_; ++x) {
         for (int y = 1; y <= height_; ++y) {
-            vecPairs->push_back(LocationPair(new XYLocation(x, y), new std::vector<PtrEnv>()));
+            vecPairs.push_back(LocationPair(new XYLocation(x, y), std::vector<PtrEnv>()));
         }
     }
 }

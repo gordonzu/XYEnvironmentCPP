@@ -19,15 +19,17 @@ public:
 
     void                        moveObjectToAbsoluteLocation(PtrEnv eo, XYLocation* loc);
     XYLocation*                 getCurrentLocationFor(PtrEnv eo); 
-    std::vector<LocationPair>*  get_vector(); 
-    std::vector<PtrEnv>*        getObjectsAt(XYLocation* loc); 
+    std::vector<LocationPair>&  get_vector(); 
+    std::vector<PtrEnv>&        getObjectsAt(XYLocation* loc); 
 
 private:
-    std::vector<PtrEnv>*        vecEnvs;
-    std::vector<LocationPair>*  vecPairs;
     int                         width_;
     int                         height_;
     void                        initState(); 
+    //std::vector<PtrEnv>*        vecEnvs;
+    std::vector<PtrEnv>         env_vector;
+    std::vector<LocationPair>   vecPairs;
+
 };
 #endif
 

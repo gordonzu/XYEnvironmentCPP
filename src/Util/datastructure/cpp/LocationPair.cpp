@@ -1,17 +1,22 @@
 // LocationPair.cpp
 #include "Util/datastructure/include/LocationPair.h"
 
-LocationPair::LocationPair(XYLocation* xy, std::vector<std::shared_ptr<EnvironmentObject>>* envs)
+LocationPair::LocationPair(XYLocation* xy, std::vector<PtrEnv>& envs)
                             : xy_{xy}, envs_{envs}
 {
 }
 
-/*size_t LocationPair::getEnvsSize()
+LocationPair::LocationPair(XYLocation* xy, std::vector<PtrEnv>&& envs)
+                            : xy_{xy}, envs_{std::move(envs)}
 {
-    return envs_->size();
-}*/
+}
 
-std::vector<std::shared_ptr<EnvironmentObject>>* LocationPair::get_envs() 
+size_t LocationPair::getEnvsSize()
+{
+    return envs_.size();
+}
+
+std::vector<PtrEnv>& LocationPair::get_envs() 
 {
     return envs_;
 } 
