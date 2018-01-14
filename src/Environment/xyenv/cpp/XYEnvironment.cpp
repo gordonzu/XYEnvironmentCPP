@@ -18,9 +18,9 @@ XYEnvironment::~XYEnvironment()
 {
 }
 
-void XYEnvironment::addObjectToLocation(PtrEnv eo, XYLocation* loc)
+void XYEnvironment::addObjectToLocation(PtrEnv eo, std::shared_ptr<XYLocation> loc)
 {
-    moveObjectToAbsoluteLocation(eo, loc);
+    //moveObjectToAbsoluteLocation(eo, loc);
 }
 
 void XYEnvironment::moveObjectToAbsoluteLocation(PtrEnv eo, XYLocation* loc)
