@@ -9,17 +9,19 @@
 #include "Agent/impl/include/AbstractEnvironment.h"
 #include "Environment/xyenv/include/XYEnvironmentState.h"
 
+using PtrEnv = std::shared_ptr<EnvironmentObject>;
+
 class XYEnvironment: public AbstractEnvironment {
 public:
     XYEnvironment(); 
     XYEnvironment(int w, int h); 
     virtual ~XYEnvironment();
 
-    void                                                addObjectToLocation(std::shared_ptr<EnvironmentObject> eo, XYLocation* loc); 
-    void                                                moveObjectToAbsoluteLocation(std::shared_ptr<EnvironmentObject> eo, XYLocation* loc);
-    XYLocation*                                         getCurrentLocationFor(std::shared_ptr<EnvironmentObject> eo); 
-    //std::vector<LocationPair>*                          get_vector();
-    //std::vector<std::shared_ptr<EnvironmentObject>>*    getObjectsAt(XYLocation* loc);
+    void                        addObjectToLocation(PtrEnv eo, XYLocation* loc); 
+    void                        moveObjectToAbsoluteLocation(PtrEnv eo, XYLocation* loc);
+    XYLocation*                 getCurrentLocationFor(PtrEnv eo); 
+    std::vector<LocationPair>&  get_vector();
+    std::vector<PtrEnv>&        getObjectsAt(XYLocation* loc);
 
 private:
     XYEnvironmentState* envState;

@@ -43,7 +43,6 @@ TEST_F(XYEnvironmentTest, testAddAgentLocation) {
     env = XYEnvironment{10, 10};
     env.addObjectToLocation(agent, new XYLocation(5, 6));
     ASSERT_EQ(*(env.getCurrentLocationFor(agent)), *(new XYLocation(5, 6)));
-    //ASSERT_TRUE(true);
 }
 
 /*
