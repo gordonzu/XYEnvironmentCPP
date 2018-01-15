@@ -22,6 +22,7 @@ public:
     std::shared_ptr<XYLocation>                 getCurrentLocationFor(PtrEnv eo); 
     std::vector<LocationPair>&  get_vector();
     std::vector<PtrEnv>&        getObjectsAt(std::shared_ptr<XYLocation> loc);
+    PtrEnv                      get_pointer();
 
 private:
     XYEnvironmentState* envState;

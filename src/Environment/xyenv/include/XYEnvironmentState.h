@@ -18,9 +18,10 @@ public:
     XYEnvironmentState(int w, int h);
 
     void                        moveObjectToAbsoluteLocation(PtrEnv eo, std::shared_ptr<XYLocation> loc);
-    std::shared_ptr<XYLocation>                 getCurrentLocationFor(PtrEnv eo); 
+    std::shared_ptr<XYLocation> getCurrentLocationFor(PtrEnv eo); 
     std::vector<LocationPair>&  get_vector(); 
     std::vector<PtrEnv>&        getObjectsAt(std::shared_ptr<XYLocation> loc); 
+    PtrEnv                      get_pointer();
 
 private:
     int                         width_;
@@ -28,6 +29,7 @@ private:
     void                        initState(); 
     std::vector<PtrEnv>         env_vector;
     std::vector<LocationPair>   vecPairs;
+    PtrEnv                      env_ptr;
 
 };
 #endif

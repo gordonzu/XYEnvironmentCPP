@@ -44,4 +44,9 @@ std::vector<LocationPair>& XYEnvironment::get_vector()
     return envState->get_vector();
 }
 
+PtrEnv XYEnvironment::get_pointer()
+{
+    return envState->get_pointer();
+}
+
 

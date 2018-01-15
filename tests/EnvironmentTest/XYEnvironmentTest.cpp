@@ -41,14 +41,15 @@ TEST_F(XYEnvironmentTest, testAddAgent)
     env.addObjectToLocation(agent, std::make_shared<XYLocation>(8, 7));
     ASSERT_EQ(env.getAgents().size(), size_t(2));
 }
-/*
+
 TEST_F(XYEnvironmentTest, testAddAgentLocation) 
 {
     env = XYEnvironment{10, 10};
-    env.addObjectToLocation(agent, new XYLocation(5, 6));
-    ASSERT_EQ(*(env.getCurrentLocationFor(agent)), *(new XYLocation(5, 6)));
+    std::shared_ptr<XYLocation> myXy = std::make_shared<XYLocation>(5, 6);
+    env.addObjectToLocation(agent, myXy);
+    ASSERT_EQ(*env.getCurrentLocationFor(agent), *myXy);
 }
-*/
+
 /*
 TEST_F(XYEnvironmentTest, testAddObject2) {
     env->addObjectToLocation(new Wall(), new XYLocation(9, 9));

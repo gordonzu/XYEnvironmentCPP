@@ -9,6 +9,10 @@ XYEnvironmentState::XYEnvironmentState(int w, int h): width_{w}, height_{h}, vec
 
 void XYEnvironmentState::moveObjectToAbsoluteLocation(PtrEnv eo, std::shared_ptr<XYLocation> loc)
 {
+    // For every LocationPair in vecPairs, search the EO vector for the passed in EO.
+    // If found, erase it.
+    // Call getObjectsAt, pass it the XYLocation
+    // add the passed in EO object to the EO vector returned from getObjectsAt 
     for (auto& x : vecPairs) {
         for (auto it = x.get_envs().begin(); it != x.get_envs().end(); ) {
             if ((*it) == eo) {
@@ -18,11 +22,14 @@ void XYEnvironmentState::moveObjectToAbsoluteLocation(PtrEnv eo, std::shared_ptr
             }
         }
     }
-    //getObjectsAt(loc).push_back(eo);
+    getObjectsAt(loc).push_back(eo);
 }
 
 std::vector<PtrEnv>& XYEnvironmentState::getObjectsAt(std::shared_ptr<XYLocation> loc)
 {
+    // For every LocationPair in vecPairs, search for the passed in XYLocation 
+    // If found, return the corresponding vector of EO
+    // If not found, add the XYLocation and a new empty EO vector to vecPairs and return the EO vector
     std::vector<LocationPair>::iterator it;
 
     it = std::find_if(vecPairs.begin(), vecPairs.end(), [loc](LocationPair& mypair) {
@@ -68,6 +75,11 @@ void XYEnvironmentState::initState()
             vecPairs.push_back(LocationPair(std::make_shared<XYLocation>(x, y), std::vector<PtrEnv>()));
         }
     }
+}
+
+PtrEnv XYEnvironmentState::get_pointer()
+{
+    return env_ptr;        
 }
 
 
