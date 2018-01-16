@@ -1,11 +1,20 @@
 // XYEnvironmentState.cpp
 
+#include <new>
+#include <iostream>
 #include "Environment/xyenv/include/XYEnvironmentState.h"
 
 XYEnvironmentState::XYEnvironmentState(int w, int h): width_{w}, height_{h}, vecPairs{std::vector<LocationPair>()} 
 {
     initState();
-}                           
+}   
+
+XYEnvironmentState::~XYEnvironmentState()
+{
+    for (auto& x : vecPairs) {
+        delete x.get_xy();
+    }
+}                        
 
 void XYEnvironmentState::moveObjectToAbsoluteLocation(EnvironmentObject* eo, XYLocation* loc)
 {
@@ -72,7 +81,7 @@ void XYEnvironmentState::initState()
 {
     for (int x = 1; x <= width_; ++x) {
         for (int y = 1; y <= height_; ++y) {
-            vecPairs.push_back(LocationPair(new XYLocation(x, y), std::vector<EnvironmentObject*>()));
+           vecPairs.push_back(LocationPair(new XYLocation(x, y), std::vector<EnvironmentObject*>()));
         }
     }
 }

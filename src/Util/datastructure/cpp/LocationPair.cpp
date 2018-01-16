@@ -13,8 +13,11 @@ LocationPair::LocationPair(XYLocation* xy, std::vector<EnvironmentObject*>&& env
 
 LocationPair::~LocationPair()
 {
-    //delete xy_;
-    //xy_ = nullptr;
+ /*   if (xy_) {
+        delete xy_;
+        xy_ = nullptr;
+    }
+    */
 }
 
 size_t LocationPair::getEnvsSize()

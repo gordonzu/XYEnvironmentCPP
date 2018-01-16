@@ -14,6 +14,7 @@
 class XYEnvironmentState {
 public:
     XYEnvironmentState(int w, int h);
+    ~XYEnvironmentState();
 
     void                                moveObjectToAbsoluteLocation(EnvironmentObject* eo, XYLocation* loc);
     XYLocation*         				getCurrentLocationFor(EnvironmentObject* eo); 
@@ -28,6 +29,7 @@ private:
     std::vector<EnvironmentObject*> env_vector;
     std::vector<LocationPair>       vecPairs;
     EnvironmentObject*              env_ptr;
+    XYLocation*                     xy_;
 
 };
 #endif

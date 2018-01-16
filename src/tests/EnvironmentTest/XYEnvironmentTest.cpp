@@ -11,21 +11,24 @@ using namespace::testing;
 
 class XYEnvironmentTest: public Test {
 public:
-    XYEnvironmentTest() {}
-    ~XYEnvironmentTest() {}
-
-    virtual void SetUp() 
-    {
-        env   = new XYEnvironment(10, 10);
+    XYEnvironmentTest() {
+		env   = new XYEnvironment(10, 10);
         agent = new MockAgent();
-    }
+	}
 
-    virtual void TearDown() 
-    {
+    ~XYEnvironmentTest() {
         delete env;
 		delete agent;
         env = nullptr;
 		env = nullptr;
+	}
+
+    virtual void SetUp() 
+    {
+   	}
+
+    virtual void TearDown() 
+    {
     }
 
     XYEnvironment*  env;
