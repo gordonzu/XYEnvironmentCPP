@@ -39,14 +39,13 @@ public:
  *      rewrite XYEnvironmentState::moveObjectToAbsoluteLocation with std::find_if?   
  *      
 */
-
 TEST_F(XYEnvironmentTest, testAddAgent) 
 {
-	XYLocation* xy_one = new XYLocation(3,4); 
+	auto xy_one = new XYLocation(3,4); 
     env->addObjectToLocation(agent, xy_one);
     ASSERT_EQ(env->getAgents().size(), size_t(1));
 
-	XYLocation* xy_two = new XYLocation(8, 7);
+	auto xy_two = new XYLocation(8, 7);
     env->addObjectToLocation(agent, xy_two);
     ASSERT_EQ(env->getAgents().size(), size_t(2));
 
