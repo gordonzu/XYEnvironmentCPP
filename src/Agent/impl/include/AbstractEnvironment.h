@@ -7,17 +7,15 @@
 #include "Agent/include/Agent.h"
 #include "Agent/include/EnvironmentObject.h"
 
-using PtrAgt = std::shared_ptr<Agent>;
-
 class AbstractEnvironment {
 public:
     void                                    addEnvironmentObject(EnvironmentObject* eo);
-    const std::vector<PtrAgt>&              getAgents() const; 
+    const std::vector<Agent*>&              getAgents() const; 
     const std::vector<EnvironmentObject*>&  getEnvironmentObjects() const;  
 
 protected:
     std::vector<EnvironmentObject*> envObjects;
-    std::vector<PtrAgt>             agents;
+    std::vector<Agent*>             agents;
 };
 #endif
 

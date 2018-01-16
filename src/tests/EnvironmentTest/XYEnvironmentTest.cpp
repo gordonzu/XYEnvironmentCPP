@@ -11,104 +11,77 @@ using namespace::testing;
 
 class XYEnvironmentTest: public Test {
 public:
-    XYEnvironmentTest() {
-		env   = new XYEnvironment(10, 10);
-        agent = new MockAgent();
-	}
-
-    ~XYEnvironmentTest() {
-        delete env;
-		delete agent;
-        env = nullptr;
-		env = nullptr;
-	}
-
     virtual void SetUp() 
     {
+		env   = new XYEnvironment(10, 10);
+        xy    = new XYLocation(3, 4);
+        xy2   = new XYLocation(3, 4);
+        xy3   = new XYLocation(9, 9);
+        xy4   = new XYLocation(9, 9);
+        agent = new MockAgent();
+        wall  = new Wall();
+        env->addObjectToLocation(agent, xy);
    	}
 
     virtual void TearDown() 
     {
+        delete env;
+        delete xy;
+        delete xy2;
+        delete xy3;
+        delete xy4;
+		delete agent;
+        delete wall;
+        env  = nullptr;
+        xy   = nullptr;
+        xy2  = nullptr;
+        xy3  = nullptr;
+        xy4  = nullptr;
+		env  = nullptr;
+        wall = nullptr;
     }
 
     XYEnvironment*  env;
+    XYLocation*     xy; 
+    XYLocation*     xy2; 
+    XYLocation*     xy3; 
+    XYLocation*     xy4;
     AbstractAgent*  agent;
+    Wall*           wall;
 };
+
+TEST_F(XYEnvironmentTest, testAddObject) 
+{
+    ASSERT_EQ(env->getAgents().size(), size_t(1));
+    ASSERT_EQ(*env->getCurrentLocationFor(agent), *xy2);
+}
+
+TEST_F(XYEnvironmentTest, testAddObject2) 
+{
+    env->addObjectToLocation(wall, xy3);
+    ASSERT_EQ(env->getAgents().size(), size_t(1));
+    ASSERT_EQ(env->getEnvironmentObjects().size(), size_t(2));
+    ASSERT_EQ(env->getObjectsAt(xy4).size(), size_t(1));
+}
+
+TEST_F(XYEnvironmentTest, testAddObjectTwice) 
+{
+    ASSERT_EQ(env->getAgents().size(), size_t(1));
+    auto loc = new XYLocation(5, 5);
+    AbstractAgent* b = new MockAgent();
+    env->addObjectToLocation(b, loc);
+    ASSERT_EQ(env->getAgents().size(), size_t(2));
+    ASSERT_EQ(*env->getCurrentLocationFor(b), *loc);
+
+    delete loc;
+    delete b;
+    loc = nullptr;
+    b = nullptr;
+}
 
 /* TODO change LocationPair to std::pair
  *      rewrite XYEnvironmentState::moveObjectToAbsoluteLocation with std::find_if?   
  *      
 */
-TEST_F(XYEnvironmentTest, testAddAgent) 
-{
-	auto xy_one = new XYLocation(3,4); 
-    env->addObjectToLocation(agent, xy_one);
-    ASSERT_EQ(env->getAgents().size(), size_t(1));
-
-	auto xy_two = new XYLocation(8, 7);
-    env->addObjectToLocation(agent, xy_two);
-    ASSERT_EQ(env->getAgents().size(), size_t(2));
-
-	delete xy_one;
-	delete xy_two;
-	xy_one = nullptr;
-	xy_two = nullptr;
-}
-
-TEST_F(XYEnvironmentTest, testAddAgentLocation) 
-{
-    XYLocation* xy = new XYLocation(5, 6);
-    env->addObjectToLocation(agent, xy);
-    ASSERT_EQ(*env->getCurrentLocationFor(agent), *xy);
-
-	delete xy;
-	xy = nullptr;
-}
-
-/*
-TEST_F(XYEnvironmentTest, testAddObject2) {
-    env->addObjectToLocation(new Wall(), new XYLocation(9, 9));
-    ASSERT_EQ(env->getAgents().size(), size_t(1));
-    ASSERT_EQ(env->getEnvironmentObjects().size(), size_t(2));
-    ASSERT_EQ(env->getObjectsAt(new XYLocation(9, 9))->size(), size_t(1));
-}
-
-TEST_F(XYEnvironmentTest, testAddObjectTwice) {
-    ASSERT_EQ(env->getAgents().size(), size_t(1));
-    XYLocation* x = new XYLocation(5, 5);
-    AbstractAgent* a = new MockAgent();
-    env->addObjectToLocation(a, x);
-    ASSERT_EQ(env->getAgents().size(), size_t(2));
-    ASSERT_EQ(*(env->getCurrentLocationFor(a)), *x);
-}
-
-TEST_F(XYEnvironmentTest, testMoveObjectToAbsoluteLocation) {
-    XYLocation* loc = new XYLocation(5, 5);
-    env->moveObjectToAbsoluteLocation(agent, loc);
-    ASSERT_EQ(*(env->getCurrentLocationFor(agent)), *(new XYLocation(5, 5)));
-}
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

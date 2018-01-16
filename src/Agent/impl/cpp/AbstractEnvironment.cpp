@@ -1,8 +1,9 @@
 // AbstractEnvironment.h
 
 #include "Agent/impl/include/AbstractEnvironment.h"
+#include <iostream>
 
-const std::vector<PtrAgt>& AbstractEnvironment::getAgents() const
+const std::vector<Agent*>& AbstractEnvironment::getAgents() const
 {
     return agents;
 }
@@ -11,8 +12,8 @@ void AbstractEnvironment::addEnvironmentObject(EnvironmentObject* eo)
 {
     envObjects.push_back(eo);
     if (Agent* a = dynamic_cast<Agent*>(eo)) {
-        agents.push_back(std::make_shared<Agent>(*a));            
-    }          
+        agents.push_back(a);            
+    }
 }
 
 const std::vector<EnvironmentObject*>& AbstractEnvironment::getEnvironmentObjects() const 

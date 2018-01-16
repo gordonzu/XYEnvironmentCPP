@@ -5,7 +5,8 @@
 #include "Agent/include/EnvironmentObject.h"
 
 class Wall: public EnvironmentObject {
-
+public:
+    virtual ~Wall();
 };
 
 #endif 
