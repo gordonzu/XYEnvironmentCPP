@@ -8,20 +8,19 @@
 #include "Util/datastructure/include/XYLocation.h"
 #include "Agent/include/EnvironmentObject.h"
 
-using PtrEnv = std::shared_ptr<EnvironmentObject>;
-
 class LocationPair {
 public:
-    LocationPair(std::shared_ptr<XYLocation> xy, std::vector<PtrEnv>& envs);
-    LocationPair(std::shared_ptr<XYLocation> xy, std::vector<PtrEnv>&& envs);
+    LocationPair(XYLocation* xy, std::vector<EnvironmentObject*>& envs);
+    LocationPair(XYLocation* xy, std::vector<EnvironmentObject*>&& envs);
+	~LocationPair();
 
-    size_t                  getEnvsSize();
-    std::vector<PtrEnv>&    get_envs();
-    std::shared_ptr<XYLocation>             get_xy();
+    size_t                              getEnvsSize();
+    std::vector<EnvironmentObject*>&    get_envs();
+    XYLocation*         				get_xy();
 
 private:
-    std::shared_ptr<XYLocation>         xy_;
-    std::vector<PtrEnv> envs_;    
+    XYLocation*         				xy_;
+    std::vector<EnvironmentObject*>     envs_;    
 };
 #endif
 

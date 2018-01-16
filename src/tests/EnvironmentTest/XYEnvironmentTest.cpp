@@ -4,7 +4,7 @@
 #include <iostream>
 #include "gmock/gmock.h"
 #include "Environment/xyenv/include/XYEnvironment.h"
-#include "AgentTest/impl/include/MockAgent.h"
+#include "tests/AgentTest/impl/include/MockAgent.h"
 #include "Environment/xyenv/include/Wall.h"
 
 using namespace::testing;
@@ -16,38 +16,51 @@ public:
 
     virtual void SetUp() 
     {
-        agent = std::make_shared<MockAgent>();
+        env   = new XYEnvironment(10, 10);
+        agent = new MockAgent();
     }
 
     virtual void TearDown() 
     {
+        delete env;
+		delete agent;
+        env = nullptr;
+		env = nullptr;
     }
 
-    XYEnvironment                   env;
-    std::shared_ptr<AbstractAgent>  agent;
+    XYEnvironment*  env;
+    AbstractAgent*  agent;
 };
 
 /* TODO change LocationPair to std::pair
- *      change all new XYLocation() to smart pointers   
  *      rewrite XYEnvironmentState::moveObjectToAbsoluteLocation with std::find_if?   
  *      
 */
 
 TEST_F(XYEnvironmentTest, testAddAgent) 
 {
-    env = XYEnvironment{10, 10};
-    env.addObjectToLocation(agent, std::make_shared<XYLocation>(3, 4));
-    ASSERT_EQ(env.getAgents().size(), size_t(1));
-    env.addObjectToLocation(agent, std::make_shared<XYLocation>(8, 7));
-    ASSERT_EQ(env.getAgents().size(), size_t(2));
+	XYLocation* xy_one = new XYLocation(3,4); 
+    env->addObjectToLocation(agent, xy_one);
+    ASSERT_EQ(env->getAgents().size(), size_t(1));
+
+	XYLocation* xy_two = new XYLocation(8, 7);
+    env->addObjectToLocation(agent, xy_two);
+    ASSERT_EQ(env->getAgents().size(), size_t(2));
+
+	delete xy_one;
+	delete xy_two;
+	xy_one = nullptr;
+	xy_two = nullptr;
 }
 
 TEST_F(XYEnvironmentTest, testAddAgentLocation) 
 {
-    env = XYEnvironment{10, 10};
-    std::shared_ptr<XYLocation> myXy = std::make_shared<XYLocation>(5, 6);
-    env.addObjectToLocation(agent, myXy);
-    ASSERT_EQ(*env.getCurrentLocationFor(agent), *myXy);
+    XYLocation* xy = new XYLocation(5, 6);
+    env->addObjectToLocation(agent, xy);
+    ASSERT_EQ(*env->getCurrentLocationFor(agent), *xy);
+
+	delete xy;
+	xy = nullptr;
 }
 
 /*
