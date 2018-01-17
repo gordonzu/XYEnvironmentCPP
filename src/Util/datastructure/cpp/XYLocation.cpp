@@ -57,7 +57,7 @@ XYLocation* XYLocation::down()
     return south();
 }
 
-XYLocation* XYLocation::locationAt(Direction& direction)
+XYLocation* XYLocation::locationAt(const Direction& direction)
 {
     XYLocation* xy;
     try

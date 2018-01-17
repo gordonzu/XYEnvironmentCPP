@@ -20,7 +20,8 @@ public:
     XYLocation*         				getCurrentLocationFor(EnvironmentObject* eo); 
     std::vector<LocationPair>&          get_vector();
     std::vector<EnvironmentObject*>&    getObjectsAt(XYLocation* loc);
-    EnvironmentObject*                  get_pointer();
+    void                                moveObject(EnvironmentObject* eo, const XYLocation::Direction& dir);
+    bool                                isBlocked(XYLocation* loc);
 
 private:
     XYEnvironmentState* envState;

@@ -86,9 +86,4 @@ void XYEnvironmentState::initState()
     }
 }
 
-EnvironmentObject* XYEnvironmentState::get_pointer()
-{
-    return env_ptr;        
-}
-
 

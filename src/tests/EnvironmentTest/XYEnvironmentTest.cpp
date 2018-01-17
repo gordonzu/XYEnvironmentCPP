@@ -84,6 +84,7 @@ TEST_F(XYEnvironmentTest, testMoveObject)
 {
     env->moveObjectToAbsoluteLocation(agent, xy5);
     ASSERT_EQ(*env->getCurrentLocationFor(agent), *xy6);
+    env->moveObject(agent, XYLocation::Direction::NORTH);
     
 }
 

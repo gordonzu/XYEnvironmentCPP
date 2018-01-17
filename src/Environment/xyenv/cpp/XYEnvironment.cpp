@@ -1,6 +1,7 @@
 // XYEnvironment.cpp
 
 #include "Environment/xyenv/include/XYEnvironment.h"
+#include "Environment/xyenv/include/Wall.h"
 
 XYEnvironment::XYEnvironment()
 {
@@ -46,9 +47,48 @@ std::vector<LocationPair>& XYEnvironment::get_vector()
     return envState->get_vector();
 }
 
-EnvironmentObject* XYEnvironment::get_pointer()
+void XYEnvironment::moveObject(EnvironmentObject* eo, const XYLocation::Direction& dir)
 {
-    return envState->get_pointer();
+    XYLocation* current = envState->getCurrentLocationFor(eo);
+
+    if (current) {
+        XYLocation* moveTo = current->locationAt(dir);
+        if(!(isBlocked(moveTo))) {
+            moveObjectToAbsoluteLocation(eo, moveTo);
+        }
+    }
 }
+
+bool XYEnvironment::isBlocked(XYLocation* loc) 
+{
+    for (auto& eo : envState->getObjectsAt(loc)) {
+        if (Wall* w = dynamic_cast<Wall*>(eo)) {      
+            return true;
+        }
+    }
+    return false;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

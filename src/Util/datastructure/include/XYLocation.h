@@ -20,7 +20,7 @@ public:
     XYLocation* right();
     XYLocation* up();
     XYLocation* down();
-    XYLocation* locationAt(Direction& direction);
+    XYLocation* locationAt(const Direction& direction);
  
     bool operator==(const XYLocation& rhs) const; 
 
