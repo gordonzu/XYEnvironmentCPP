@@ -25,6 +25,7 @@ public:
 
 private:
     XYEnvironmentState* envState;
+    XYLocation* moveTo;
 };
 #endif
 

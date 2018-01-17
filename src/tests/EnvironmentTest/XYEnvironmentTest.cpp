@@ -82,18 +82,34 @@ TEST_F(XYEnvironmentTest, testMoveObjectToAbsoluteLocation)
 
 TEST_F(XYEnvironmentTest, testMoveObject)
 {
+    XYLocation* loc1 = new XYLocation(5, 4);
+    XYLocation* loc2 = new XYLocation(6, 4);
+    XYLocation* loc3 = new XYLocation(6, 5);
+    XYLocation* loc4 = new XYLocation(5, 5);
+
     env->moveObjectToAbsoluteLocation(agent, xy5);
     ASSERT_EQ(*env->getCurrentLocationFor(agent), *xy6);
     env->moveObject(agent, XYLocation::Direction::NORTH);
-    
+    ASSERT_EQ(*env->getCurrentLocationFor(agent), *loc1);
+    env->moveObject(agent, XYLocation::Direction::EAST);
+    ASSERT_EQ(*env->getCurrentLocationFor(agent), *loc2);
+    env->moveObject(agent, XYLocation::Direction::SOUTH);
+    ASSERT_EQ(*env->getCurrentLocationFor(agent), *loc3);
+    env->moveObject(agent, XYLocation::Direction::WEST);
+    ASSERT_EQ(*env->getCurrentLocationFor(agent), *loc4);
+
+    delete loc1;
+    delete loc2;
+    delete loc3;
+    delete loc4;
 }
 
 
 
-
-
-
 /* TODO change LocationPair to std::pair
+ *      find a way to pass anonymous pointers -- either smart pointers or XYEnvirnmentState vector collects and delets
+ *      stop resource leaks in XYLocation direction functions
+ *      do away with compiler warnings for unused variable
  *      rewrite XYEnvironmentState::moveObjectToAbsoluteLocation with std::find_if?   
  *      
 */
