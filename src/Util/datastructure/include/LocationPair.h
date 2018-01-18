@@ -10,16 +10,16 @@
 
 class LocationPair {
 public:
-    LocationPair(XYLocation* xy, std::vector<EnvironmentObject*>& envs);
-    LocationPair(XYLocation* xy, std::vector<EnvironmentObject*>&& envs);
+    LocationPair(const XYLocation& xy, std::vector<EnvironmentObject*>& envs);
+    LocationPair(const XYLocation& xy, std::vector<EnvironmentObject*>&& envs);
 	~LocationPair();
 
     size_t                              getEnvsSize();
     std::vector<EnvironmentObject*>&    get_envs();
-    XYLocation*         				get_xy();
+    XYLocation&         				get_xy();
 
 private:
-    XYLocation*         				xy_;
+    XYLocation         				    xy_;
     std::vector<EnvironmentObject*>     envs_;    
 };
 #endif

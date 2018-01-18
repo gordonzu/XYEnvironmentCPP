@@ -2,6 +2,10 @@
 
 #include "Util/datastructure/include/XYLocation.h"
 
+XYLocation::XYLocation()
+{
+}
+
 XYLocation::XYLocation(int x, int y): x_{x}, y_{y}
 {
 }
@@ -16,7 +20,7 @@ bool XYLocation::operator==(const XYLocation& rhs) const
 {
         return ((x_ == rhs.x_) && (y_ == rhs.y_));
 }
-
+/*
 XYLocation* XYLocation::west()
 {
     return new XYLocation(x_ - 1, y_);
@@ -86,5 +90,5 @@ XYLocation* XYLocation::locationAt(const Direction& direction)
 
     return xy;
 }
-
+*/
 

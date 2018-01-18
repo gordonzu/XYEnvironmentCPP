@@ -16,10 +16,10 @@ public:
     XYEnvironmentState(int w, int h);
     ~XYEnvironmentState();
 
-    void                                moveObjectToAbsoluteLocation(EnvironmentObject* eo, XYLocation* loc);
-    XYLocation*         				getCurrentLocationFor(EnvironmentObject* eo); 
+    void                                moveObjectToAbsoluteLocation(EnvironmentObject* eo, const XYLocation& loc);
+    XYLocation&         				getCurrentLocationFor(EnvironmentObject* eo); 
     std::vector<LocationPair>&          get_vector(); 
-    std::vector<EnvironmentObject*>&    getObjectsAt(XYLocation* loc); 
+    std::vector<EnvironmentObject*>&    getObjectsAt(const XYLocation& loc); 
     EnvironmentObject*                  get_pointer();
 
 private:
@@ -29,7 +29,8 @@ private:
     std::vector<EnvironmentObject*> env_vector;
     std::vector<LocationPair>       vecPairs;
     EnvironmentObject*              env_ptr;
-    XYLocation*                     xy_;
+    XYLocation                      xy_;
+    XYLocation                      NULL_XYLOCATION;
 
 };
 #endif

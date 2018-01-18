@@ -5,13 +5,15 @@
 
 class XYLocation {
 public:
+    XYLocation(); 
     XYLocation(int x, int y);
     void xylocation();
 
-    enum class Direction: unsigned short{ NORTH, SOUTH, EAST, WEST };
+    //enum class Direction: unsigned short{ NORTH, SOUTH, EAST, WEST };
 
     int getx();
     int gety();
+/*
     XYLocation* west();
     XYLocation* east();
     XYLocation* north();
@@ -21,7 +23,7 @@ public:
     XYLocation* up();
     XYLocation* down();
     XYLocation* locationAt(const Direction& direction);
- 
+*/ 
     bool operator==(const XYLocation& rhs) const; 
 
 private:

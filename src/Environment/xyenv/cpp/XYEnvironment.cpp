@@ -21,23 +21,23 @@ XYEnvironment::~XYEnvironment()
     envState = nullptr;
 }
 
-void XYEnvironment::addObjectToLocation(EnvironmentObject* eo, XYLocation* loc)
+void XYEnvironment::addObjectToLocation(EnvironmentObject* eo, const XYLocation& loc)
 {
     moveObjectToAbsoluteLocation(eo, loc);
 }
 
-void XYEnvironment::moveObjectToAbsoluteLocation(EnvironmentObject* eo, XYLocation* loc)
+void XYEnvironment::moveObjectToAbsoluteLocation(EnvironmentObject* eo, const XYLocation& loc)
 {
     envState->moveObjectToAbsoluteLocation(eo, loc);
     addEnvironmentObject(eo);
 }
 
-XYLocation* XYEnvironment::getCurrentLocationFor(EnvironmentObject* eo)
+XYLocation& XYEnvironment::getCurrentLocationFor(EnvironmentObject* eo)
 {
     return envState->getCurrentLocationFor(eo);
 }
 
-std::vector<EnvironmentObject*>& XYEnvironment::getObjectsAt(XYLocation* loc)
+std::vector<EnvironmentObject*>& XYEnvironment::getObjectsAt(XYLocation& loc)
 {
     return envState->getObjectsAt(loc);
 }
@@ -46,7 +46,7 @@ std::vector<LocationPair>& XYEnvironment::get_vector()
 {
     return envState->get_vector();
 }
-
+/*
 void XYEnvironment::moveObject(EnvironmentObject* eo, const XYLocation::Direction& dir)
 {
     XYLocation* current = envState->getCurrentLocationFor(eo);
@@ -68,7 +68,7 @@ bool XYEnvironment::isBlocked(XYLocation* loc)
     }
     return false;
 }
-
+*/
 
 
 
