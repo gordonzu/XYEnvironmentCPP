@@ -6,8 +6,9 @@
 class XYLocation {
 public:
     XYLocation(int x, int y);
-    void xylocation();
+    ~XYLocation();
 
+    void xylocation();
     enum class Direction: unsigned short{ NORTH, SOUTH, EAST, WEST };
 
     int getx();

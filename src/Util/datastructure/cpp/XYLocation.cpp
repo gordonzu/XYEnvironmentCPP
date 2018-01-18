@@ -6,6 +6,9 @@ XYLocation::XYLocation(int x, int y): x_{x}, y_{y}
 {
 }
 
+XYLocation::~XYLocation()
+{
+}
 
 void XYLocation::xylocation() 
 {

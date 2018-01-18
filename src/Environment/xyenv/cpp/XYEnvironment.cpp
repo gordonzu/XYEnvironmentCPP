@@ -18,7 +18,6 @@ XYEnvironment::XYEnvironment(int w, int h)
 XYEnvironment::~XYEnvironment()
 {
     delete envState;
-    envState = nullptr;
 }
 
 void XYEnvironment::addObjectToLocation(EnvironmentObject* eo, XYLocation* loc)
