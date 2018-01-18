@@ -53,33 +53,27 @@ public:
     Wall*           wall;
 };
 
-TEST_F(XYEnvironmentTest, testAddObject) 
-{
-    //ASSERT_TRUE(true);
+TEST_F(XYEnvironmentTest, testAddObject) {
     ASSERT_EQ(env->getAgents().size(), size_t(1));
     ASSERT_EQ(env->getCurrentLocationFor(agent), XYLocation(3, 4));
 }
 
-/*
-TEST_F(XYEnvironmentTest, testAddObject2) 
-{
-    env->addObjectToLocation(wall, xy3);
+TEST_F(XYEnvironmentTest, testAddObject2) {
+    env->addObjectToLocation(wall, XYLocation(9, 9));
     ASSERT_EQ(env->getAgents().size(), size_t(1));
     ASSERT_EQ(env->getEnvironmentObjects().size(), size_t(2));
-    ASSERT_EQ(env->getObjectsAt(xy4).size(), size_t(1));
+    ASSERT_EQ(env->getObjectsAt(XYLocation(9, 9)).size(), size_t(1));
 }
 
-TEST_F(XYEnvironmentTest, testAddObjectTwice) 
-{
+TEST_F(XYEnvironmentTest, testAddObjectTwice) {
     ASSERT_EQ(env->getAgents().size(), size_t(1));
     AbstractAgent* b = new MockAgent();
-    env->addObjectToLocation(b, xy5);
+    env->addObjectToLocation(b, XYLocation(5, 5));
     ASSERT_EQ(env->getAgents().size(), size_t(2));
-    ASSERT_EQ(*env->getCurrentLocationFor(b), *xy6);
-
+    ASSERT_EQ(env->getCurrentLocationFor(b), XYLocation(5, 5));
     delete b;
 }
-
+/*
 TEST_F(XYEnvironmentTest, testMoveObjectToAbsoluteLocation)
 {
     env->moveObjectToAbsoluteLocation(agent, xy5);

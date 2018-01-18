@@ -19,7 +19,7 @@ public:
     void                                moveObjectToAbsoluteLocation(EnvironmentObject* eo, const XYLocation& loc);
     XYLocation&         				getCurrentLocationFor(EnvironmentObject* eo); 
     std::vector<LocationPair>&          get_vector();
-    std::vector<EnvironmentObject*>&    getObjectsAt(XYLocation& loc);
+    std::vector<EnvironmentObject*>&    getObjectsAt(const XYLocation& loc);
 //    void                                moveObject(EnvironmentObject* eo, const XYLocation::Direction& dir);
 //    bool                                isBlocked(XYLocation* loc);
 
