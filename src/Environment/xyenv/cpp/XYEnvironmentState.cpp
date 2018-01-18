@@ -4,7 +4,8 @@
 #include <iostream>
 #include "Environment/xyenv/include/XYEnvironmentState.h"
 
-XYEnvironmentState::XYEnvironmentState(int w, int h): width_{w}, height_{h}, vecPairs{std::vector<LocationPair>()} 
+XYEnvironmentState::XYEnvironmentState(int w, int h)
+                   : width_{w}, height_{h}, vecPairs{std::vector<LocationPair>()}, NULL_XYLOCATION{XYLocation{0, 0}}
 {
     initState();
 }   
@@ -63,6 +64,7 @@ XYLocation& XYEnvironmentState::getCurrentLocationFor(EnvironmentObject* eo)
         for (itEnvs = itPairs->get_envs().begin(); itEnvs != itPairs->get_envs().end(); ++itEnvs) {
             if (*itEnvs == eo) {
                 xy_ = itPairs->get_xy();
+                //xy_.print();
                 return xy_;
             }
         }

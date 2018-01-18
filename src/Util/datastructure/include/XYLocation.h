@@ -2,28 +2,28 @@
 #define XYLOCATION_H
 
 #include <iostream>
+#include <memory>
 
 class XYLocation {
 public:
     XYLocation(); 
     XYLocation(int x, int y);
-    void xylocation();
 
-    //enum class Direction: unsigned short{ NORTH, SOUTH, EAST, WEST };
-
+    enum class Direction: unsigned short{ NORTH, SOUTH, EAST, WEST };
     int getx();
     int gety();
-/*
-    XYLocation* west();
-    XYLocation* east();
-    XYLocation* north();
-    XYLocation* south();
-    XYLocation* left();
-    XYLocation* right();
-    XYLocation* up();
-    XYLocation* down();
-    XYLocation* locationAt(const Direction& direction);
-*/ 
+    void print();
+//    XYLocation* west();
+//    XYLocation* east();
+//    XYLocation* north();
+    void north();
+//    XYLocation* south();
+//    XYLocation* left();
+//    XYLocation* right();
+//    XYLocation* up();
+//    XYLocation* down();
+    //XYLocation* locationAt(const Direction& direction);
+    void locationAt(const Direction& direction);
     bool operator==(const XYLocation& rhs) const; 
 
 private:

@@ -46,20 +46,17 @@ std::vector<LocationPair>& XYEnvironment::get_vector()
 {
     return envState->get_vector();
 }
-/*
+
 void XYEnvironment::moveObject(EnvironmentObject* eo, const XYLocation::Direction& dir)
 {
-    XYLocation* current = envState->getCurrentLocationFor(eo);
+    // check that the current location for the eo returns a vaild XYLocation
+    // if so, move that location consistent with the Direction parameter
+    // check that the eo 
 
-    if (current) {
-        moveTo = current->locationAt(dir);
-        if(!(isBlocked(moveTo))) {
-            moveObjectToAbsoluteLocation(eo, moveTo);
-        }
-    }
+
 }
 
-bool XYEnvironment::isBlocked(XYLocation* loc) 
+bool XYEnvironment::isBlocked(XYLocation& loc) 
 {
     for (auto& eo : envState->getObjectsAt(loc)) {
         if (Wall* w = dynamic_cast<Wall*>(eo)) {      
@@ -68,27 +65,5 @@ bool XYEnvironment::isBlocked(XYLocation* loc)
     }
     return false;
 }
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

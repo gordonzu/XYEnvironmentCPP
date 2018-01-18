@@ -57,7 +57,7 @@ TEST_F(XYEnvironmentTest, testAddObject) {
     ASSERT_EQ(env->getAgents().size(), size_t(1));
     ASSERT_EQ(env->getCurrentLocationFor(agent), XYLocation(3, 4));
 }
-
+/*
 TEST_F(XYEnvironmentTest, testAddObject2) {
     env->addObjectToLocation(wall, XYLocation(9, 9));
     ASSERT_EQ(env->getAgents().size(), size_t(1));
@@ -73,37 +73,35 @@ TEST_F(XYEnvironmentTest, testAddObjectTwice) {
     ASSERT_EQ(env->getCurrentLocationFor(b), XYLocation(5, 5));
     delete b;
 }
-/*
-TEST_F(XYEnvironmentTest, testMoveObjectToAbsoluteLocation)
-{
-    env->moveObjectToAbsoluteLocation(agent, xy5);
-    ASSERT_EQ(*env->getCurrentLocationFor(agent), *xy6);
+*/
+TEST_F(XYEnvironmentTest, testMoveObjectToAbsoluteLocation) {
+    env->moveObjectToAbsoluteLocation(agent, XYLocation(5, 5));
+    ASSERT_EQ(env->getCurrentLocationFor(agent), XYLocation(5, 5));
 }
 
-TEST_F(XYEnvironmentTest, testMoveObject)
-{
-    XYLocation* loc1 = new XYLocation(5, 4);
-    XYLocation* loc2 = new XYLocation(6, 4);
-    XYLocation* loc3 = new XYLocation(6, 5);
-    XYLocation* loc4 = new XYLocation(5, 5);
+//TEST_F(XYEnvironmentTest, testMoveObject)
+//{
+    //XYLocation* loc1 = new XYLocation(5, 4);
+    //XYLocation* loc2 = new XYLocation(6, 4);
+    //XYLocation* loc3 = new XYLocation(6, 5);
+    //XYLocation* loc4 = new XYLocation(5, 5);
 
-    env->moveObjectToAbsoluteLocation(agent, xy5);
-    ASSERT_EQ(*env->getCurrentLocationFor(agent), *xy6);
-    env->moveObject(agent, XYLocation::Direction::NORTH);
-    ASSERT_EQ(*env->getCurrentLocationFor(agent), *loc1);
+    //env->moveObjectToAbsoluteLocation(agent, XYLocation(5, 5));
+    //ASSERT_EQ(env->getCurrentLocationFor(agent), XYLocation(5, 5));
+
+    //env->moveObject(agent, XYLocation::Direction::NORTH);
+   //ASSERT_EQ(env->getCurrentLocationFor(agent), XYLocation(5, 4));
+    //ASSERT_TRUE(true);
+/*
     env->moveObject(agent, XYLocation::Direction::EAST);
     ASSERT_EQ(*env->getCurrentLocationFor(agent), *loc2);
     env->moveObject(agent, XYLocation::Direction::SOUTH);
     ASSERT_EQ(*env->getCurrentLocationFor(agent), *loc3);
     env->moveObject(agent, XYLocation::Direction::WEST);
     ASSERT_EQ(*env->getCurrentLocationFor(agent), *loc4);
-
-    delete loc1;
-    delete loc2;
-    delete loc3;
-    delete loc4;
-}
 */
+//}
+
 
 
 /* TODO change LocationPair to std::pair
