@@ -52,8 +52,8 @@ void XYEnvironment::moveObject(EnvironmentObject* eo, const XYLocation::Directio
 
     if (current) {
         moveTo = current->locationAt(dir);
-        if(!(isBlocked(moveTo))) {
-            moveObjectToAbsoluteLocation(eo, moveTo);
+        if(!(isBlocked(moveTo.get()))) {
+            moveObjectToAbsoluteLocation(eo, moveTo.get());
         }
     }
 }

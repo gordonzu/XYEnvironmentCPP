@@ -25,7 +25,8 @@ public:
 
 private:
     XYEnvironmentState* envState;
-    XYLocation* moveTo;
+    //XYLocation* moveTo;
+    std::shared_ptr<XYLocation> moveTo;
 };
 #endif
 
