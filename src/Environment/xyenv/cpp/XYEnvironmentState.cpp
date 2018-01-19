@@ -18,11 +18,7 @@ XYEnvironmentState::~XYEnvironmentState()
 
 void XYEnvironmentState::moveObjectToAbsoluteLocation(EnvironmentObject* eo, XYLocation* loc)
 {
-    // For every LocationPair in vecPairs, search the EO vector for the passed in EO.
-    // If found, erase it.
-    // Call getObjectsAt, pass it the XYLocation
-    // add the passed in EO object to the EO vector returned from getObjectsAt 
-    for (auto& x : vecPairs) {
+   for (auto& x : vecPairs) {
         for (auto it = x.get_envs().begin(); it != x.get_envs().end(); ) {
             if ((*it) == eo) {
                 it = x.get_envs().erase(it);
@@ -36,10 +32,7 @@ void XYEnvironmentState::moveObjectToAbsoluteLocation(EnvironmentObject* eo, XYL
 
 std::vector<EnvironmentObject*>& XYEnvironmentState::getObjectsAt(XYLocation* loc)
 {
-    // For every LocationPair in vecPairs, search for the passed in XYLocation 
-    // If found, return the corresponding vector of EO
-    // If not found, add the XYLocation and a new empty EO vector to vecPairs and return the EO vector
-    std::vector<LocationPair>::iterator it;
+   std::vector<LocationPair>::iterator it;
 
     it = std::find_if(vecPairs.begin(), vecPairs.end(), [loc](LocationPair& mypair) {
         return (*(mypair.get_xy()) == *loc);
