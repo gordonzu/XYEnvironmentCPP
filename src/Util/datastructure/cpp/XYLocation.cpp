@@ -2,7 +2,15 @@
 
 #include "Util/datastructure/include/XYLocation.h"
 
+XYLocation::XYLocation() 
+{
+}
+
 XYLocation::XYLocation(int x, int y): x_{x}, y_{y}
+{
+}
+
+XYLocation::~XYLocation()
 {
 }
 

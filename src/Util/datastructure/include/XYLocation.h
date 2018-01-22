@@ -6,6 +6,7 @@
 
 class XYLocation {
 public:
+    XYLocation();
     XYLocation(int x, int y);
     ~XYLocation();
 

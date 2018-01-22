@@ -35,11 +35,7 @@ void XYEnvironmentState::moveObjectToAbsoluteLocation(EnvironmentObject* eo, con
 
 std::vector<EnvironmentObject*>& XYEnvironmentState::getObjectsAt(const XYLocation& loc)
 {
-<<<<<<< HEAD
-   std::vector<LocationPair>::iterator it;
-=======
     std::vector<LocationPair>::iterator it;
->>>>>>> xylocation_ptr
 
     it = std::find_if(vecPairs.begin(), vecPairs.end(), [loc](LocationPair& mypair) {
         return (mypair.get_xy() == loc);
