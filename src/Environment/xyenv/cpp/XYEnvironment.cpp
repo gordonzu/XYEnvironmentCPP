@@ -32,7 +32,7 @@ void XYEnvironment::moveObjectToAbsoluteLocation(EnvironmentObject* eo, const XY
     addEnvironmentObject(eo);
 }
 
-XYLocation& XYEnvironment::getCurrentLocationFor(EnvironmentObject* eo)
+std::shared_ptr<XYLocation> XYEnvironment::getCurrentLocationFor(EnvironmentObject* eo)
 {
     return envState->getCurrentLocationFor(eo);
 }
@@ -49,11 +49,14 @@ std::vector<LocationPair>& XYEnvironment::get_vector()
 
 void XYEnvironment::moveObject(EnvironmentObject* eo, const XYLocation::Direction& dir)
 {
-    // check that the current location for the eo returns a vaild XYLocation
-    // if so, move that location consistent with the Direction parameter
-    // check that the eo 
+    std::shared_ptr<XYLocation> temp = envState->getCurrentLocationFor(eo);
 
-
+    if (temp != nullptr) {
+        temp = temp.get()->locationAt(dir);
+        if (!(isBlocked(*(temp.get())))) {
+            moveObjectToAbsoluteLocation(eo, *(temp.get()));
+        }
+    }    
 }
 
 bool XYEnvironment::isBlocked(XYLocation& loc) 

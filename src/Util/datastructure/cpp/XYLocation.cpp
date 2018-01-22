@@ -29,57 +29,58 @@ bool XYLocation::operator==(const XYLocation& rhs) const
 {
         return ((x_ == rhs.x_) && (y_ == rhs.y_));
 }
-/*
-XYLocation* XYLocation::west()
+
+std::shared_ptr<XYLocation> XYLocation::west()
 {
-    return new XYLocation(x_ - 1, y_);
+    return std::make_shared<XYLocation>(x_ - 1, y_);
 }
 
-XYLocation* XYLocation::east()
+std::shared_ptr<XYLocation> XYLocation::east()
 {
-    return new XYLocation(x_ + 1, y_);
-}
-*/
-void XYLocation::north()
-{
-    this->y_--;
-}
-/*
-XYLocation* XYLocation::south()
-{
-    return new XYLocation(x_, y_ + 1);
+    return std::make_shared<XYLocation>(x_ + 1, y_);
 }
 
-XYLocation* XYLocation::right()
+std::shared_ptr<XYLocation> XYLocation::north()
+{
+    return std::make_shared<XYLocation>(x_, y_ - 1);
+}
+
+std::shared_ptr<XYLocation> XYLocation::south()
+{
+    return std::make_shared<XYLocation>(x_, y_ + 1);
+}
+
+std::shared_ptr<XYLocation> XYLocation::right()
 {
     return east();
 }
 
-XYLocation* XYLocation::left()
+std::shared_ptr<XYLocation> XYLocation::left()
 {
     return west();
 }
 
-XYLocation* XYLocation::up()
+std::shared_ptr<XYLocation> XYLocation::up()
 {
     return north();
 }
 
-XYLocation* XYLocation::down()
+std::shared_ptr<XYLocation> XYLocation::down()
 {
     return south();
 }
-*/
-void XYLocation::locationAt(const Direction& direction)
+
+std::shared_ptr<XYLocation> XYLocation::locationAt(const Direction& direction)
 {
+    std::shared_ptr<XYLocation> xy;
     try
     {
         switch (direction) 
         {
             case     Direction::NORTH:
-                     north();
+                     xy = north();
                      break;
-            /*case     Direction::SOUTH:
+            case     Direction::SOUTH:
                      xy = south();
                      break;
             case     Direction::EAST:
@@ -88,7 +89,7 @@ void XYLocation::locationAt(const Direction& direction)
             case     Direction::WEST:
                      xy = west();
                      break;
-            */
+            
             default: throw std::runtime_error("Unknown direction: ");
         } 
     }
@@ -96,6 +97,7 @@ void XYLocation::locationAt(const Direction& direction)
     {
         std::cerr << "Exception: " << e.what() << "\n";
     }
+    return xy;
 }
 
 

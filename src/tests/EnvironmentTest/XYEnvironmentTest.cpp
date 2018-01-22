@@ -55,7 +55,7 @@ public:
 
 TEST_F(XYEnvironmentTest, testAddObject) {
     ASSERT_EQ(env->getAgents().size(), size_t(1));
-    ASSERT_EQ(env->getCurrentLocationFor(agent), XYLocation(3, 4));
+    ASSERT_EQ(*(env->getCurrentLocationFor(agent).get()), XYLocation(3, 4));
 }
 
 TEST_F(XYEnvironmentTest, testAddObject2) {
@@ -67,39 +67,29 @@ TEST_F(XYEnvironmentTest, testAddObject2) {
 
 TEST_F(XYEnvironmentTest, testAddObjectTwice) {
     ASSERT_EQ(env->getAgents().size(), size_t(1));
-    AbstractAgent* b = new MockAgent();
-    env->addObjectToLocation(b, XYLocation(5, 5));
+    auto b = std::make_unique<AbstractAgent>(MockAgent());
+    env->addObjectToLocation(b.get(), XYLocation(5, 5));
     ASSERT_EQ(env->getAgents().size(), size_t(2));
-    ASSERT_EQ(env->getCurrentLocationFor(b), XYLocation(5, 5));
-    delete b;
+    ASSERT_EQ(*(env->getCurrentLocationFor(b.get()).get()), XYLocation(5, 5));
 }
 
 TEST_F(XYEnvironmentTest, testMoveObjectToAbsoluteLocation) {
     env->moveObjectToAbsoluteLocation(agent, XYLocation(5, 5));
-    ASSERT_EQ(env->getCurrentLocationFor(agent), XYLocation(5, 5));
+    ASSERT_EQ(*(env->getCurrentLocationFor(agent).get()), XYLocation(5, 5));
 }
 
 TEST_F(XYEnvironmentTest, testMoveObject)
 {
-    //XYLocation* loc1 = new XYLocation(5, 4);
-    //XYLocation* loc2 = new XYLocation(6, 4);
-    //XYLocation* loc3 = new XYLocation(6, 5);
-    //XYLocation* loc4 = new XYLocation(5, 5);
-
     env->moveObjectToAbsoluteLocation(agent, XYLocation(5, 5));
-    ASSERT_EQ(env->getCurrentLocationFor(agent), XYLocation(5, 5));
-
+    ASSERT_EQ(*(env->getCurrentLocationFor(agent).get()), XYLocation(5, 5));
     env->moveObject(agent, XYLocation::Direction::NORTH);
-    ASSERT_EQ(env->getCurrentLocationFor(agent), XYLocation(5, 4));
-    //ASSERT_TRUE(true);
-/*
+    ASSERT_EQ(*(env->getCurrentLocationFor(agent).get()), XYLocation(5, 4));
     env->moveObject(agent, XYLocation::Direction::EAST);
-    ASSERT_EQ(*env->getCurrentLocationFor(agent), *loc2);
+    ASSERT_EQ(*(env->getCurrentLocationFor(agent).get()), XYLocation(6, 4));
     env->moveObject(agent, XYLocation::Direction::SOUTH);
-    ASSERT_EQ(*env->getCurrentLocationFor(agent), *loc3);
+    ASSERT_EQ(*(env->getCurrentLocationFor(agent).get()), XYLocation(6, 5));
     env->moveObject(agent, XYLocation::Direction::WEST);
-    ASSERT_EQ(*env->getCurrentLocationFor(agent), *loc4);
-*/
+    ASSERT_EQ(*(env->getCurrentLocationFor(agent).get()), XYLocation(5, 5));
 }
 
 

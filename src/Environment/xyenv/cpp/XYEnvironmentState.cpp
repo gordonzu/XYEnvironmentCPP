@@ -55,7 +55,7 @@ std::vector<EnvironmentObject*>& XYEnvironmentState::getObjectsAt(const XYLocati
 }
 
  
-XYLocation& XYEnvironmentState::getCurrentLocationFor(EnvironmentObject* eo) 
+std::shared_ptr<XYLocation> XYEnvironmentState::getCurrentLocationFor(EnvironmentObject* eo) 
 {
     std::vector<LocationPair>::iterator itPairs;
     std::vector<EnvironmentObject*>::iterator itEnvs;
@@ -65,11 +65,11 @@ XYLocation& XYEnvironmentState::getCurrentLocationFor(EnvironmentObject* eo)
             if (*itEnvs == eo) {
                 xy_ = itPairs->get_xy();
                 //xy_.print();
-                return xy_;
+                return std::make_shared<XYLocation>(xy_);
             }
         }
     }
-    return NULL_XYLOCATION;
+    return nullptr;
 }
 
 

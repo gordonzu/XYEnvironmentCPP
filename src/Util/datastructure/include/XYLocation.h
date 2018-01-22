@@ -13,17 +13,15 @@ public:
     int getx();
     int gety();
     void print();
-//    XYLocation* west();
-//    XYLocation* east();
-//    XYLocation* north();
-    void north();
-//    XYLocation* south();
-//    XYLocation* left();
-//    XYLocation* right();
-//    XYLocation* up();
-//    XYLocation* down();
-    //XYLocation* locationAt(const Direction& direction);
-    void locationAt(const Direction& direction);
+    std::shared_ptr<XYLocation> west();
+    std::shared_ptr<XYLocation> east();
+    std::shared_ptr<XYLocation> north();
+    std::shared_ptr<XYLocation> south();
+    std::shared_ptr<XYLocation> left();
+    std::shared_ptr<XYLocation> right();
+    std::shared_ptr<XYLocation> up();
+    std::shared_ptr<XYLocation> down();
+    std::shared_ptr<XYLocation> locationAt(const Direction& direction);
     bool operator==(const XYLocation& rhs) const; 
 
 private:

@@ -17,7 +17,8 @@ public:
     ~XYEnvironmentState();
 
     void                                moveObjectToAbsoluteLocation(EnvironmentObject* eo, const XYLocation& loc);
-    XYLocation&         				getCurrentLocationFor(EnvironmentObject* eo); 
+    //XYLocation&         				getCurrentLocationFor(EnvironmentObject* eo); 
+    std::shared_ptr<XYLocation>         getCurrentLocationFor(EnvironmentObject* eo); 
     std::vector<LocationPair>&          get_vector(); 
     std::vector<EnvironmentObject*>&    getObjectsAt(const XYLocation& loc); 
     EnvironmentObject*                  get_pointer();
