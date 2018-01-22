@@ -50,10 +50,17 @@ void XYEnvironment::moveObject(EnvironmentObject* eo, const XYLocation::Directio
 {
     std::shared_ptr<XYLocation> temp = envState->getCurrentLocationFor(eo);
 
+<<<<<<< HEAD
+    if (current) {
+        moveTo = current->locationAt(dir);
+        if(!(isBlocked(moveTo.get()))) {
+            moveObjectToAbsoluteLocation(eo, moveTo.get());
+=======
     if (temp != nullptr) {
         temp = temp.get()->locationAt(dir);
         if (!(isBlocked(*(temp.get())))) {
             moveObjectToAbsoluteLocation(eo, *(temp.get()));
+>>>>>>> xylocation_ptr
         }
     }    
 }

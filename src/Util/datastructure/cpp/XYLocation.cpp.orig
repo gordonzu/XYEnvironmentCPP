@@ -2,7 +2,15 @@
 
 #include "Util/datastructure/include/XYLocation.h"
 
+XYLocation::XYLocation()
+{
+}
+
+<<<<<<< HEAD
+XYLocation::~XYLocation()
+=======
 XYLocation::XYLocation(int x, int y): x_{x}, y_{y}
+>>>>>>> xylocation_ptr
 {
 }
 
@@ -38,7 +46,11 @@ std::shared_ptr<XYLocation> XYLocation::east()
 
 std::shared_ptr<XYLocation> XYLocation::north()
 {
+<<<<<<< HEAD
     return std::make_shared<XYLocation>(x_, y_ -1);
+=======
+    return std::make_shared<XYLocation>(x_, y_ - 1);
+>>>>>>> xylocation_ptr
 }
 
 std::shared_ptr<XYLocation> XYLocation::south()
@@ -61,6 +73,10 @@ std::shared_ptr<XYLocation> XYLocation::up()
     return north();
 }
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> xylocation_ptr
 std::shared_ptr<XYLocation> XYLocation::down()
 {
     return south();
@@ -86,6 +102,11 @@ std::shared_ptr<XYLocation> XYLocation::locationAt(const Direction& direction)
             case     Direction::WEST:
                      xy = west();
                      break;
+<<<<<<< HEAD
+                
+=======
+            
+>>>>>>> xylocation_ptr
             default: throw std::runtime_error("Unknown direction: ");
         } 
     }

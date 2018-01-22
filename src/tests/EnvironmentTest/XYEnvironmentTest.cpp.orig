@@ -22,7 +22,10 @@ public:
         //xy6   = new XYLocation(5, 5);
         agent = new MockAgent();
         wall  = new Wall();
-        env->addObjectToLocation(agent, XYLocation(3, 4));
+        env->addObjectToLocation(agent, XYLocation{3, 4});
+
+        //env = XYEnvironment{10, 10};
+        //env.addObjectToLocation(agent, XYLocation{3, 4});
    	}
 
     virtual void TearDown() 
@@ -38,6 +41,7 @@ public:
         delete wall;
     }
 
+    //XYEnvironment   env;
     XYEnvironment*  env;
     //XYLocation*     xy; 
     //XYLocation*     xy2; 
@@ -79,7 +83,12 @@ TEST_F(XYEnvironmentTest, testMoveObject)
     env->moveObjectToAbsoluteLocation(agent, XYLocation(5, 5));
     ASSERT_EQ(*(env->getCurrentLocationFor(agent).get()), XYLocation(5, 5));
     env->moveObject(agent, XYLocation::Direction::NORTH);
+<<<<<<< HEAD
+    ASSERT_EQ(*env->getCurrentLocationFor(agent), *loc1);
+
+=======
     ASSERT_EQ(*(env->getCurrentLocationFor(agent).get()), XYLocation(5, 4));
+>>>>>>> xylocation_ptr
     env->moveObject(agent, XYLocation::Direction::EAST);
     ASSERT_EQ(*(env->getCurrentLocationFor(agent).get()), XYLocation(6, 4));
     env->moveObject(agent, XYLocation::Direction::SOUTH);

@@ -6,15 +6,21 @@
 
 class XYLocation {
 public:
+    XYLocation(); 
     XYLocation(int x, int y);
+<<<<<<< HEAD
     ~XYLocation();
+=======
+>>>>>>> xylocation_ptr
 
     void print();
     enum class Direction: unsigned short{ NORTH, SOUTH, EAST, WEST };
-
     int getx();
     int gety();
-
+<<<<<<< HEAD
+=======
+    void print();
+>>>>>>> xylocation_ptr
     std::shared_ptr<XYLocation> west();
     std::shared_ptr<XYLocation> east();
     std::shared_ptr<XYLocation> north();
@@ -24,6 +30,10 @@ public:
     std::shared_ptr<XYLocation> up();
     std::shared_ptr<XYLocation> down();
     std::shared_ptr<XYLocation> locationAt(const Direction& direction);
+<<<<<<< HEAD
+ 
+=======
+>>>>>>> xylocation_ptr
     bool operator==(const XYLocation& rhs) const; 
 
 private:
