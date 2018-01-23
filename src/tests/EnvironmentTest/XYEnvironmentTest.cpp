@@ -14,12 +14,6 @@ public:
     virtual void SetUp() 
     {
 		env   = new XYEnvironment(10, 10);
-        //xy    = new XYLocation(3, 4);
-        //xy2   = new XYLocation(3, 4);
-        //xy3   = new XYLocation(9, 9);
-        //xy4   = new XYLocation(9, 9);
-        //xy5   = new XYLocation(5, 5);
-        //xy6   = new XYLocation(5, 5);
         agent = new MockAgent();
         wall  = new Wall();
         env->addObjectToLocation(agent, XYLocation(3, 4));
@@ -28,23 +22,11 @@ public:
     virtual void TearDown() 
     {
         delete env;
-        //delete xy;
-        //delete xy2;
-        //delete xy3;
-        //delete xy4;
-        //delete xy5;
-        //delete xy6;
 		delete agent;
         delete wall;
     }
 
     XYEnvironment*  env;
-    //XYLocation*     xy; 
-    //XYLocation*     xy2; 
-    //XYLocation*     xy3; 
-    //XYLocation*     xy4;
-    //XYLocation*     xy5;
-    //XYLocation*     xy6;
     AbstractAgent*  agent;
     Wall*           wall;
 };
