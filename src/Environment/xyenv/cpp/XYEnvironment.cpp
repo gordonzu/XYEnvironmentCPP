@@ -10,7 +10,7 @@
 #include "Util/datastructure/include/XYLocation.h"
 #include "Agent/include/EnvironmentObject.h"
 
-class XYEnvironmentState {
+class XYEnvironment::XYEnvironmentState {
 public:
     XYEnvironmentState(int w, int h);
     ~XYEnvironmentState();
@@ -40,18 +40,16 @@ XYEnvironment::XYEnvironment()
 {
 }
 
-XYEnvironment::XYEnvironment(int w, int h)//: envState(std::make_unique<XYEnvironmentState>(w, h))
+XYEnvironment::XYEnvironment(int w, int h)
 {
     assert (w > 0);
     assert (h > 0);
 
-    //envState = new XYEnvironmentState(w, h);
     envState = std::make_unique<XYEnvironmentState>(w, h);
 }
 
 XYEnvironment::~XYEnvironment()
 {
-    //delete envState;
 }
 
 void XYEnvironment::addObjectToLocation(EnvironmentObject* eo, XYLocation& loc)
@@ -113,11 +111,6 @@ XYEnvironment::XYEnvironmentState::XYEnvironmentState(int w, int h)
 
 XYEnvironment::XYEnvironmentState::~XYEnvironmentState()
 {
-   //env_vector.clear(); 
-   ///vecPairs.clear(); 
-//    for (auto& x : vecPairs) {
-//        delete x.get_xy();
-//    }
 }                        
 
 void XYEnvironment::XYEnvironmentState::moveObjectToAbsoluteLocation(EnvironmentObject* eo, XYLocation& loc)
