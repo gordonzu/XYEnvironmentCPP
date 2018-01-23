@@ -8,8 +8,11 @@ class XYLocation {
 public:
     XYLocation();
     XYLocation(int x, int y);
+    XYLocation(XYLocation&& other);
     ~XYLocation();
+    XYLocation(const XYLocation& other);
 
+    XYLocation& operator=(const XYLocation& rhs);
     bool operator==(const XYLocation& rhs) const; 
     bool operator<(const XYLocation& rhs) const;
 

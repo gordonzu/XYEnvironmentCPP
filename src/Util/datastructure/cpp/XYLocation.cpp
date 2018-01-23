@@ -10,8 +10,23 @@ XYLocation::XYLocation(int x, int y): x_{x}, y_{y}
 {
 }
 
+XYLocation::XYLocation(XYLocation&& other): x_{0}, y_{0}
+{
+    x_ = other.x_;
+    y_ = other.y_;
+
+    other.x_ = 0;
+    other.y_ = 0;
+}
+
 XYLocation::~XYLocation()
 {
+}
+
+XYLocation::XYLocation(const XYLocation& other)
+{
+    x_ = other.x_;
+    y_ = other.y_;
 }
 
 void XYLocation::print() 
@@ -28,6 +43,16 @@ int XYLocation::gety()
 {
     return y_;
 }
+
+XYLocation& XYLocation::operator=(const XYLocation& rhs)
+{
+    if (&rhs != this) {
+        x_ = rhs.x_;
+        y_ = rhs.y_;
+    }
+    return *this;
+}
+
 bool XYLocation::operator<(const XYLocation& rhs) const 
 {
     return x_ < rhs.x_ || (!(rhs.x_ < x_) && y_ < rhs.y_);

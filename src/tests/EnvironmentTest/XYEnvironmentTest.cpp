@@ -16,7 +16,7 @@ public:
 		env   = new XYEnvironment(10, 10);
         agent = new MockAgent();
         wall  = new Wall();
-        loc   = std::make_shared<XYLocation>(3, 4);  
+        loc   = std::make_unique<XYLocation>(3, 4);  
         env->addObjectToLocation(agent, *loc);
    	}
 
@@ -30,56 +30,72 @@ public:
     XYEnvironment*  env;
     AbstractAgent*  agent;
     Wall*           wall;
-    std::shared_ptr<XYLocation> loc;
+    std::unique_ptr<XYLocation> loc;
 };
 
-TEST_F(XYEnvironmentTest, testAddObject) {
-    //ASSERT_EQ(env->getAgents().size(), size_t(1));
-    //ASSERT_EQ(*(env->getCurrentLocationFor(agent).get()), XYLocation(3, 4));
-    ASSERT_TRUE(true);
+TEST_F(XYEnvironmentTest, testAddObject) 
+{
+    ASSERT_EQ(env->getAgents().size(), size_t(1));
 }
 
-
-/*
-TEST_F(XYEnvironmentTest, testAddObject) {
-    ASSERT_EQ(env->getAgents().size(), size_t(1));
+TEST_F(XYEnvironmentTest, testGetCurrentLocation) 
+{
     ASSERT_EQ(*(env->getCurrentLocationFor(agent).get()), XYLocation(3, 4));
 }
 
-TEST_F(XYEnvironmentTest, testAddObject2) {
-    env->addObjectToLocation(wall, XYLocation(9, 9));
+TEST_F(XYEnvironmentTest, testAddObject2) 
+{
+    auto loc1 = std::make_unique<XYLocation>(9, 9);
+    auto loc2 = std::make_unique<XYLocation>(9, 9);
+
+    env->addObjectToLocation(wall, *loc1);
     ASSERT_EQ(env->getAgents().size(), size_t(1));
     ASSERT_EQ(env->getEnvironmentObjects().size(), size_t(2));
-    ASSERT_EQ(env->getObjectsAt(XYLocation(9, 9)).size(), size_t(1));
+    ASSERT_EQ(env->getObjectsAt(*loc2).size(), size_t(1));
 }
 
-TEST_F(XYEnvironmentTest, testAddObjectTwice) {
+TEST_F(XYEnvironmentTest, testAddObjectTwice) 
+{
     ASSERT_EQ(env->getAgents().size(), size_t(1));
-    auto b = std::make_unique<AbstractAgent>(MockAgent());
-    env->addObjectToLocation(b.get(), XYLocation(5, 5));
+
+    auto agt = std::make_unique<AbstractAgent>(MockAgent());
+    auto loc = std::make_unique<XYLocation>(5, 5);
+    auto xy2 = std::make_unique<XYLocation>(5, 5);
+
+    env->addObjectToLocation(agt.get(), *loc);
     ASSERT_EQ(env->getAgents().size(), size_t(2));
-    ASSERT_EQ(*(env->getCurrentLocationFor(b.get()).get()), XYLocation(5, 5));
+    ASSERT_EQ(*(env->getCurrentLocationFor(agt.get()).get()), *xy2);
 }
 
-TEST_F(XYEnvironmentTest, testMoveObjectToAbsoluteLocation) {
-    env->moveObjectToAbsoluteLocation(agent, XYLocation(5, 5));
-    ASSERT_EQ(*(env->getCurrentLocationFor(agent).get()), XYLocation(5, 5));
+TEST_F(XYEnvironmentTest, testMoveObjectToAbsoluteLocation) 
+{
+    auto loc = std::make_unique<XYLocation>(5, 5);
+    auto xy2 = std::make_unique<XYLocation>(5, 5);
+    env->moveObjectToAbsoluteLocation(agent, *loc);
+    ASSERT_EQ(*(env->getCurrentLocationFor(agent).get()), *xy2);
 }
 
 TEST_F(XYEnvironmentTest, testMoveObject)
 {
-    env->moveObjectToAbsoluteLocation(agent, XYLocation(5, 5));
-    ASSERT_EQ(*(env->getCurrentLocationFor(agent).get()), XYLocation(5, 5));
+    auto xy1 = std::make_unique<XYLocation>(5, 5);
+    auto xy2 = std::make_unique<XYLocation>(5, 5);
+    auto xy3 = std::make_unique<XYLocation>(5, 5);
+    auto xy4 = std::make_unique<XYLocation>(5, 4);
+    auto xy5 = std::make_unique<XYLocation>(6, 4);
+    auto xy6 = std::make_unique<XYLocation>(6, 5);
+
+    env->moveObjectToAbsoluteLocation(agent, *xy1);
+    ASSERT_EQ(*(env->getCurrentLocationFor(agent).get()), *xy2);
     env->moveObject(agent, XYLocation::Direction::NORTH);
-    ASSERT_EQ(*(env->getCurrentLocationFor(agent).get()), XYLocation(5, 4));
+    ASSERT_EQ(*(env->getCurrentLocationFor(agent).get()), *xy4);
     env->moveObject(agent, XYLocation::Direction::EAST);
-    ASSERT_EQ(*(env->getCurrentLocationFor(agent).get()), XYLocation(6, 4));
+    ASSERT_EQ(*(env->getCurrentLocationFor(agent).get()), *xy5);
     env->moveObject(agent, XYLocation::Direction::SOUTH);
-    ASSERT_EQ(*(env->getCurrentLocationFor(agent).get()), XYLocation(6, 5));
+    ASSERT_EQ(*(env->getCurrentLocationFor(agent).get()), *xy6);
     env->moveObject(agent, XYLocation::Direction::WEST);
-    ASSERT_EQ(*(env->getCurrentLocationFor(agent).get()), XYLocation(5, 5));
+    ASSERT_EQ(*(env->getCurrentLocationFor(agent).get()), *xy3);
 }
-*/
+
 
 
 /* TODO change LocationPair to std::pair
