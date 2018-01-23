@@ -28,6 +28,10 @@ int XYLocation::gety()
 {
     return y_;
 }
+bool XYLocation::operator<(const XYLocation& rhs) const 
+{
+    return x_ < rhs.x_ || (!(rhs.x_ < x_) && y_ < rhs.y_);
+} 
 
 bool XYLocation::operator==(const XYLocation& rhs) const  
 {
