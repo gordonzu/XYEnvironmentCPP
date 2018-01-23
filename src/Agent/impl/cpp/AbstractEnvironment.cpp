@@ -3,7 +3,7 @@
 #include "Agent/impl/include/AbstractEnvironment.h"
 #include <iostream>
 
-const std::vector<Agent*>& AbstractEnvironment::getAgents() const
+std::vector<Agent*>& AbstractEnvironment::getAgents() 
 {
     return agents;
 }
@@ -16,7 +16,7 @@ void AbstractEnvironment::addEnvironmentObject(EnvironmentObject* eo)
     }
 }
 
-const std::vector<EnvironmentObject*>& AbstractEnvironment::getEnvironmentObjects() const 
+std::vector<EnvironmentObject*>& AbstractEnvironment::getEnvironmentObjects()  
 {
     return envObjects;    
 }

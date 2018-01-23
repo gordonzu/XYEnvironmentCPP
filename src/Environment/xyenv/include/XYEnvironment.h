@@ -5,7 +5,6 @@
 #include <memory>
 #include "Agent/include/EnvironmentObject.h"
 #include "Util/datastructure/include/XYLocation.h"
-#include "Util/datastructure/include/LocationPair.h"
 #include "Agent/impl/include/AbstractEnvironment.h"
 #include "Environment/xyenv/include/XYEnvironmentState.h"
 
@@ -15,12 +14,13 @@ public:
     XYEnvironment(int w, int h); 
     virtual ~XYEnvironment();
 
-    void                                addObjectToLocation(EnvironmentObject* eo, const XYLocation& loc); 
-    void                                moveObjectToAbsoluteLocation(EnvironmentObject* eo, const XYLocation& loc);
+    void                                addObjectToLocation(EnvironmentObject* eo, XYLocation& loc); 
+    void                                moveObjectToAbsoluteLocation(EnvironmentObject* eo, XYLocation& loc);
     std::shared_ptr<XYLocation>         getCurrentLocationFor(EnvironmentObject* eo); 
-    std::vector<LocationPair>&          get_vector();
-    std::vector<EnvironmentObject*>&    getObjectsAt(const XYLocation& loc);
-    void                                moveObject(EnvironmentObject* eo, const XYLocation::Direction& dir);
+    std::vector<std::pair<XYLocation, std::vector<EnvironmentObject*>>>& get_vector();
+
+    std::vector<EnvironmentObject*>&    getObjectsAt(XYLocation& loc);
+    void                                moveObject(EnvironmentObject* eo, XYLocation::Direction& dir);
     bool                                isBlocked(XYLocation& loc);
 
 private:

@@ -14,7 +14,7 @@ set(sources
     src/Environment/xyenv/cpp/XYEnvironment.cpp
     src/Agent/cpp/EnvironmentObject.cpp
     src/Agent/impl/cpp/AbstractEnvironment.cpp
-    src/Util/datastructure/cpp/LocationPair.cpp
+    #src/Util/datastructure/cpp/LocationPair.cpp
     src/tests/AgentTest/impl/cpp/MockAgent.cpp
     src/Agent/impl/cpp/AbstractAgent.cpp
     src/Agent/cpp/Agent.cpp
