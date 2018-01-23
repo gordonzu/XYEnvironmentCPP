@@ -19,7 +19,7 @@ set(sources
     src/Agent/impl/cpp/AbstractAgent.cpp
     src/Agent/cpp/Agent.cpp
     src/Util/datastructure/cpp/XYLocation.cpp
-    src/Environment/xyenv/cpp/XYEnvironmentState.cpp
+    #src/Environment/xyenv/cpp/XYEnvironmentState.cpp
     src/tests/EnvironmentTest/XYEnvironmentTest.cpp
     main.cpp
   )

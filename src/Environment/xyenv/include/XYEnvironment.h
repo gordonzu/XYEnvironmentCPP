@@ -6,7 +6,6 @@
 #include "Agent/include/EnvironmentObject.h"
 #include "Util/datastructure/include/XYLocation.h"
 #include "Agent/impl/include/AbstractEnvironment.h"
-#include "Environment/xyenv/include/XYEnvironmentState.h"
 
 class XYEnvironment: public AbstractEnvironment {
 public:
@@ -24,7 +23,8 @@ public:
     bool                                isBlocked(XYLocation& loc);
 
 private:
-    XYEnvironmentState* envState;
+    class XYEnvironmentState;
+    std::unique_ptr<XYEnvironmentState> envState;
 };
 #endif
 
