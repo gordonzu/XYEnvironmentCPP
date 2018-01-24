@@ -13,15 +13,14 @@ public:
     XYEnvironment(int w, int h); 
     virtual ~XYEnvironment();
 
+    void                                moveObject(EnvironmentObject* eo, const XYLocation::Direction& dir);
     void                                addObjectToLocation(EnvironmentObject* eo, XYLocation& loc); 
     void                                moveObjectToAbsoluteLocation(EnvironmentObject* eo, XYLocation& loc);
-    std::shared_ptr<XYLocation>         getCurrentLocationFor(EnvironmentObject* eo); 
-    std::vector<std::pair<XYLocation,   std::vector<EnvironmentObject*>>>& get_vector();
-
-    std::vector<EnvironmentObject*>&    getObjectsAt(XYLocation& loc);
-    void                                moveObject(EnvironmentObject* eo, const XYLocation::Direction& dir);
     bool                                isBlocked(XYLocation& loc);
+    std::shared_ptr<XYLocation>         getCurrentLocationFor(EnvironmentObject* eo); 
+    std::vector<EnvironmentObject*>&    getObjectsAt(XYLocation& loc);
 
+    std::vector<std::pair<XYLocation,std::vector<EnvironmentObject*>>>& get_vector();
 private:
     class XYEnvironmentState;
     std::unique_ptr<XYEnvironmentState> envState;

@@ -129,7 +129,6 @@ void XYEnvironment::XYEnvironmentState::moveObjectToAbsoluteLocation(Environment
 
 std::vector<EnvironmentObject*>& XYEnvironment::XYEnvironmentState::getObjectsAt(XYLocation& loc)
 {
-    //std::vector<std::pair<XYLocation, std::vector<EnvironmentObject*>>>::iterator it;
     std::vector<std::pair<XYLocation, std::vector<EnvironmentObject*>>>::iterator it;
 
     it = std::find_if(vecPairs.begin(), vecPairs.end(), [loc](std::pair<XYLocation, std::vector<EnvironmentObject*>>& mypair) {
@@ -155,7 +154,6 @@ std::shared_ptr<XYLocation> XYEnvironment::XYEnvironmentState::getCurrentLocatio
         for (itEnvs = itPairs->second.begin(); itEnvs != itPairs->second.end(); ++itEnvs) {
             if (*itEnvs == eo) {
                 xy_ = itPairs->first;
-                //xy_.print();
                 return std::make_shared<XYLocation>(xy_);
             }
         }
