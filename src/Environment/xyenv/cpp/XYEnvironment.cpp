@@ -10,29 +10,25 @@
 #include "Util/datastructure/include/XYLocation.h"
 #include "Agent/include/EnvironmentObject.h"
 
+using VectorOfPairs = std::vector<std::pair<XYLocation, std::vector<EnvironmentObject*>>>;
+
 class XYEnvironment::XYEnvironmentState {
 public:
     XYEnvironmentState(int w, int h);
     ~XYEnvironmentState();
-
     void                                moveObjectToAbsoluteLocation(EnvironmentObject* eo, XYLocation& loc);
     std::shared_ptr<XYLocation>         getCurrentLocationFor(EnvironmentObject* eo); 
-
-    std::vector<std::pair<XYLocation, std::vector<EnvironmentObject*>>>& get_vector();
-
-
+    VectorOfPairs& get_vector();
     std::vector<EnvironmentObject*>&    getObjectsAt(XYLocation& loc); 
     EnvironmentObject*                  get_pointer();
-
 private:
     int                             width_;
     int                             height_;
     std::vector<EnvironmentObject*> env_vector;
-    std::vector<std::pair<XYLocation, std::vector<EnvironmentObject*>>> vecPairs;
+    VectorOfPairs                   vecPairs;
     EnvironmentObject*              env_ptr;
     XYLocation                      xy_;
     XYLocation                      NULL_XYLOCATION;
-
 };
 
 XYEnvironment::XYEnvironment()
