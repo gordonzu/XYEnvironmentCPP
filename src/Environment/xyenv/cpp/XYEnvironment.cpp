@@ -27,7 +27,6 @@ public:
 private:
     int                             width_;
     int                             height_;
-    void                            initState(); 
     std::vector<EnvironmentObject*> env_vector;
     std::vector<std::pair<XYLocation, std::vector<EnvironmentObject*>>> vecPairs;
     EnvironmentObject*              env_ptr;
@@ -106,7 +105,11 @@ XYEnvironment::XYEnvironmentState::XYEnvironmentState(int w, int h)
                     vecPairs{std::vector<std::pair<XYLocation, std::vector<EnvironmentObject*>>>()}, 
                     NULL_XYLOCATION{XYLocation{0, 0}}
 {
-    initState();
+    for (int x = 1; x <= width_; ++x) {
+        for (int y = 1; y <= height_; ++y) {
+           vecPairs.push_back(std::make_pair(XYLocation(x, y), std::vector<EnvironmentObject*>()));
+        }
+    }
 }   
 
 XYEnvironment::XYEnvironmentState::~XYEnvironmentState()
@@ -165,15 +168,6 @@ std::shared_ptr<XYLocation> XYEnvironment::XYEnvironmentState::getCurrentLocatio
 std::vector<std::pair<XYLocation, std::vector<EnvironmentObject*>>>& XYEnvironment::XYEnvironmentState::get_vector()
 {
     return vecPairs;
-}
-
-void XYEnvironment::XYEnvironmentState::initState()
-{
-    for (int x = 1; x <= width_; ++x) {
-        for (int y = 1; y <= height_; ++y) {
-           vecPairs.push_back(std::make_pair(XYLocation(x, y), std::vector<EnvironmentObject*>()));
-        }
-    }
 }
 
 
