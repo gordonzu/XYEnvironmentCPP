@@ -16,19 +16,20 @@ class XYEnvironment::XYEnvironmentState {
 public:
     XYEnvironmentState(int w, int h);
     ~XYEnvironmentState();
+
     void                                moveObjectToAbsoluteLocation(EnvironmentObject* eo, XYLocation& loc);
     std::shared_ptr<XYLocation>         getCurrentLocationFor(EnvironmentObject* eo); 
     VectorOfPairs& get_vector();
     std::vector<EnvironmentObject*>&    getObjectsAt(XYLocation& loc); 
     EnvironmentObject*                  get_pointer();
+
 private:
-    int                             width_;
-    int                             height_;
-    std::vector<EnvironmentObject*> env_vector;
-    VectorOfPairs                   vecPairs;
-    EnvironmentObject*              env_ptr;
-    XYLocation                      xy_;
-    XYLocation                      NULL_XYLOCATION;
+    int                                 width_;
+    int                                 height_;
+    VectorOfPairs                       vecPairs;
+    std::vector<EnvironmentObject*>     env_vector;
+    EnvironmentObject*                  env_ptr;
+    XYLocation                          xy_;
 };
 
 XYEnvironment::XYEnvironment()
@@ -97,9 +98,8 @@ bool XYEnvironment::isBlocked(XYLocation& loc)
 }
 
 XYEnvironment::XYEnvironmentState::XYEnvironmentState(int w, int h)
-                   : width_{w}, height_{h}, 
-                    vecPairs{std::vector<std::pair<XYLocation, std::vector<EnvironmentObject*>>>()}, 
-                    NULL_XYLOCATION{XYLocation{0, 0}}
+                                                    : width_{w}, height_{h}, 
+                                                    vecPairs{VectorOfPairs()} 
 {
     for (int x = 1; x <= width_; ++x) {
         for (int y = 1; y <= height_; ++y) {
@@ -128,7 +128,7 @@ void XYEnvironment::XYEnvironmentState::moveObjectToAbsoluteLocation(Environment
 
 std::vector<EnvironmentObject*>& XYEnvironment::XYEnvironmentState::getObjectsAt(XYLocation& loc)
 {
-    std::vector<std::pair<XYLocation, std::vector<EnvironmentObject*>>>::iterator it;
+    VectorOfPairs::iterator it;
 
     it = std::find_if(vecPairs.begin(), vecPairs.end(), [loc](std::pair<XYLocation, std::vector<EnvironmentObject*>>& mypair) {
         return (mypair.first == loc);
@@ -146,7 +146,7 @@ std::vector<EnvironmentObject*>& XYEnvironment::XYEnvironmentState::getObjectsAt
  
 std::shared_ptr<XYLocation> XYEnvironment::XYEnvironmentState::getCurrentLocationFor(EnvironmentObject* eo) 
 {
-    std::vector<std::pair<XYLocation, std::vector<EnvironmentObject*>>>::iterator itPairs;
+    VectorOfPairs::iterator itPairs;
     std::vector<EnvironmentObject*>::iterator itEnvs;
 
     for (itPairs = vecPairs.begin(); itPairs!= vecPairs.end(); ++itPairs) {
@@ -161,7 +161,7 @@ std::shared_ptr<XYLocation> XYEnvironment::XYEnvironmentState::getCurrentLocatio
 }
 
 
-std::vector<std::pair<XYLocation, std::vector<EnvironmentObject*>>>& XYEnvironment::XYEnvironmentState::get_vector()
+VectorOfPairs& XYEnvironment::XYEnvironmentState::get_vector()
 {
     return vecPairs;
 }

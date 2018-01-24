@@ -98,12 +98,14 @@ TEST_F(XYEnvironmentTest, testMoveObject)
 
 
 
-/* TODO change LocationPair to std::pair
- *      find a way to pass anonymous pointers -- either smart pointers or XYEnvirnmentState vector collects and delets
- *      stop resource leaks in XYLocation direction functions
- *      do away with compiler warnings for unused variable
+/* TODO 
+ *      construct data strctures as unique pointers and dereference them to pass by reference
  *      rewrite XYEnvironmentState::moveObjectToAbsoluteLocation with std::find_if?   
- *      
+ *      construct the XYEnvironment vectors (sets) in moveObjectToAbsoluteLocation with unique_ptr, pass by object ref
+ *      have test class inherit from test data class, store test data there
+ *      check all for loops for change to STL algos
+ *      explore adding "const" and constexpr to all functions that do not write data
+ *
 */
 
 
