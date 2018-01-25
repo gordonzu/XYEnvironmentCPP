@@ -2,9 +2,9 @@
 // gordonzu 1/24/18
 
 #include <memory>
-#include "Environment/xyenv/include/XYEnvironment.h"
-#include "Environment/xyenv/include/Wall.h"
-#include "tests/AgentTest/impl/include/MockAgent.h"
+#include "environment/xyenv/xy_environment.h"
+#include "environment/xyenv/wall.h"
+#include "mock_agent.h"
 
 class TestData {
 public:

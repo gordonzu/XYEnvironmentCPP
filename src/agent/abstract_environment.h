@@ -4,12 +4,12 @@
 #include <vector>
 #include <memory>
 #include <iostream>
-#include "Agent/include/Agent.h"
-#include "Agent/include/EnvironmentObject.h"
+#include "agent.h"
+#include "environment_object.h"
 
 class AbstractEnvironment {
 public:
-    void                                    addEnvironmentObject(EnvironmentObject* eo);
+    void                              addEnvironmentObject(EnvironmentObject* eo);
     std::vector<Agent*>&              getAgents(); 
     std::vector<EnvironmentObject*>&  getEnvironmentObjects();  
 

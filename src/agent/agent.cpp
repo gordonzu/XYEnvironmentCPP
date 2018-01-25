@@ -1,6 +1,6 @@
 // Agent.cpp
 
-#include "Agent/include/Agent.h"
+#include "agent.h"
 
 Agent::~Agent()
 {

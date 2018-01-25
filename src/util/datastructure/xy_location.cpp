@@ -1,6 +1,6 @@
 // XYLocation.cpp
 
-#include "Util/datastructure/include/XYLocation.h"
+#include "util/datastructure/xy_location.h"
 
 XYLocation::XYLocation() 
 {

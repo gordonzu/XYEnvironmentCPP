@@ -3,22 +3,22 @@ cmake_minimum_required(VERSION 2.6)
 
 include_directories("$ENV{GMOCK_HOME}/googlemock/include" 
                     "$ENV{GMOCK_HOME}/googletest/include"
-                    "$ENV{HOME}/src/cpp/AICPP/src" ) 
+                    "$ENV{HOME}/src/cpp/AICPP/src") 
 link_directories   ("$ENV{GMOCK_HOME}/mybuild/googlemock" 
                     "$ENV{GMOCK_HOME}/mybuild/googlemock/gtest")
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -ggdb3 -Wall -Wno-unused-variable -O0 -fmax-errors=1")
 
 set(sources
-    src/Environment/xyenv/cpp/Wall.cpp
-    src/Environment/xyenv/cpp/XYEnvironment.cpp
-    src/Agent/cpp/EnvironmentObject.cpp
-    src/Agent/impl/cpp/AbstractEnvironment.cpp
-    src/tests/AgentTest/impl/cpp/MockAgent.cpp
-    src/Agent/impl/cpp/AbstractAgent.cpp
-    src/Agent/cpp/Agent.cpp
-    src/Util/datastructure/cpp/XYLocation.cpp
-    src/tests/EnvironmentTest/XYEnvironmentTest.cpp
+    src/environment/xyenv/wall.cpp
+    src/environment/xyenv/xy_environment.cpp
+    src/agent/environment_object.cpp
+    src/agent/abstract_environment.cpp
+    src/environment/xyenv/mock_agent.cpp
+    src/agent/abstract_agent.cpp
+    src/agent/agent.cpp
+    src/util/datastructure/xy_location.cpp
+    src/environment/xyenv/xy_environment_test.cpp
     main.cpp
   )
 

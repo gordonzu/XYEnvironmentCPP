@@ -1,6 +1,6 @@
 // AbstractAgent.cpp
 
-#include "Agent/impl/include/AbstractAgent.h"
+#include "abstract_agent.h"
 
 AbstractAgent::~AbstractAgent()
 {

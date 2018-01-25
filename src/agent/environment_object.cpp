@@ -1,7 +1,7 @@
 // EnvironmentObject .cpp
 //
 
-#include "Agent/include/EnvironmentObject.h"
+#include "environment_object.h"
 
 EnvironmentObject::~EnvironmentObject()
 {

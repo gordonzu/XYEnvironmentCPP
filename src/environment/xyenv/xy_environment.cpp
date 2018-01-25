@@ -1,14 +1,14 @@
-// XYEnvironment.cpp
+// xy_environment.cpp
 
-#include "Environment/xyenv/include/XYEnvironment.h"
-#include "Environment/xyenv/include/Wall.h"
 #include <iostream>
 #include <vector>
 #include <algorithm>
 #include <cassert>
 #include <memory>
-#include "Util/datastructure/include/XYLocation.h"
-#include "Agent/include/EnvironmentObject.h"
+#include "environment/xyenv/xy_environment.h"
+#include "environment/xyenv/wall.h"
+#include "util/datastructure/xy_location.h"
+#include "agent/environment_object.h"
 
 using VectorOfPairs = std::vector<std::pair<XYLocation, std::vector<EnvironmentObject*>>>;
 

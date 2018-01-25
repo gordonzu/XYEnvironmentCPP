@@ -1,7 +1,7 @@
 // AbstractEnvironment.h
 
-#include "Agent/impl/include/AbstractEnvironment.h"
 #include <iostream>
+#include "abstract_environment.h"
 
 std::vector<Agent*>& AbstractEnvironment::getAgents() 
 {

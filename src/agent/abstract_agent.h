@@ -1,7 +1,7 @@
 #ifndef ABSTRACT_AGENT_H
 #define ABSTRACT_AGENT_H
 
-#include "Agent/include/Agent.h"
+#include "agent.h"
 
 class AbstractAgent: public Agent {
 public:

@@ -1,7 +1,7 @@
 #ifndef AGENT_H
 #define AGENT_H
 
-#include "Agent/include/EnvironmentObject.h"
+#include "environment_object.h"
 
 class Agent: public EnvironmentObject {
 public:

@@ -3,7 +3,7 @@
 #include <string>
 #include <iostream>
 #include "gmock/gmock.h"
-#include "tests/data/TestData.h"
+#include "test_data.h"
 
 using namespace::testing;
 

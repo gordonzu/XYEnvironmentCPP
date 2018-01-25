@@ -3,9 +3,9 @@
 
 #include <vector>
 #include <memory>
-#include "Agent/include/EnvironmentObject.h"
-#include "Util/datastructure/include/XYLocation.h"
-#include "Agent/impl/include/AbstractEnvironment.h"
+#include "agent/environment_object.h"
+#include "agent/abstract_environment.h"
+#include "util/datastructure/xy_location.h"
 
 class XYEnvironment: public AbstractEnvironment {
 public:
