@@ -3,15 +3,13 @@
 
 #include <memory>
 #include "environment/xyenv/xy_environment.h"
-#include "environment/xyenv/wall.h"
-#include "mock_agent.h"
 
 class TestData {
 public:
     TestData() {
         env     = new XYEnvironment(12, 10);
-        agent   = new MockAgent();
-        agent2  = new MockAgent();
+        agent   = new Agent();
+        agent2  = new Agent();
         wall    = new Wall();
         loc     = std::make_unique<XYLocation>(3, 4);
         loc2    = std::make_unique<XYLocation>(3, 4);
@@ -44,8 +42,8 @@ protected:
     std::unique_ptr<XYLocation> xy991;
     std::unique_ptr<XYLocation> xy992;
     XYEnvironment*              env;
-    AbstractAgent*              agent;
-    AbstractAgent*              agent2;
+    Agent*                      agent;
+    Agent*                      agent2;
     Wall*                       wall;
 };
 

@@ -6,9 +6,8 @@
 #include <cassert>
 #include <memory>
 #include "environment/xyenv/xy_environment.h"
-#include "environment/xyenv/wall.h"
 #include "util/datastructure/xy_location.h"
-#include "agent/environment_object.h"
+#include "agent/agent.h"
 
 using VectorOfPairs = std::vector<std::pair<XYLocation, std::vector<EnvironmentObject*>>>;
 

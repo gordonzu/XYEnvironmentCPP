@@ -10,13 +10,10 @@ link_directories   ("$ENV{GMOCK_HOME}/mybuild/googlemock"
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -ggdb3 -Wall -Wno-unused-variable -O0 -fmax-errors=1")
 
 set(sources
-    src/environment/xyenv/wall.cpp
-    src/environment/xyenv/xy_environment.cpp
     src/agent/environment_object.cpp
-    src/agent/abstract_environment.cpp
-    src/environment/xyenv/mock_agent.cpp
-    src/agent/abstract_agent.cpp
     src/agent/agent.cpp
+    src/agent/abstract_environment.cpp
+    src/environment/xyenv/xy_environment.cpp
     src/util/datastructure/xy_location.cpp
     src/environment/xyenv/xy_environment_test.cpp
     main.cpp

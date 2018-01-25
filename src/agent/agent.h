@@ -7,5 +7,6 @@ class Agent: public EnvironmentObject {
 public:
     virtual ~Agent();
 };
+
 #endif
 

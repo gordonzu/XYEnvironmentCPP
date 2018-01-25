@@ -5,7 +5,6 @@
 #include <memory>
 #include <iostream>
 #include "agent.h"
-#include "environment_object.h"
 
 class AbstractEnvironment {
 public:

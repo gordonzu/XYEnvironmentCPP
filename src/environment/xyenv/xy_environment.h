@@ -3,9 +3,14 @@
 
 #include <vector>
 #include <memory>
-#include "agent/environment_object.h"
+#include "agent/agent.h"
 #include "agent/abstract_environment.h"
 #include "util/datastructure/xy_location.h"
+
+class Wall: public EnvironmentObject {
+public:
+    virtual ~Wall() {}
+};
 
 class XYEnvironment: public AbstractEnvironment {
 public:
