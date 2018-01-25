@@ -19,17 +19,17 @@ public:
 
     void                                moveObjectToAbsoluteLocation(EnvironmentObject* eo, XYLocation& loc);
     std::shared_ptr<XYLocation>         getCurrentLocationFor(EnvironmentObject* eo); 
-    VectorOfPairs& get_vector();
+    VectorOfPairs&                      get_vector();
     std::vector<EnvironmentObject*>&    getObjectsAt(XYLocation& loc); 
     EnvironmentObject*                  get_pointer();
 
 private:
-    int                                 width_;
-    int                                 height_;
-    VectorOfPairs                       vecPairs;
-    std::vector<EnvironmentObject*>     env_vector;
-    EnvironmentObject*                  env_ptr;
-    XYLocation                          xy_;
+    int                                                 width_;
+    int                                                 height_;
+    VectorOfPairs                                       vecPairs;
+    std::unique_ptr<std::vector<EnvironmentObject*>>    env_vector;
+    EnvironmentObject*                                  env_ptr;
+    XYLocation                                          xy_;
 };
 
 XYEnvironment::XYEnvironment()
@@ -137,9 +137,9 @@ std::vector<EnvironmentObject*>& XYEnvironment::XYEnvironmentState::getObjectsAt
     if (it != vecPairs.end()) {
         return it->second;
     } else {
-        env_vector = std::vector<EnvironmentObject*>();
-        vecPairs.push_back(std::make_pair(loc, env_vector));
-        return env_vector;
+        env_vector = std::make_unique<std::vector<EnvironmentObject*>>();
+        vecPairs.push_back(std::make_pair(loc, *env_vector));
+        return *env_vector;
     }
 }
 
