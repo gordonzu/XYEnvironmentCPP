@@ -30,7 +30,7 @@ public:
     std::shared_ptr<XYLocation> right();
     std::shared_ptr<XYLocation> up();
     std::shared_ptr<XYLocation> down();
-    std::shared_ptr<XYLocation> locationAt(const Direction& direction);
+    std::shared_ptr<XYLocation> location_at(const Direction& direction);
 
 private:
     int x_;

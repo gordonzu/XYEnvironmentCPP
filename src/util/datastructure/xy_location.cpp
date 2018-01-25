@@ -103,7 +103,7 @@ std::shared_ptr<XYLocation> XYLocation::down()
     return south();
 }
 
-std::shared_ptr<XYLocation> XYLocation::locationAt(const Direction& direction)
+std::shared_ptr<XYLocation> XYLocation::location_at(const Direction& direction)
 {
     std::shared_ptr<XYLocation> xy;
     try
@@ -123,7 +123,7 @@ std::shared_ptr<XYLocation> XYLocation::locationAt(const Direction& direction)
             case     Direction::WEST:
                      xy = west();
                      break;
-            default: throw std::runtime_error("Unknown direction: ");
+            default: throw std::runtime_error("Unknown direction...");
         } 
     }
     catch(std::exception const& e)

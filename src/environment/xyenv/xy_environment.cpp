@@ -16,10 +16,10 @@ public:
     XYEnvironmentState(int w, int h);
     ~XYEnvironmentState();
 
-    void                                moveObjectToAbsoluteLocation(EnvironmentObject* eo, XYLocation& loc);
-    std::shared_ptr<XYLocation>         getCurrentLocationFor(EnvironmentObject* eo); 
+    void                                move_to(EnvironmentObject* eo, XYLocation& loc);
+    std::shared_ptr<XYLocation>         get_location(EnvironmentObject* eo); 
     VectorOfPairs&                      get_vector();
-    std::vector<EnvironmentObject*>&    getObjectsAt(XYLocation& loc); 
+    std::vector<EnvironmentObject*>&    get_at(XYLocation& loc); 
     EnvironmentObject*                  get_pointer();
 
 private:
@@ -47,26 +47,26 @@ XYEnvironment::~XYEnvironment()
 {
 }
 
-void XYEnvironment::addObjectToLocation(EnvironmentObject* eo, XYLocation& loc)
+void XYEnvironment::add_to(EnvironmentObject* eo, XYLocation& loc)
 {
-    moveObjectToAbsoluteLocation(eo, loc);
+    move_to(eo, loc);
 }
 
 
-void XYEnvironment::moveObjectToAbsoluteLocation(EnvironmentObject* eo, XYLocation& loc)
+void XYEnvironment::move_to(EnvironmentObject* eo, XYLocation& loc)
 {
-    envState->moveObjectToAbsoluteLocation(eo, loc);
-    addEnvironmentObject(eo);
+    envState->move_to(eo, loc);
+    add_eo(eo);
 }
 
-std::shared_ptr<XYLocation> XYEnvironment::getCurrentLocationFor(EnvironmentObject* eo)
+std::shared_ptr<XYLocation> XYEnvironment::get_location(EnvironmentObject* eo)
 {
-    return envState->getCurrentLocationFor(eo);
+    return envState->get_location(eo);
 }
 
-std::vector<EnvironmentObject*>& XYEnvironment::getObjectsAt(XYLocation& loc)
+std::vector<EnvironmentObject*>& XYEnvironment::get_at(XYLocation& loc)
 {
-    return envState->getObjectsAt(loc);
+    return envState->get_at(loc);
 }
 
 std::vector<std::pair<XYLocation, std::vector<EnvironmentObject*>>>& XYEnvironment::get_vector()
@@ -74,21 +74,21 @@ std::vector<std::pair<XYLocation, std::vector<EnvironmentObject*>>>& XYEnvironme
     return envState->get_vector();
 }
 
-void XYEnvironment::moveObject(EnvironmentObject* eo, const XYLocation::Direction& dir)
+void XYEnvironment::move_object(EnvironmentObject* eo, const XYLocation::Direction& dir)
 {
-    std::shared_ptr<XYLocation> temp = envState->getCurrentLocationFor(eo);
+    std::shared_ptr<XYLocation> temp = envState->get_location(eo);
 
     if (temp != nullptr) {
-        temp = temp.get()->locationAt(dir);
-        if (!(isBlocked(*(temp.get())))) {
-            moveObjectToAbsoluteLocation(eo, *(temp.get()));
+        temp = temp.get()->location_at(dir);
+        if (!(is_blocked(*(temp.get())))) {
+            move_to(eo, *(temp.get()));
         }
     }    
 }
 
-bool XYEnvironment::isBlocked(XYLocation& loc) 
+bool XYEnvironment::is_blocked(XYLocation& loc) 
 {
-    for (auto& eo : envState->getObjectsAt(loc)) {
+    for (auto& eo : envState->get_at(loc)) {
         if (Wall* w = dynamic_cast<Wall*>(eo)) {      
             return true;
         }
@@ -111,7 +111,7 @@ XYEnvironment::XYEnvironmentState::~XYEnvironmentState()
 {
 }                        
 
-void XYEnvironment::XYEnvironmentState::moveObjectToAbsoluteLocation(EnvironmentObject* eo, XYLocation& loc)
+void XYEnvironment::XYEnvironmentState::move_to(EnvironmentObject* eo, XYLocation& loc)
 {
    for (auto& x : vecPairs) {
         for (auto it = x.second.begin(); it != x.second.end(); ) {
@@ -122,10 +122,10 @@ void XYEnvironment::XYEnvironmentState::moveObjectToAbsoluteLocation(Environment
             }
         }
     }
-    getObjectsAt(loc).push_back(eo);
+    get_at(loc).push_back(eo);
 }
 
-std::vector<EnvironmentObject*>& XYEnvironment::XYEnvironmentState::getObjectsAt(XYLocation& loc)
+std::vector<EnvironmentObject*>& XYEnvironment::XYEnvironmentState::get_at(XYLocation& loc)
 {
     VectorOfPairs::iterator it;
 
@@ -143,7 +143,7 @@ std::vector<EnvironmentObject*>& XYEnvironment::XYEnvironmentState::getObjectsAt
 }
 
  
-std::shared_ptr<XYLocation> XYEnvironment::XYEnvironmentState::getCurrentLocationFor(EnvironmentObject* eo) 
+std::shared_ptr<XYLocation> XYEnvironment::XYEnvironmentState::get_location(EnvironmentObject* eo) 
 {
     VectorOfPairs::iterator itPairs;
     std::vector<EnvironmentObject*>::iterator itEnvs;
