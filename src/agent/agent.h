@@ -1,9 +1,9 @@
 #ifndef AGENT_H
 #define AGENT_H
 
-#include "environment_object.h"
+#include "object.h"
 
-class Agent: public EnvironmentObject {
+class Agent: public Object {
 public:
     virtual ~Agent();
 };

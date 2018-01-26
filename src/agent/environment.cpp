@@ -1,14 +1,14 @@
 // AbstractEnvironment.h
 
 #include <iostream>
-#include "abstract_environment.h"
+#include "environment.h"
 
-std::vector<Agent*>& AbstractEnvironment::get_agents() 
+std::vector<Agent*>& Environment::get_agents() 
 {
     return agents;
 }
 
-void AbstractEnvironment::add_eo(EnvironmentObject* eo)
+void Environment::add_eo(Object* eo)
 {
     envs.push_back(eo);
     if (Agent* a = dynamic_cast<Agent*>(eo)) {
@@ -16,7 +16,7 @@ void AbstractEnvironment::add_eo(EnvironmentObject* eo)
     }
 }
 
-std::vector<EnvironmentObject*>& AbstractEnvironment::get_envs()  
+std::vector<Object*>& Environment::get_envs()  
 {
     return envs;    
 }

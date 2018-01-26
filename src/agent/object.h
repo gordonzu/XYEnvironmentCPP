@@ -1,9 +1,9 @@
 #ifndef ENVIRONMENT_OBJECT_H
 #define ENVIRONMENT_OBJECT_H
 
-class EnvironmentObject {
+class Object {
 public:
-    virtual ~EnvironmentObject()=0;
+    virtual ~Object()=0;
 };
 #endif
 
