@@ -37,12 +37,12 @@ TEST_F(XYEnvironmentTest, testAddObjectTwice) {
 }
 
 TEST_F(XYEnvironmentTest, testMoveObjectToAbsoluteLocation) {
-    env->move_to(agent, *xy551);
+    env->add_to(agent, *xy551);
     ASSERT_EQ(*(env->get_location(agent).get()), *xy552);
 }
 
 TEST_F(XYEnvironmentTest, testMoveObject) {
-    env->move_to(agent, *xy551);
+    env->add_to(agent, *xy551);
     ASSERT_EQ(*(env->get_location(agent)), *xy552);
     env->move_object(agent, XYLocation::Direction::NORTH);
     ASSERT_EQ(*(env->get_location(agent).get()), *xy54);

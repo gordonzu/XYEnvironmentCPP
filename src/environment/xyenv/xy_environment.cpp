@@ -49,16 +49,18 @@ XYEnvironment::~XYEnvironment()
 
 void XYEnvironment::add_to(Object* eo, XYLocation& loc)
 {
-    move_to(eo, loc);
+    envState->move_to(eo, loc);
+    add_eo(eo);
+    //move_to(eo, loc);
 }
 
 
-void XYEnvironment::move_to(Object* eo, XYLocation& loc)
+/*void XYEnvironment::move_to(Object* eo, XYLocation& loc)
 {
     envState->move_to(eo, loc);
     add_eo(eo);
 }
-
+*/
 std::shared_ptr<XYLocation> XYEnvironment::get_location(Object* eo)
 {
     return envState->get_location(eo);
@@ -81,7 +83,8 @@ void XYEnvironment::move_object(Object* eo, const XYLocation::Direction& dir)
     if (temp != nullptr) {
         temp = temp.get()->location_at(dir);
         if (!(is_blocked(*(temp.get())))) {
-            move_to(eo, *(temp.get()));
+            //move_to(eo, *(temp.get()));
+            add_to(eo, *(temp.get()));
         }
     }    
 }

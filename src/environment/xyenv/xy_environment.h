@@ -20,7 +20,7 @@ public:
 
     void                                move_object(Object* eo, const XYLocation::Direction& dir);
     void                                add_to(Object* eo, XYLocation& loc); 
-    void                                move_to(Object* eo, XYLocation& loc);
+    //void                                move_to(Object* eo, XYLocation& loc);
     bool                                is_blocked(XYLocation& loc);
     std::shared_ptr<XYLocation>         get_location(Object* eo); 
     std::vector<Object*>&               get_at(XYLocation& loc);
