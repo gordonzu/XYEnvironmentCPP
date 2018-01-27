@@ -4,7 +4,7 @@
 #include <vector>
 #include <memory>
 #include <iostream>
-#include "agent.h"
+#include "object.h"
 
 class Environment {
 public:

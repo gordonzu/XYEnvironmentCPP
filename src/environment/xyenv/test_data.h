@@ -10,6 +10,8 @@ public:
         env     = new XYEnvironment(12, 10);
         agent   = new Agent();
         agent2  = new Agent();
+        agent3  = new Agent();
+        agent4  = new Agent();
         wall    = new Wall();
         loc     = std::make_unique<XYLocation>(3, 4);
         loc2    = std::make_unique<XYLocation>(3, 4);
@@ -27,6 +29,8 @@ public:
         delete env;
         delete agent;
         delete agent2;
+        delete agent3;
+        delete agent4;
         delete wall;
     }
 
@@ -44,6 +48,8 @@ protected:
     XYEnvironment*              env;
     Agent*                      agent;
     Agent*                      agent2;
+    Agent*                      agent3;
+    Agent*                      agent4;
     Wall*                       wall;
 };
 

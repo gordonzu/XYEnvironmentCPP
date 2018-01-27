@@ -3,14 +3,10 @@
 
 #include <vector>
 #include <memory>
-#include "agent/agent.h"
 #include "agent/environment.h"
 #include "util/datastructure/xy_location.h"
 
-class Wall: public Object {
-public:
-    virtual ~Wall() {}
-};
+using VectorOfPairs = std::vector<std::pair<XYLocation, std::vector<Object*>>>;
 
 class XYEnvironment: public Environment {
 public:
@@ -20,7 +16,6 @@ public:
 
     void                                move_object(Object* eo, const XYLocation::Direction& dir);
     void                                add_to(Object* eo, XYLocation& loc); 
-    //void                                move_to(Object* eo, XYLocation& loc);
     bool                                is_blocked(XYLocation& loc);
     std::shared_ptr<XYLocation>         get_location(Object* eo); 
     std::vector<Object*>&               get_at(XYLocation& loc);
@@ -28,8 +23,12 @@ public:
     std::vector<std::pair<XYLocation,std::vector<Object*>>>& get_vector();
 
 private:
-    class XYEnvironmentState;
-    std::unique_ptr<XYEnvironmentState> envState;
+    int                                                 width_;
+    int                                                 height_;
+    VectorOfPairs                                       vecPairs;
+    std::unique_ptr<std::vector<Object*>>               env_vector;
+    Object*                                             env_ptr;
+    XYLocation                                          xy_;
 };
 #endif
 

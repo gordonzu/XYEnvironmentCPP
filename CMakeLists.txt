@@ -12,7 +12,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -ggdb3 -Wall -Wno-unused-vari
 set(sources
     src/agent/environment.cpp
     src/agent/object.cpp
-    src/agent/agent.cpp
+    #src/agent/agent.cpp
     src/environment/xyenv/xy_environment.cpp
     src/util/datastructure/xy_location.cpp
     src/environment/xyenv/xy_environment_test.cpp
@@ -31,6 +31,6 @@ add_custom_command(TARGET xyenv
 add_custom_command(TARGET xyenv
                  POST_BUILD
 #                 COMMAND valgrind --tool=memcheck --leak-check=yes ./xyenv)
-                 COMMAND valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all ./xyenv)
-#                 COMMAND "xyenv")
+#                 COMMAND valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all ./xyenv)
+                 COMMAND "xyenv")
 

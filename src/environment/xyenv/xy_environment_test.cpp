@@ -33,27 +33,27 @@ TEST_F(XYEnvironmentTest, testAddObjectTwice) {
     ASSERT_EQ(env->get_agents().size(), size_t(1));
     env->add_to(agent2, *xy551);
     ASSERT_EQ(env->get_agents().size(), size_t(2));
-    ASSERT_EQ(*(env->get_location(agent2)), *xy552);
+    ASSERT_EQ(*(env->get_location(agent2).get()), *xy552);
 }
 
 TEST_F(XYEnvironmentTest, testMoveObjectToAbsoluteLocation) {
-    env->add_to(agent, *xy551);
-    ASSERT_EQ(*(env->get_location(agent).get()), *xy552);
+    env->add_to(agent3, *xy551);
+    ASSERT_EQ(*(env->get_location(agent3).get()), *xy552);
 }
 
 TEST_F(XYEnvironmentTest, testMoveObject) {
-    env->add_to(agent, *xy551);
-    ASSERT_EQ(*(env->get_location(agent)), *xy552);
-    env->move_object(agent, XYLocation::Direction::NORTH);
-    ASSERT_EQ(*(env->get_location(agent).get()), *xy54);
-    env->move_object(agent, XYLocation::Direction::EAST);
-    ASSERT_EQ(*(env->get_location(agent).get()), *xy64);
-    env->move_object(agent, XYLocation::Direction::SOUTH);
-    ASSERT_EQ(*(env->get_location(agent).get()), *xy65);
-    env->move_object(agent, XYLocation::Direction::WEST);
-    ASSERT_EQ(*(env->get_location(agent).get()), *xy553);
-}
+    env->add_to(agent4, *xy551);
+    ASSERT_EQ(*(env->get_location(agent4).get()), *xy552);
 
+    env->move_object(agent4, XYLocation::Direction::NORTH);
+    ASSERT_EQ(*(env->get_location(agent4).get()), *xy54);
+    env->move_object(agent4, XYLocation::Direction::EAST);
+    ASSERT_EQ(*(env->get_location(agent4).get()), *xy64);
+    env->move_object(agent4, XYLocation::Direction::SOUTH);
+    ASSERT_EQ(*(env->get_location(agent4).get()), *xy65);
+    env->move_object(agent4, XYLocation::Direction::WEST);
+    ASSERT_EQ(*(env->get_location(agent4).get()), *xy553);
+}
 
 /* TODO 
  *      construct data strctures as unique pointers and dereference them to pass by reference
