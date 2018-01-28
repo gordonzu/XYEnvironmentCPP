@@ -6,7 +6,7 @@
 #include "agent/environment.h"
 #include "util/datastructure/xy_location.h"
 
-using VectorOfPairs = std::vector<std::pair<XYLocation, std::vector<Object*>>>;
+using Vector = std::vector<std::pair<XYLocation, std::vector<Object*>>>;
 
 class XYEnvironment: public Environment {
 public:
@@ -19,14 +19,14 @@ public:
     bool                                is_blocked(XYLocation& loc);
     XYLocation*                         get_location(Object* eo); 
     std::vector<Object*>&               get_at(XYLocation& loc);
-    VectorOfPairs&                      get_vector();
+    Vector&                             get_vector();
 
 private:
     int                                                 width_;
     int                                                 height_;
-    VectorOfPairs                                       vecPairs;
+    Vector                                              vec_pairs;
     std::unique_ptr<XYLocation>                         xyuniq;
-    std::unique_ptr<std::vector<Object*>>               env_vector;
+    std::unique_ptr<std::vector<Object*>>               vec_objs;
 };
 #endif
 
