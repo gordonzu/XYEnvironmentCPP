@@ -86,13 +86,15 @@ std::vector<std::pair<XYLocation, std::vector<Object*>>>& XYEnvironment::get_vec
 
 void XYEnvironment::move_object(Object* eo, const XYLocation::Direction& dir)
 {
-    std::shared_ptr<XYLocation> temp = get_location(eo);
+    //std::shared_ptr<XYLocation> temp = get_location(eo);
+    XYLocation* temp = (get_location(eo)).get();
 
     if (temp != nullptr) {
-        temp = temp.get()->location_at(dir);
-        if (!(is_blocked(*(temp.get())))) {
-            //move_to(eo, *(temp.get()));
-            add_to(eo, *(temp.get()));
+        //temp = temp.get()->location_at(dir);
+        temp = temp->location_at(dir);
+        //if (!(is_blocked(*(temp.get())))) {
+        if (!(is_blocked(*temp))) {
+            add_to(eo, *temp);
         }
     }    
 }

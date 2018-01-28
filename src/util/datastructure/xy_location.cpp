@@ -62,7 +62,7 @@ bool XYLocation::operator==(const XYLocation& rhs) const
 {
         return ((x_ == rhs.x_) && (y_ == rhs.y_));
 }
-
+/*
 std::shared_ptr<XYLocation> XYLocation::west()
 {
     return std::make_shared<XYLocation>(x_ - 1, y_);
@@ -72,11 +72,19 @@ std::shared_ptr<XYLocation> XYLocation::east()
 {
     return std::make_shared<XYLocation>(x_ + 1, y_);
 }
+*/
+XYLocation* XYLocation::north()
+{
+    tmpxy = std::make_unique<XYLocation>(x_, y_ -1);
+    return tmpxy.get();
+}
 
+/*
 std::shared_ptr<XYLocation> XYLocation::north()
 {
     return std::make_shared<XYLocation>(x_, y_ -1);
 }
+
 
 std::shared_ptr<XYLocation> XYLocation::south()
 {
@@ -102,10 +110,12 @@ std::shared_ptr<XYLocation> XYLocation::down()
 {
     return south();
 }
-
-std::shared_ptr<XYLocation> XYLocation::location_at(const Direction& direction)
+*/
+//std::shared_ptr<XYLocation> XYLocation::location_at(const Direction& direction)
+XYLocation* XYLocation::location_at(const Direction& direction)
 {
-    std::shared_ptr<XYLocation> xy;
+    //std::shared_ptr<XYLocation> xy;
+    XYLocation* xy;
     try
     {
         switch (direction) 
@@ -113,7 +123,7 @@ std::shared_ptr<XYLocation> XYLocation::location_at(const Direction& direction)
             case     Direction::NORTH:
                      xy = north();
                      break;
-            
+    /*        
             case     Direction::SOUTH:
                      xy = south();
                      break;
@@ -123,6 +133,7 @@ std::shared_ptr<XYLocation> XYLocation::location_at(const Direction& direction)
             case     Direction::WEST:
                      xy = west();
                      break;
+    */
             default: throw std::runtime_error("Unknown direction...");
         } 
     }

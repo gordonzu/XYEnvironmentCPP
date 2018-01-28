@@ -22,17 +22,20 @@ public:
     int getx();
     int gety();
 
-    std::shared_ptr<XYLocation> west();
+    /*std::shared_ptr<XYLocation> west();
     std::shared_ptr<XYLocation> east();
-    std::shared_ptr<XYLocation> north();
     std::shared_ptr<XYLocation> south();
     std::shared_ptr<XYLocation> left();
     std::shared_ptr<XYLocation> right();
     std::shared_ptr<XYLocation> up();
     std::shared_ptr<XYLocation> down();
     std::shared_ptr<XYLocation> location_at(const Direction& direction);
+    */
+    XYLocation* north();
+    XYLocation* location_at(const Direction& direction);
 
 private:
+    std::unique_ptr<XYLocation> tmpxy;
     int x_;
     int y_;
 };
