@@ -17,7 +17,8 @@ public:
     void                                move_object(Object* eo, const XYLocation::Direction& dir);
     void                                add_to(Object* eo, XYLocation& loc); 
     bool                                is_blocked(XYLocation& loc);
-    std::shared_ptr<XYLocation>         get_location(Object* eo); 
+    //std::shared_ptr<XYLocation>         get_location(Object* eo); 
+    XYLocation*                         get_location(Object* eo); 
     std::vector<Object*>&               get_at(XYLocation& loc);
 
     std::vector<std::pair<XYLocation,std::vector<Object*>>>& get_vector();
@@ -28,7 +29,7 @@ private:
     VectorOfPairs                                       vecPairs;
     std::unique_ptr<std::vector<Object*>>               env_vector;
     Object*                                             env_ptr;
-    XYLocation                                          xy_;
+    std::unique_ptr<XYLocation>                         xyuniq;
 };
 #endif
 

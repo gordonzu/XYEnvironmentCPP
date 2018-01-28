@@ -45,7 +45,7 @@ void XYEnvironment::add_to(Object* eo, XYLocation& loc)
     get_at(loc).push_back(eo);
     add_eo(eo);
 }
-
+/*
 std::shared_ptr<XYLocation> XYEnvironment::get_location(Object* eo)
 {
     VectorOfPairs::iterator itPairs;
@@ -56,6 +56,22 @@ std::shared_ptr<XYLocation> XYEnvironment::get_location(Object* eo)
             if (*itEnvs == eo) {
                 xy_ = itPairs->first;
                 return std::make_shared<XYLocation>(xy_);
+            }
+        }
+    }
+    return nullptr;
+}
+*/
+XYLocation* XYEnvironment::get_location(Object* eo)
+{
+    VectorOfPairs::iterator itPairs;
+    std::vector<Object*>::iterator itEnvs;
+
+    for (itPairs = vecPairs.begin(); itPairs!= vecPairs.end(); ++itPairs) {
+        for (itEnvs = itPairs->second.begin(); itEnvs != itPairs->second.end(); ++itEnvs) {
+            if (*itEnvs == eo) {
+                xyuniq = std::make_unique<XYLocation>(itPairs->first);
+                return xyuniq.get();
             }
         }
     }
@@ -87,7 +103,7 @@ std::vector<std::pair<XYLocation, std::vector<Object*>>>& XYEnvironment::get_vec
 void XYEnvironment::move_object(Object* eo, const XYLocation::Direction& dir)
 {
     //std::shared_ptr<XYLocation> temp = get_location(eo);
-    XYLocation* temp = (get_location(eo)).get();
+    XYLocation* temp = get_location(eo);
 
     if (temp != nullptr) {
         //temp = temp.get()->location_at(dir);

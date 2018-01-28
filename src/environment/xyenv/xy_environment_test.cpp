@@ -19,7 +19,8 @@ TEST_F(XYEnvironmentTest, testAddObject) {
 }
 
 TEST_F(XYEnvironmentTest, testGetCurrentLocation) {
-    ASSERT_EQ(*(env->get_location(agent).get()), *loc2);
+    //ASSERT_EQ(*(env->get_location(agent).get()), *loc2);
+    ASSERT_EQ(*(env->get_location(agent)), *loc2);
 }
 
 TEST_F(XYEnvironmentTest, testAddObject2) {
@@ -33,26 +34,33 @@ TEST_F(XYEnvironmentTest, testAddObjectTwice) {
     ASSERT_EQ(env->get_agents().size(), size_t(1));
     env->add_to(agent2, *xy551);
     ASSERT_EQ(env->get_agents().size(), size_t(2));
-    ASSERT_EQ(*(env->get_location(agent2).get()), *xy552);
+    //ASSERT_EQ(*(env->get_location(agent2).get()), *xy552);
+    ASSERT_EQ(*(env->get_location(agent2)), *xy552);
 }
 
 TEST_F(XYEnvironmentTest, testMoveObjectToAbsoluteLocation) {
     env->add_to(agent3, *xy551);
-    ASSERT_EQ(*(env->get_location(agent3).get()), *xy552);
+    //ASSERT_EQ(*(env->get_location(agent3).get()), *xy552);
+    ASSERT_EQ(*(env->get_location(agent3)), *xy552);
 }
 
 TEST_F(XYEnvironmentTest, testMoveObject) {
     env->add_to(agent4, *xy551);
-    ASSERT_EQ(*(env->get_location(agent4).get()), *xy552);
+    //ASSERT_EQ(*(env->get_location(agent4).get()), *xy552);
+    ASSERT_EQ(*(env->get_location(agent4)), *xy552);
 
     env->move_object(agent4, XYLocation::Direction::NORTH);
-    ASSERT_EQ(*(env->get_location(agent4).get()), *xy54);
+    //ASSERT_EQ(*(env->get_location(agent4).get()), *xy54);
+    ASSERT_EQ(*(env->get_location(agent4)), *xy54);
     env->move_object(agent4, XYLocation::Direction::EAST);
-    ASSERT_EQ(*(env->get_location(agent4).get()), *xy64);
+    //ASSERT_EQ(*(env->get_location(agent4).get()), *xy64);
+    ASSERT_EQ(*(env->get_location(agent4)), *xy64);
     env->move_object(agent4, XYLocation::Direction::SOUTH);
-    ASSERT_EQ(*(env->get_location(agent4).get()), *xy65);
+    //ASSERT_EQ(*(env->get_location(agent4).get()), *xy65);
+    ASSERT_EQ(*(env->get_location(agent4)), *xy65);
     env->move_object(agent4, XYLocation::Direction::WEST);
-    ASSERT_EQ(*(env->get_location(agent4).get()), *xy553);
+    //ASSERT_EQ(*(env->get_location(agent4).get()), *xy553);
+    ASSERT_EQ(*(env->get_location(agent4)), *xy553);
 }
 
 /* TODO 
