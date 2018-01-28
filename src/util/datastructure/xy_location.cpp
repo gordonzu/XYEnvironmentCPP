@@ -62,59 +62,53 @@ bool XYLocation::operator==(const XYLocation& rhs) const
 {
         return ((x_ == rhs.x_) && (y_ == rhs.y_));
 }
-/*
-std::shared_ptr<XYLocation> XYLocation::west()
+
+XYLocation* XYLocation::west()
 {
-    return std::make_shared<XYLocation>(x_ - 1, y_);
+    tmpxy = std::make_unique<XYLocation>(x_ - 1, y_);
+    return tmpxy.get();
 }
 
-std::shared_ptr<XYLocation> XYLocation::east()
+XYLocation* XYLocation::east()
 {
-    return std::make_shared<XYLocation>(x_ + 1, y_);
+    tmpxy = std::make_unique<XYLocation>(x_ + 1, y_);
+    return tmpxy.get();
 }
-*/
+
 XYLocation* XYLocation::north()
 {
     tmpxy = std::make_unique<XYLocation>(x_, y_ -1);
     return tmpxy.get();
 }
 
-/*
-std::shared_ptr<XYLocation> XYLocation::north()
+XYLocation* XYLocation::south()
 {
-    return std::make_shared<XYLocation>(x_, y_ -1);
+    tmpxy = std::make_unique<XYLocation>(x_, y_ + 1);
+    return tmpxy.get();
 }
 
-
-std::shared_ptr<XYLocation> XYLocation::south()
-{
-    return std::make_shared<XYLocation>(x_, y_ + 1);
-}
-
-std::shared_ptr<XYLocation> XYLocation::right()
+XYLocation* XYLocation::right()
 {
     return east();
 }
 
-std::shared_ptr<XYLocation> XYLocation::left()
+XYLocation* XYLocation::left()
 {
     return west();
 }
 
-std::shared_ptr<XYLocation> XYLocation::up()
+XYLocation* XYLocation::up()
 {
     return north();
 }
 
-std::shared_ptr<XYLocation> XYLocation::down()
+XYLocation* XYLocation::down()
 {
     return south();
 }
-*/
-//std::shared_ptr<XYLocation> XYLocation::location_at(const Direction& direction)
+
 XYLocation* XYLocation::location_at(const Direction& direction)
 {
-    //std::shared_ptr<XYLocation> xy;
     XYLocation* xy;
     try
     {
@@ -123,7 +117,6 @@ XYLocation* XYLocation::location_at(const Direction& direction)
             case     Direction::NORTH:
                      xy = north();
                      break;
-    /*        
             case     Direction::SOUTH:
                      xy = south();
                      break;
@@ -133,7 +126,6 @@ XYLocation* XYLocation::location_at(const Direction& direction)
             case     Direction::WEST:
                      xy = west();
                      break;
-    */
             default: throw std::runtime_error("Unknown direction...");
         } 
     }
