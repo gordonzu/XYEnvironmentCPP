@@ -3,15 +3,28 @@
 #include <string>
 #include <iostream>
 #include "gmock/gmock.h"
-#include "test_data.h"
+#include "environment/xyenv/xy_environment.h"
 
 using namespace::testing;
 
-class XYEnvironmentTest: public Test, public TestData {
+class XYEnvironmentTest: public Test {
 public:
     virtual void SetUp() {
+        env = new XYEnvironment(10, 12);
+        loc = new XYLocation(3, 4);
+        agent = new Agent();
         env->add_to(agent, *loc);
    	}
+
+    virtual void TearDown() {
+        delete loc;
+        delete agent;
+        delete env;
+    }
+    
+    Object* agent;
+    XYLocation* loc;
+    XYEnvironment* env;
 };
 
 TEST_F(XYEnvironmentTest, testAddObject) {
@@ -19,40 +32,76 @@ TEST_F(XYEnvironmentTest, testAddObject) {
 }
 
 TEST_F(XYEnvironmentTest, testGetCurrentLocation) {
-    ASSERT_EQ(*(env->get_location(agent)), *loc2);
+    XYLocation* xyloc = new XYLocation(3, 4);
+    ASSERT_EQ(*(env->get_location(agent)), *xyloc);
+    delete xyloc;
 }
 
 TEST_F(XYEnvironmentTest, testAddObject2) {
-    env->add_to(wall, *xy991);
+    Object* wall = new Wall();
+    XYLocation* xyloc = new XYLocation(9, 9);
+
+    env->add_to(wall, *xyloc);
     ASSERT_EQ(env->get_agents().size(), size_t(1));
     ASSERT_EQ(env->get_envs().size(), size_t(2));
-    ASSERT_EQ(env->get_at(*xy992).size(), size_t(1));
+    delete xyloc;
+
+    xyloc = new XYLocation(9, 9);
+    ASSERT_EQ(env->get_at(*xyloc).size(), size_t(1));
+    delete xyloc;
+    delete wall;
 }
 
 TEST_F(XYEnvironmentTest, testAddObjectTwice) {
     ASSERT_EQ(env->get_agents().size(), size_t(1));
-    env->add_to(agent2, *xy551);
+
+    XYLocation* xyloc = new XYLocation(5, 5);
+    XYLocation* xy    = new XYLocation(5, 5);
+  
+    env->add_to(agent, *xyloc);
     ASSERT_EQ(env->get_agents().size(), size_t(2));
-    ASSERT_EQ(*(env->get_location(agent2)), *xy552);
+    ASSERT_EQ(*(env->get_location(agent)), *xy);
+
+    delete xyloc;
+    delete xy;
 }
 
 TEST_F(XYEnvironmentTest, testMoveObjectToAbsoluteLocation) {
-    env->add_to(agent3, *xy551);
-    ASSERT_EQ(*(env->get_location(agent3)), *xy552);
+    XYLocation* xyloc = new XYLocation(5, 5);
+    XYLocation* xy    = new XYLocation(5, 5);
+ 
+    env->add_to(agent, *xyloc);
+    ASSERT_EQ(*(env->get_location(agent)), *xy);
+
+    delete xyloc;
+    delete xy;
 }
 
 TEST_F(XYEnvironmentTest, testMoveObject) {
-    env->add_to(agent4, *xy551);
-    ASSERT_EQ(*(env->get_location(agent4)), *xy552);
+    XYLocation* xyloc = new XYLocation(5, 5);
+    XYLocation* xy    = new XYLocation(5, 5);
 
-    env->move_object(agent4, XYLocation::Direction::NORTH);
-    ASSERT_EQ(*(env->get_location(agent4)), *xy54);
-    env->move_object(agent4, XYLocation::Direction::EAST);
-    ASSERT_EQ(*(env->get_location(agent4)), *xy64);
-    env->move_object(agent4, XYLocation::Direction::SOUTH);
-    ASSERT_EQ(*(env->get_location(agent4)), *xy65);
-    env->move_object(agent4, XYLocation::Direction::WEST);
-    ASSERT_EQ(*(env->get_location(agent4)), *xy553);
+    env->add_to(agent, *xyloc);
+    ASSERT_EQ(*(env->get_location(agent)), *xy);
+
+    XYLocation* loc54 = new XYLocation(5, 4);
+    XYLocation* loc64    = new XYLocation(6, 4);
+    XYLocation* loc65    = new XYLocation(6, 5);
+
+    env->move_object(agent, XYLocation::Direction::NORTH);
+    ASSERT_EQ(*(env->get_location(agent)), *loc54);
+    env->move_object(agent, XYLocation::Direction::EAST);
+    ASSERT_EQ(*(env->get_location(agent)), *loc64);
+    env->move_object(agent, XYLocation::Direction::SOUTH);
+    ASSERT_EQ(*(env->get_location(agent)), *loc65);
+    env->move_object(agent, XYLocation::Direction::WEST);
+    ASSERT_EQ(*(env->get_location(agent)), *xy);
+
+    delete xyloc;
+    delete xy;
+    delete loc54;
+    delete loc64;
+    delete loc65;
 }
 
 /* TODO 
