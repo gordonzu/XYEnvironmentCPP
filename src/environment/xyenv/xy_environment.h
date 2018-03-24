@@ -21,6 +21,7 @@ public:
 //    XYLocation*                         get_location(Object* eo);
 //    std::vector<Object*>&               get_at(XYLocation& loc);
 //    Vector&                             get_vector();
+    xy::Matrix&                           get_matrix();
 
 private:
     xy::Matrix                                  matrix;

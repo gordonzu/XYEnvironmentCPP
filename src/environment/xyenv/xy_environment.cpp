@@ -24,6 +24,11 @@ XYEnvironment::~XYEnvironment()
 {
 }
 
+xy::Matrix& XYEnvironment::get_matrix()
+{
+    return matrix;
+}
+
 /*
 void XYEnvironment::add_to(Object* eo, XYLocation& loc)
 {
