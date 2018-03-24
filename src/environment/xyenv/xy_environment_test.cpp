@@ -43,7 +43,7 @@ TEST_F(XYEnvironmentTest, testGetCurrentLocation) {
 
 TEST_F(XYEnvironmentTest, testAddObject2) {
     Object* wall = new Wall();
-    XYLocation* xyloc = new XYLocation(9, 9);
+    auto xyloc = new XYLocation(9, 9);
 
     env->add_to(wall, *xyloc);
     ASSERT_EQ(env->get_agents().size(), size_t(1));
@@ -51,25 +51,27 @@ TEST_F(XYEnvironmentTest, testAddObject2) {
     delete xyloc;
 
     xyloc = new XYLocation(9, 9);
-    //ASSERT_EQ(env->get_at(*xyloc).size(), size_t(1));
+    ASSERT_EQ(env->get_set_size(*xyloc), size_t(1));
     delete xyloc;
     delete wall;
 }
-/*
+
 TEST_F(XYEnvironmentTest, testAddObjectTwice) {
     ASSERT_EQ(env->get_agents().size(), size_t(1));
 
-    XYLocation* xyloc = new XYLocation(5, 5);
-    XYLocation* xy    = new XYLocation(5, 5);
+    auto agent1 = new Agent();
+    auto xyloc = new XYLocation(5, 5);
+    auto xy    = new XYLocation(5, 5);
   
-    env->add_to(agent, *xyloc);
+    env->add_to(agent1, *xyloc);
     ASSERT_EQ(env->get_agents().size(), size_t(2));
-    ASSERT_EQ(*(env->get_location(agent)), *xy);
+    ASSERT_EQ(*(env->get_location(agent1)), *xy);
 
+    delete agent1;
     delete xyloc;
     delete xy;
 }
-
+/*
 TEST_F(XYEnvironmentTest, testMoveObjectToAbsoluteLocation) {
     XYLocation* xyloc = new XYLocation(5, 5);
     XYLocation* xy    = new XYLocation(5, 5);

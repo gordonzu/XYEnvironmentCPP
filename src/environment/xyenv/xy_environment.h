@@ -22,6 +22,7 @@ public:
 //    std::vector<Object*>&               get_at(XYLocation& loc);
 //    Vector&                             get_vector();
     size_t                                get_matrix_size();
+    size_t                                get_set_size(XYLocation& xy);
 
 private:
     xy::Matrix                                          matrix;

@@ -22,6 +22,10 @@ size_t XYEnvironment::get_matrix_size()
     return matrix.vector_size();
 }
 
+size_t XYEnvironment::get_set_size(XYLocation& xy)
+{
+    return matrix.set_size(xy);
+}
 
 void XYEnvironment::add_to(Object* eo, XYLocation& loc)
 {

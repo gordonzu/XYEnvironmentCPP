@@ -52,10 +52,12 @@ namespace xy {
 
     std::set<Object*>* Matrix::get_set(XYLocation& xy) {
         if (has_xy(xy) != get_vector().end()) {
-            return &(*itv).second;
+            return &(itv->second);
         }
         else {
-            return nullptr;
+            set = std::make_unique<std::set<Object*>>();
+            vec.emplace_back(xy, *set);
+            return set.get();
         }
     }
 
@@ -64,16 +66,11 @@ namespace xy {
     }
 
     size_t Matrix::set_size(XYLocation& xy) {
-        if (get_set(xy)) {
-            return get_set(xy)->size();
-        }
-        else
-            return 0;
+        return get_set(xy)->size();
     }
 
     size_t Matrix::vector_size() {
         return Matrix::get_vector().size();
     }
-
 }
 

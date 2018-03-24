@@ -19,9 +19,10 @@ namespace xy {
 
     class Matrix {
     private:
-        static Vector               vec;
-        Vector::iterator            itv;
-        std::set<Object*>::iterator its;
+        static Vector                       vec;
+        Vector::iterator                    itv;
+        std::unique_ptr<std::set<Object*>>  set;
+        std::set<Object*>::iterator         its;
 
     public:
         Matrix(unsigned w, unsigned h);
