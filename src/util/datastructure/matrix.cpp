@@ -6,7 +6,6 @@ namespace xy {
 
     Vector Matrix::vec = Vector();
 
-    // constructor builds matrix w rows wide and h columns high
     Matrix::Matrix(unsigned w, unsigned h) {
         for (unsigned x = 1; x <= w; ++x) {
             for (unsigned y = 1; y <= h; ++y) {
@@ -15,28 +14,24 @@ namespace xy {
         }
     }
 
-    // default destructor
     Matrix::~Matrix() = default;
 
-    // searches the vector for a given XYLocation. Returns an index position.
     Vector::iterator Matrix::has_xy(XYLocation& loc) {
-        it = std::find_if(
+        itv = std::find_if(
                 Matrix::get_vector().begin(),
                 Matrix::get_vector().end(),
                 [loc](std::pair<XYLocation, std::set<Object*>>& mypair) {
                     return (mypair.first == loc);
                 });
-        return it;
+        return itv;
     }
 
-    // adds a polymorphic agent pointer to the set corresponding to a given XYLocation. Returns a boolean.
     bool Matrix::add_object(Object* obj, XYLocation& xy) {
-        std::set<Object*>::iterator myit;
         std::set<Object*>* theset = get_set(xy);
 
         if (theset) {
-            if ((myit = theset->find(obj)) != theset->end()) {
-                theset->erase(myit);
+            if ((its = theset->find(obj)) != theset->end()) {
+                theset->erase(its);
             }
             theset->insert(obj);
             return true;
@@ -45,9 +40,19 @@ namespace xy {
             return false;
     }
 
+    XYLocation* Matrix::get_object_location(Object *obj)
+    {
+        for (itv = vec.begin(); itv != vec.end(); ++itv) {
+            if ((its = itv->second.find(obj)) != itv->second.end()) {
+                return &(itv->first);
+            }
+        }
+        return nullptr;
+    }
+
     std::set<Object*>* Matrix::get_set(XYLocation& xy) {
         if (has_xy(xy) != get_vector().end()) {
-            return &(*it).second;
+            return &(*itv).second;
         }
         else {
             return nullptr;

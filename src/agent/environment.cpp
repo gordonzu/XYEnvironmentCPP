@@ -3,21 +3,27 @@
 #include <iostream>
 #include "environment.h"
 
-std::vector<Agent*>& Environment::get_agents() 
+std::set<Agent*>& Environment::get_agents()
 {
     return agents;
 }
 
-void Environment::add_eo(Object* eo)
+std::set<Object*>& Environment::get_objs()
 {
-    envs.push_back(eo);
-    if (Agent* a = dynamic_cast<Agent*>(eo)) {
-        agents.push_back(a);            
+    return objs;
+}
+
+void Environment::add_agent(Agent* a)
+{
+    agents.insert(a);
+}
+
+void Environment::add_obj(Object* eo)
+{
+    objs.insert(eo);
+    if (auto a = dynamic_cast<Agent*>(eo)) {
+        add_agent(a);
     }
 }
 
-std::vector<Object*>& Environment::get_envs()  
-{
-    return envs;    
-}
 

@@ -1,20 +1,21 @@
 #ifndef ABSTRACT_ENVIRONMENT_H
 #define ABSTRACT_ENVIRONMENT_H
 
-#include <vector>
+#include <set>
 #include <memory>
 #include <iostream>
 #include "object.h"
 
 class Environment {
 public:
-    void                    add_eo(Object* eo);
-    std::vector<Agent*>&    get_agents(); 
-    std::vector<Object*>&   get_envs();  
+    void                 add_obj(Object* eo);
+    void                 add_agent(Agent* a);
+    std::set<Object*>&   get_objs();
+    std::set<Agent*>&    get_agents();
 
 protected:
-    std::vector<Object*>    envs;
-    std::vector<Agent*>     agents;
+    std::set<Object*>    objs;
+    std::set<Agent*>     agents;
 };
 #endif
 

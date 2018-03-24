@@ -9,14 +9,14 @@ using namespace::testing;
 
 class XYEnvironmentTest: public Test {
 public:
-    virtual void SetUp() {
+    void SetUp() override {
         env = new XYEnvironment(10, 12);
         loc = new XYLocation(3, 4);
         agent = new Agent();
         env->add_to(agent, *loc);
    	}
 
-    virtual void TearDown() {
+    void TearDown() override {
         delete loc;
         delete agent;
         delete env;
@@ -34,9 +34,9 @@ TEST_F(XYEnvironmentTest, testMatrixConstruction) {
 TEST_F(XYEnvironmentTest, testAddObject) {
     ASSERT_EQ(env->get_agents().size(), size_t(1));
 }
-/*
+
 TEST_F(XYEnvironmentTest, testGetCurrentLocation) {
-    XYLocation* xyloc = new XYLocation(3, 4);
+    auto xyloc = new XYLocation(3, 4);
     ASSERT_EQ(*(env->get_location(agent)), *xyloc);
     delete xyloc;
 }
@@ -47,15 +47,15 @@ TEST_F(XYEnvironmentTest, testAddObject2) {
 
     env->add_to(wall, *xyloc);
     ASSERT_EQ(env->get_agents().size(), size_t(1));
-    ASSERT_EQ(env->get_envs().size(), size_t(2));
+    ASSERT_EQ(env->get_objs().size(), size_t(2));
     delete xyloc;
 
     xyloc = new XYLocation(9, 9);
-    ASSERT_EQ(env->get_at(*xyloc).size(), size_t(1));
+    //ASSERT_EQ(env->get_at(*xyloc).size(), size_t(1));
     delete xyloc;
     delete wall;
 }
-
+/*
 TEST_F(XYEnvironmentTest, testAddObjectTwice) {
     ASSERT_EQ(env->get_agents().size(), size_t(1));
 

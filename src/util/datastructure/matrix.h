@@ -19,8 +19,9 @@ namespace xy {
 
     class Matrix {
     private:
-        static Vector       vec;
-        Vector::iterator    it;
+        static Vector               vec;
+        Vector::iterator            itv;
+        std::set<Object*>::iterator its;
 
     public:
         Matrix(unsigned w, unsigned h);
@@ -29,6 +30,7 @@ namespace xy {
         static Vector& get_vector();
         Vector::iterator has_xy(XYLocation& loc);
         bool add_object(Object* obj, XYLocation& xy);
+        XYLocation* get_object_location(Object* obj);
         size_t set_size(XYLocation& xy);
         size_t vector_size();
     };

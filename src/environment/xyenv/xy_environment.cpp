@@ -26,12 +26,15 @@ size_t XYEnvironment::get_matrix_size()
 void XYEnvironment::add_to(Object* eo, XYLocation& loc)
 {
     matrix.add_object(eo, loc);
-    add_eo(eo);
+    add_obj(eo);
 }
 
-/*
+
 XYLocation* XYEnvironment::get_location(Object* eo)
 {
+    return matrix.get_object_location(eo);
+
+    /*
     Vector::iterator itPairs;
     std::vector<Object*>::iterator itEnvs;
 
@@ -46,8 +49,10 @@ XYLocation* XYEnvironment::get_location(Object* eo)
         }
     }
     return nullptr;
+    */
 }
 
+/*
 std::vector<Object*>& XYEnvironment::get_at(XYLocation& loc)
 {
     Vector::iterator it;
