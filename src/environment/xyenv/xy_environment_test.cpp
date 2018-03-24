@@ -121,20 +121,101 @@ TEST_F(XYEnvironmentTest, testMoveObject) {
     delete loc65;
 }
 
+TEST_F(XYEnvironmentTest, testIsBlocked) {
+    auto loc = new XYLocation(5, 5);
+    ASSERT_EQ(env->get_set_size(*loc), size_t(0));
+
+    delete loc;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* TODO 
- *      construct data strctures as unique pointers and dereference them to pass by reference
- *      rewrite XYEnvironmentState::moveObjectToAbsoluteLocation with std::find_if?   
- *      construct the XYEnvironment vectors (sets) in moveObjectToAbsoluteLocation with unique_ptr, pass by object ref
- *      have test class inherit from test data class, store test data there
- *      check all for loops for change to STL algos
  *      explore adding "const" and constexpr to all functions that do not write data
- *
- *
- *      each environment has its own vector of location and agent vector pairs, each location 
+ *      each environment has its own vector of location and agent vector pairs, each location
  *      has it's own vector of agents. 
  *
- *      create two data structure classes - one vector holding a std::pair of a location
- *      and an agent vector, and one agent vector used in the first vector
 */
 
 
