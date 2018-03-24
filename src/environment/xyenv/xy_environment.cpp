@@ -7,29 +7,24 @@
 #include <memory>
 #include "environment/xyenv/xy_environment.h"
 
-XYEnvironment::XYEnvironment()
-{
-}
-
-XYEnvironment::XYEnvironment(int w, int h): 
-                            width_{w}, 
-                            height_{h}, 
-                            vec_pairs{Vector()} 
+XYEnvironment::XYEnvironment(unsigned w, unsigned h): matrix{w,h}
 {
     assert (w > 0);
     assert (h > 0);
 
-    for (int x = 1; x <= width_; ++x) {
+/*    for (int x = 1; x <= width_; ++x) {
         for (int y = 1; y <= height_; ++y) {
-           vec_pairs.push_back( std::make_pair(XYLocation(x, y), std::vector<Object*>()));
+           vec_pairs.emplace_back(XYLocation(x, y), std::set<Object*>());
         }
-    }
+      }
+*/
 }
 
 XYEnvironment::~XYEnvironment()
 {
 }
 
+/*
 void XYEnvironment::add_to(Object* eo, XYLocation& loc)
 {
    for (auto& x : vec_pairs) {
@@ -108,5 +103,5 @@ bool XYEnvironment::is_blocked(XYLocation& loc)
     }
     return false;
 }
-
+*/
 
