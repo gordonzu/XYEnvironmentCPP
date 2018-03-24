@@ -30,7 +30,7 @@ public:
 TEST_F(XYEnvironmentTest, testAddObject) {
     ASSERT_EQ(env->get_agents().size(), size_t(1));
 }
-
+/*
 TEST_F(XYEnvironmentTest, testGetCurrentLocation) {
     XYLocation* xyloc = new XYLocation(3, 4);
     ASSERT_EQ(*(env->get_location(agent)), *xyloc);
@@ -103,6 +103,7 @@ TEST_F(XYEnvironmentTest, testMoveObject) {
     delete loc64;
     delete loc65;
 }
+*/
 
 /* TODO 
  *      construct data strctures as unique pointers and dereference them to pass by reference

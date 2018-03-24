@@ -21,9 +21,7 @@ XYEnvironment::XYEnvironment(int w, int h):
 
     for (int x = 1; x <= width_; ++x) {
         for (int y = 1; y <= height_; ++y) {
-           vec_pairs.push_back(
-                              std::make_pair(XYLocation(x, y), 
-                              std::vector<Object*>()));
+           vec_pairs.push_back( std::make_pair(XYLocation(x, y), std::vector<Object*>()));
         }
     }
 }
