@@ -19,7 +19,7 @@ namespace xy {
 
     class Matrix {
     private:
-        static Vector                       vec;
+        Vector                              vec;
         Vector::iterator                    itv;
         std::unique_ptr<std::set<Object*>>  set;
         std::set<Object*>::iterator         its;
@@ -27,13 +27,16 @@ namespace xy {
     public:
         Matrix(unsigned w, unsigned h);
         virtual ~Matrix();
-        std::set<Object*>* get_set(XYLocation& loc);
-        static Vector& get_vector();
-        Vector::iterator has_xy(XYLocation& loc);
-        bool add_object(Object* obj, XYLocation& xy);
-        XYLocation* get_object_location(Object* obj);
-        size_t set_size(XYLocation& xy);
-        size_t vector_size();
+        std::set<Object*>*  get_set(XYLocation& loc);
+        Vector&             get_vector();
+        Vector::iterator    has_xy(XYLocation& loc);
+        void                check_for_object(Object* obj);
+        void                add_object(Object* obj, XYLocation& xy);
+        XYLocation*         get_object_location(Object* obj);
+        void                move_object(Object* obj, const XYLocation::Direction& dir);
+        bool                is_blocked(XYLocation& xy);
+        size_t              set_size(XYLocation& xy);
+        size_t              vector_size();
     };
 }
 

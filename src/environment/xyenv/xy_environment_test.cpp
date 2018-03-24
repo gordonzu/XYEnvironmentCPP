@@ -1,7 +1,6 @@
 // XYEnvironmentTest.cpp
 
 #include <string>
-#include <iostream>
 #include "gmock/gmock.h"
 #include "environment/xyenv/xy_environment.h"
 
@@ -28,11 +27,21 @@ public:
 };
 
 TEST_F(XYEnvironmentTest, testMatrixConstruction) {
-    ASSERT_EQ(env->get_matrix_size(), size_t(120));
+    ASSERT_EQ(env->get_vector_size(), size_t(120));
+    ASSERT_EQ(env->get_set_size(*loc), size_t(1));
 }
 
-TEST_F(XYEnvironmentTest, testAddObject) {
+TEST_F(XYEnvironmentTest, testObjectIsUnique) {
+    auto xy = new XYLocation(5,6);
+    env->add_to(agent, *xy);
+    ASSERT_EQ(env->get_set_size(*xy), size_t(1));
+    ASSERT_EQ(env->get_set_size(*loc), size_t(0));
+    delete xy;
+}
+
+TEST_F(XYEnvironmentTest, testBaseClassContainers) {
     ASSERT_EQ(env->get_agents().size(), size_t(1));
+    ASSERT_EQ(env->get_objs().size(), size_t(1));
 }
 
 TEST_F(XYEnvironmentTest, testGetCurrentLocation) {
@@ -71,28 +80,30 @@ TEST_F(XYEnvironmentTest, testAddObjectTwice) {
     delete xyloc;
     delete xy;
 }
-/*
-TEST_F(XYEnvironmentTest, testMoveObjectToAbsoluteLocation) {
-    XYLocation* xyloc = new XYLocation(5, 5);
-    XYLocation* xy    = new XYLocation(5, 5);
- 
-    env->add_to(agent, *xyloc);
-    ASSERT_EQ(*(env->get_location(agent)), *xy);
 
+TEST_F(XYEnvironmentTest, testMoveObjectToAbsoluteLocation) {
+    auto a = new Agent();
+    auto xyloc = new XYLocation(5, 5);
+    auto xy    = new XYLocation(5, 5);
+ 
+    env->add_to(a, *xyloc);
+    ASSERT_EQ(*(env->get_location(a)), *xy);
+
+    delete a;
     delete xyloc;
     delete xy;
 }
 
 TEST_F(XYEnvironmentTest, testMoveObject) {
-    XYLocation* xyloc = new XYLocation(5, 5);
-    XYLocation* xy    = new XYLocation(5, 5);
+    auto xyloc = new XYLocation(5, 5);
+    auto xy    = new XYLocation(5, 5);
 
     env->add_to(agent, *xyloc);
     ASSERT_EQ(*(env->get_location(agent)), *xy);
 
-    XYLocation* loc54 = new XYLocation(5, 4);
-    XYLocation* loc64    = new XYLocation(6, 4);
-    XYLocation* loc65    = new XYLocation(6, 5);
+    auto loc54 = new XYLocation(5, 4);
+    auto loc64    = new XYLocation(6, 4);
+    auto loc65    = new XYLocation(6, 5);
 
     env->move_object(agent, XYLocation::Direction::NORTH);
     ASSERT_EQ(*(env->get_location(agent)), *loc54);
@@ -109,7 +120,6 @@ TEST_F(XYEnvironmentTest, testMoveObject) {
     delete loc64;
     delete loc65;
 }
-*/
 
 /* TODO 
  *      construct data strctures as unique pointers and dereference them to pass by reference
