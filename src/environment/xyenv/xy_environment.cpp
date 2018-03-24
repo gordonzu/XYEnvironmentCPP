@@ -11,40 +11,25 @@ XYEnvironment::XYEnvironment(unsigned w, unsigned h): matrix{w,h}
 {
     assert (w > 0);
     assert (h > 0);
-
-/*    for (int x = 1; x <= width_; ++x) {
-        for (int y = 1; y <= height_; ++y) {
-           vec_pairs.emplace_back(XYLocation(x, y), std::set<Object*>());
-        }
-      }
-*/
 }
 
 XYEnvironment::~XYEnvironment()
 {
 }
 
-xy::Matrix& XYEnvironment::get_matrix()
+size_t XYEnvironment::get_matrix_size()
 {
-    return matrix;
+    return matrix.vector_size();
 }
 
-/*
+
 void XYEnvironment::add_to(Object* eo, XYLocation& loc)
 {
-   for (auto& x : vec_pairs) {
-        for (auto it = x.second.begin(); it != x.second.end(); ) {
-            if ((*it) == eo) {
-                it = x.second.erase(it);
-            } else {
-                ++it;
-            }
-        }
-    }
-    get_at(loc).push_back(eo);
+    matrix.add_object(eo, loc);
     add_eo(eo);
 }
 
+/*
 XYLocation* XYEnvironment::get_location(Object* eo)
 {
     Vector::iterator itPairs;

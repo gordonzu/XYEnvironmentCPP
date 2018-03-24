@@ -16,15 +16,15 @@ public:
     virtual ~XYEnvironment();
 
 //    void                                move_object(Object* eo, const XYLocation::Direction& dir);
-//    void                                add_to(Object* eo, XYLocation& loc);
+    void                                add_to(Object* eo, XYLocation& loc);
 //    bool                                is_blocked(XYLocation& loc);
 //    XYLocation*                         get_location(Object* eo);
 //    std::vector<Object*>&               get_at(XYLocation& loc);
 //    Vector&                             get_vector();
-    xy::Matrix&                           get_matrix();
+    size_t                                get_matrix_size();
 
 private:
-    xy::Matrix                                  matrix;
+    xy::Matrix                                          matrix;
     //int                                                 width_;
     //int                                                 height_;
     //Vector                                              vec_pairs;
