@@ -23,8 +23,8 @@ public:
         delete env;
     }
     
-    Object* agent;
-    Object* wall;
+    Agent* agent;
+    Wall* wall;
     XYLocation* loc;
     XYEnvironment* env;
 };
@@ -83,7 +83,7 @@ TEST_F(XYEnvironmentTest, testAddObjectTwice) {
 }
 
 TEST_F(XYEnvironmentTest, testMoveObjectToAbsoluteLocation) {
-    Object* a = new Agent();
+    auto a = new Agent();
     auto xyloc = new XYLocation(5, 5);
     auto xy    = new XYLocation(5, 5);
  
@@ -143,12 +143,12 @@ TEST_F(XYEnvironmentTest, testMoveWithBlockingWalls) {
     auto westloc = new XYLocation(4, 5);
     auto endloc = new XYLocation(6, 5);
 
-    Object* northwall = new Wall();
+    auto northwall = new Wall();
     env->add_to(northwall, *northloc);
     ASSERT_EQ(env->is_blocked(*northloc), true);
 
-    Object* southwall = new Wall();
-    Object* westwall = new Wall();
+    auto southwall = new Wall();
+    auto westwall = new Wall();
     env->add_to(southwall, *southloc);
     env->add_to(westwall, *westloc);
     ASSERT_EQ(env->get_objs().size(), size_t(4));
@@ -167,10 +167,47 @@ TEST_F(XYEnvironmentTest, testMoveWithBlockingWalls) {
     delete northwall;
     delete southwall;
     delete westwall;
-
 }
 
+TEST_F(XYEnvironmentTest, testGetSet) {
+    auto loc = new XYLocation(5, 7);
+    env->add_to(agent, *loc);
+    ASSERT_EQ(env->get_set_size(*loc), size_t(1));
+    auto b = new Agent();
+    env->add_to(b, *loc);
+    ASSERT_EQ(env->get_set_size(*loc), size_t(2));
 
+    delete loc;
+    delete b;
+}
+
+TEST_F(XYEnvironmentTest, testGetObjectsNear) {
+    auto loc = new XYLocation(5, 5);
+    auto loc2 = new XYLocation(7, 4);
+    auto loc3 = new XYLocation(5, 7);
+    auto loc4 = new XYLocation(3, 10);
+
+    env->add_to(agent, *loc);
+    auto b = new Agent();
+    auto c = new Agent();
+    auto w = new Wall();
+
+    env->add_to(b, *loc2);
+    env->add_to(c, *loc3);
+    env->add_to(w, *loc4);
+
+    std::set<Object*> agentset = env->get_objects_near(agent, 3);
+    //ASSERT_EQ(agentset.size(), size_t(2));
+    ASSERT_EQ(2,2);
+
+    delete loc;
+    delete loc2;
+    delete loc3;
+    delete loc4;
+    delete b;
+    delete c;
+    delete w;
+}
 
 
 

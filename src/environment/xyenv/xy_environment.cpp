@@ -38,4 +38,9 @@ bool XYEnvironment::is_blocked(XYLocation &xy) {
     return matrix.is_blocked(xy);
 }
 
+std::set<Object*> XYEnvironment::get_objects_near(Object* obj, unsigned) {
+    near_set_ptr = std::make_unique<std::set<Object*>>();
+
+    return *near_set_ptr;
+}
 

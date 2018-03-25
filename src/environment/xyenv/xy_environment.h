@@ -12,15 +12,17 @@ public:
     XYEnvironment(unsigned w, unsigned h);
     virtual ~XYEnvironment();
 
-    bool        is_blocked(XYLocation& xy);
-    void        move_object(Object* eo, const XYLocation::Direction& dir);
-    void        add_to(Object* eo, XYLocation& loc);
-    XYLocation* get_location(Object* eo);
-    size_t      get_vector_size();
-    size_t      get_set_size(XYLocation& xy);
+    bool                is_blocked(XYLocation& xy);
+    void                move_object(Object* eo, const XYLocation::Direction& dir);
+    void                add_to(Object* eo, XYLocation& loc);
+    XYLocation*         get_location(Object* eo);
+    size_t              get_vector_size();
+    size_t              get_set_size(XYLocation& xy);
+    std::set<Object*>   get_objects_near(Object* obj, unsigned);
 
 private:
-    xy::Matrix  matrix;
+    xy::Matrix                          matrix;
+    std::unique_ptr<std::set<Object*>>  near_set_ptr;
 };
 #endif
 

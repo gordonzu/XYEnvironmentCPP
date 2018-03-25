@@ -94,5 +94,6 @@ namespace xy {
     size_t Matrix::vector_size() {
         return Matrix::get_vector().size();
     }
+
 }
 
