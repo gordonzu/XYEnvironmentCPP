@@ -12,6 +12,7 @@ public:
     XYEnvironment(unsigned w, unsigned h);
     virtual ~XYEnvironment();
 
+    bool        is_blocked(XYLocation& xy);
     void        move_object(Object* eo, const XYLocation::Direction& dir);
     void        add_to(Object* eo, XYLocation& loc);
     XYLocation* get_location(Object* eo);

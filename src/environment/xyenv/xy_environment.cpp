@@ -34,4 +34,8 @@ void XYEnvironment::move_object(Object* eo, const XYLocation::Direction& dir) {
     matrix.move_object(eo, dir);
 }
 
+bool XYEnvironment::is_blocked(XYLocation &xy) {
+    return matrix.is_blocked(xy);
+}
+
 
