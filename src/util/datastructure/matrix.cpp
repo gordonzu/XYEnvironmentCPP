@@ -7,7 +7,9 @@ namespace xy {
     Matrix::Matrix(unsigned w, unsigned h) {
         for (unsigned x = 1; x <= w; ++x) {
             for (unsigned y = 1; y <= h; ++y) {
-                vec.emplace_back(XYLocation(x, y), std::set<Object*>());
+                std::unique_ptr<std::set<Object*>> myset = std::make_unique<std::set<Object*>>();
+                std::unique_ptr<XYLocation> myloc = std::make_unique<XYLocation>(x, y);
+                vec.emplace_back(*myloc, *myset);
             }
         }
     }
@@ -17,11 +19,14 @@ namespace xy {
     void Matrix::add_object(Object* obj, XYLocation& xy) {
         check_for_object(obj);
         std::set<Object*>* theset = get_set(xy);
+        //std::cout << "Set size in Matrix before adding object: " << theset->size() << std::endl;
 
         if ((its = theset->find(obj)) != theset->end()) {
             theset->erase(its);
         }
+        //std::cout << "Inserting object." << std::endl;
         theset->insert(obj);
+        //std::cout << "Set size in Matrix after adding object: " << theset->size() << std::endl;
     }
 
     void Matrix::check_for_object(Object *obj) {
@@ -88,7 +93,8 @@ namespace xy {
     }
 
     size_t Matrix::set_size(XYLocation& xy) {
-        return get_set(xy)->size();
+        return has_xy(xy)->second.size();
+        //return get_set(xy)->size();
     }
 
     size_t Matrix::vector_size() {

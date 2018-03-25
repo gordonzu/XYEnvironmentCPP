@@ -29,7 +29,7 @@ add_custom_command(TARGET xyenv
 
 add_custom_command(TARGET xyenv
                  POST_BUILD
-                 COMMAND valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all ./xyenv)
-#                COMMAND valgrind --tool=memcheck --leak-check=yes ./xyenv)
+#                COMMAND valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all ./xyenv)
+                 COMMAND valgrind --tool=memcheck --leak-check=yes ./xyenv)
 #                COMMAND "xyenv")
 
