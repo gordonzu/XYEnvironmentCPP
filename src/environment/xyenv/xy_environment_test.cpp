@@ -249,6 +249,31 @@ TEST_F(XYEnvironmentTest, testGetObjectsNear) {
     delete w;
 }
 
+TEST_F(XYEnvironmentTest, testOutOfRangeXYLocations) {
+    auto loc = new XYLocation(5, 5);
+    auto loc2 = new XYLocation(25, 30);
+    auto loc3 = new XYLocation(0, 0);
+
+    auto a = new Agent();
+    env->add_to(a, *loc);
+    ASSERT_EQ(env->get_set_size(*loc), size_t(1));
+
+    auto a1 = new Agent();
+    env->add_to(a1, *loc2);
+    ASSERT_EQ(env->get_set_size(*loc2), size_t(0));
+
+    auto a2 = new Agent();
+    env->add_to(a2, *loc3);
+    ASSERT_EQ(env->get_set_size(*loc3), size_t(0));
+
+    delete loc;
+    delete loc2;
+    delete loc3;
+    delete a;
+    delete a1;
+    delete a2;
+}
+
 
 
 
