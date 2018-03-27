@@ -19,14 +19,11 @@ namespace xy {
     void Matrix::add_object(Object* obj, XYLocation& xy) {
         check_for_object(obj);
         std::set<Object*>* theset = get_set(xy);
-        //std::cout << "Set size in Matrix before adding object: " << theset->size() << std::endl;
 
         if ((its = theset->find(obj)) != theset->end()) {
             theset->erase(its);
         }
-        //std::cout << "Inserting object." << std::endl;
         theset->insert(obj);
-        //std::cout << "Set size in Matrix after adding object: " << theset->size() << std::endl;
     }
 
     void Matrix::check_for_object(Object *obj) {
@@ -45,7 +42,8 @@ namespace xy {
         else {
             set = std::make_unique<std::set<Object*>>();
             vec.emplace_back(xy, *set);
-            return set.get();
+            //return set.get();
+            return &((has_xy(xy))->second);
         }
     }
 
