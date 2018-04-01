@@ -12,7 +12,14 @@ XYEnvironment::XYEnvironment(unsigned w, unsigned h): width{w}, height{h}, matri
 
 }
 
-XYEnvironment::~XYEnvironment() {
+XYEnvironment::~XYEnvironment() { }
+
+XYEnvironment& XYEnvironment::operator=(const XYEnvironment &rhs) {
+    if (&rhs != this) {
+        width = rhs.width;
+        height = rhs.height;
+    }
+    return *this;
 }
 
 size_t XYEnvironment::get_vector_size() {

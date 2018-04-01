@@ -13,6 +13,7 @@ public:
     XYEnvironment() = delete;
     XYEnvironment(unsigned w, unsigned h);
     virtual ~XYEnvironment();
+    XYEnvironment& operator=(const XYEnvironment& rhs);
 
     bool                is_blocked(const XYLocation& xy);
     bool                is_blocked(const XYLocation&& xy);
