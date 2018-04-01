@@ -3,12 +3,14 @@
 #include <iostream>
 #include <cassert>
 #include <memory>
+#include <algorithm>
 #include <cmath>
 #include "environment/xyenv/xy_environment.h"
 
 XYEnvironment::XYEnvironment(unsigned w, unsigned h): width{w}, height{h}, matrix{w,h} {
     assert (width > 0);
     assert (height > 0);
+
 }
 
 XYEnvironment::~XYEnvironment() {
@@ -40,6 +42,10 @@ bool XYEnvironment::is_blocked(XYLocation &xy) {
     return matrix.is_blocked(xy);
 }
 
+bool XYEnvironment::is_blocked(XYLocation &&xy) {
+    return matrix.is_blocked(xy);
+}
+
 std::set<Object*>& XYEnvironment::get_objects_near(Object* obj, unsigned rad) {
     near_set = std::make_unique<std::set<Object*>>();
     XYLocation* xy = get_location(obj);
@@ -67,43 +73,36 @@ bool XYEnvironment::in_radius(unsigned rad, XYLocation& loca, XYLocation& locb) 
 Vector& XYEnvironment::get_vector() {
     return matrix.get_vector();
 }
-/*
-void XYEnvironment::make_perimeter() {
-    w1 = std::make_unique<Wall>();
-    w2 = std::make_unique<Wall>();
-    w3 = std::make_unique<Wall>();
-    w4 = std::make_unique<Wall>();
-    loc1 = std::make_unique<XYLocation>(0, 0);
 
-    add_to(w1.get(), *loc1);
+void XYEnvironment::make_perimeter() {
 
     for (unsigned i = 0; i < width; ++i) {
-        loc1 = std::make_unique<XYLocation>(i, 0);
-        loc2 = std::make_unique<XYLocation>(i, height - 1);
-        add_to(w1.get(), *loc1);
-        add_to(w2.get(), *loc2);
+        std::unique_ptr<XYLocation> xy1 = std::make_unique<XYLocation>(i, 0);
+        std::unique_ptr<XYLocation> xy2 = std::make_unique<XYLocation>(i, height - 1);
+        std::unique_ptr<Object> wall1 = std::make_unique<Wall>();
+        std::unique_ptr<Object> wall2 = std::make_unique<Wall>();
+        add_to(wall1.get(), *xy1);
+        add_to(wall2.get(), *xy2);
     }
 
     for (unsigned i = 0; i < height; ++i) {
-        loc3 = std::make_unique<XYLocation>(0, i);
-        loc4 = std::make_unique<XYLocation>(width - 1, i);
-        add_to(w3.get(), *loc3);
-        add_to(w4.get(), *loc4);
+        std::unique_ptr<XYLocation> xy1 = std::make_unique<XYLocation>(0, i);
+        std::unique_ptr<XYLocation> xy2 = std::make_unique<XYLocation>(width - 1, i);
+        std::unique_ptr<Object> wall1 = std::make_unique<Wall>();
+        std::unique_ptr<Object> wall2 = std::make_unique<Wall>();
+        add_to(wall1.get(), *xy1);
+        add_to(wall2.get(), *xy2);
     }
-}
-*/
-void XYEnvironment::test_set() {
 
-    loc1 = std::make_unique<XYLocation>(0, 0);
-    w1 =  std::make_unique<Wall>();
-    auto a = std::make_unique<Agent>();
-    Object* aa = new Agent();
-    add_to(aa, *loc1);
+    /*std::unique_ptr<XYLocation> xy1 = std::make_unique<XYLocation>(0, 0);
+    std::unique_ptr<Object> wall1 = std::make_unique<Wall>();
+    add_to(wall1.get(), *xy1);*/
 }
 
 Vector::iterator XYEnvironment::has_xy(XYLocation& xy) {
     return matrix.has_xy(xy);
 }
+
 
 
 

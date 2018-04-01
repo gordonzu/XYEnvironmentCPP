@@ -8,7 +8,7 @@ class XYLocation {
 public:
     XYLocation();
     XYLocation(int x, int y);
-    XYLocation(XYLocation&& other);
+    //XYLocation(XYLocation&& other);
     ~XYLocation();
     XYLocation(const XYLocation& other);
 
@@ -21,6 +21,7 @@ public:
 
     int getx();
     int gety();
+    void change_loc(int xx, int yy);
 
     XYLocation* west();
     XYLocation* east();

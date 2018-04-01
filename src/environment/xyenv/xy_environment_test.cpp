@@ -1,6 +1,7 @@
 // XYEnvironmentTest.cpp
 
 #include <string>
+#include <vector>
 #include "gmock/gmock.h"
 #include "environment/xyenv/xy_environment.h"
 
@@ -196,4 +197,20 @@ TEST_F(XYEnvironmentTest, testOutOfRangeXYLocations) {
     env->add_to(a2.get(), *loc3);
     ASSERT_EQ(env->get_set_size(*loc3), size_t(1));
 }
+
+
+TEST_F(XYEnvironmentTest, testMakePerimeter) {
+    env->make_perimeter();
+    ASSERT_TRUE(env->is_blocked(XYLocation{0, 0}));
+    ASSERT_TRUE(env->is_blocked(XYLocation{0, 6}));
+    ASSERT_TRUE(env->is_blocked(XYLocation{0, 11}));
+    ASSERT_TRUE(env->is_blocked(XYLocation{6, 0}));
+    ASSERT_TRUE(env->is_blocked(XYLocation{9, 0}));
+    ASSERT_TRUE(env->is_blocked(XYLocation{9, 6}));
+    ASSERT_TRUE(env->is_blocked(XYLocation{9, 11}));
+    ASSERT_TRUE(env->is_blocked(XYLocation{6, 11}));
+}
+
+
+
 

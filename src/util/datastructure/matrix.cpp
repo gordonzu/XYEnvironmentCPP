@@ -79,7 +79,16 @@ namespace xy {
 
     bool Matrix::is_blocked(XYLocation& xy) {
         for (auto& eo : *(get_set(xy))) {
-            if (dynamic_cast<Wall*>(eo)) {
+            if (static_cast<Wall*>(eo)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool Matrix::is_blocked(XYLocation&& xy) {
+        for (auto& eo : *(get_set(xy))) {
+            if (static_cast<Wall*>(eo)) {
                 return true;
             }
         }

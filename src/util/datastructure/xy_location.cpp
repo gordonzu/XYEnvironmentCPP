@@ -10,7 +10,7 @@ XYLocation::XYLocation(int x, int y): x_{x}, y_{y}
 {
 }
 
-XYLocation::XYLocation(XYLocation&& other): x_{0}, y_{0}
+/*XYLocation::XYLocation(XYLocation&& other): x_{0}, y_{0}
 {
     x_ = other.x_;
     y_ = other.y_;
@@ -18,6 +18,7 @@ XYLocation::XYLocation(XYLocation&& other): x_{0}, y_{0}
     other.x_ = 0;
     other.y_ = 0;
 }
+*/
 
 XYLocation::~XYLocation()
 {
@@ -134,6 +135,12 @@ XYLocation* XYLocation::location_at(const Direction& direction)
         std::cerr << "Exception: " << e.what() << "\n";
     }
     return xy;
+}
+
+void XYLocation::change_loc(int xx, int yy)
+{
+    x_ = xx;
+    y_ = yy;
 }
 
 

@@ -35,6 +35,7 @@ namespace xy {
         XYLocation*         get_object_location(Object* obj);
         void                move_object(Object* obj, const XYLocation::Direction& dir);
         bool                is_blocked(XYLocation& xy);
+        bool                is_blocked(XYLocation&& xy);
         size_t              set_size(XYLocation& xy);
         size_t              vector_size();
     };
