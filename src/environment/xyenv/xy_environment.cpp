@@ -4,7 +4,6 @@
 #include <cassert>
 #include <memory>
 #include <algorithm>
-#include <cmath>
 #include "environment/xyenv/xy_environment.h"
 
 XYEnvironment::XYEnvironment(unsigned w, unsigned h): width{w}, height{h}, matrix{w,h} {
@@ -26,7 +25,6 @@ size_t XYEnvironment::get_set_size(XYLocation& xy) {
 
 void XYEnvironment::add_to(Object* eo, XYLocation& loc) {
     matrix.add_object(eo, loc);
-    //std::cout << "Set size after returning from Matrix: " << get_set_size(loc) << std::endl;
     add_obj(eo);
 }
 
@@ -43,7 +41,7 @@ bool XYEnvironment::is_blocked(XYLocation &xy) {
 }
 
 bool XYEnvironment::is_blocked(XYLocation &&xy) {
-    return matrix.is_blocked(xy);
+    return is_blocked(xy);
 }
 
 std::set<Object*>& XYEnvironment::get_objects_near(Object* obj, unsigned rad) {
@@ -70,10 +68,6 @@ bool XYEnvironment::in_radius(unsigned rad, XYLocation& loca, XYLocation& locb) 
     return std::sqrt((xdiff * xdiff) + (ydiff * ydiff)) <= rad;
 }
 
-Vector& XYEnvironment::get_vector() {
-    return matrix.get_vector();
-}
-
 void XYEnvironment::make_perimeter() {
 
     for (unsigned i = 0; i < width; ++i) {
@@ -93,16 +87,11 @@ void XYEnvironment::make_perimeter() {
         add_to(wall1.get(), *xy1);
         add_to(wall2.get(), *xy2);
     }
-
-    /*std::unique_ptr<XYLocation> xy1 = std::make_unique<XYLocation>(0, 0);
-    std::unique_ptr<Object> wall1 = std::make_unique<Wall>();
-    add_to(wall1.get(), *xy1);*/
 }
 
-Vector::iterator XYEnvironment::has_xy(XYLocation& xy) {
-    return matrix.has_xy(xy);
+Vector& XYEnvironment::get_vector() {
+    return matrix.get_vector();
 }
-
 
 
 

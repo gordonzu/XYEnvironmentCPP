@@ -86,15 +86,6 @@ namespace xy {
         return false;
     }
 
-    bool Matrix::is_blocked(XYLocation&& xy) {
-        for (auto& eo : *(get_set(xy))) {
-            if (static_cast<Wall*>(eo)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     std::vector<std::pair<XYLocation, std::set<Object*>>>& Matrix::get_vector() {
         return vec;
     }

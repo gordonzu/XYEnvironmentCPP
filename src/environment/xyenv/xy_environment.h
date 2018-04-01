@@ -20,14 +20,11 @@ public:
     void                move_object(Object* eo, const XYLocation::Direction& dir);
     void                add_to(Object* eo, XYLocation& loc);
     void                make_perimeter();
-    void                delete_perimeter();
     XYLocation*         get_location(Object* eo);
     size_t              get_vector_size();
     size_t              get_set_size(XYLocation& xy);
     std::set<Object*>&  get_objects_near(Object* obj, unsigned);
     Vector&             get_vector();
-    Vector::iterator    has_xy(XYLocation& xy);
-
 
 private:
     unsigned                                    width;
