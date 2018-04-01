@@ -19,11 +19,11 @@ size_t XYEnvironment::get_vector_size() {
     return matrix.vector_size();
 }
 
-size_t XYEnvironment::get_set_size(XYLocation& xy) {
+size_t XYEnvironment::get_set_size(const XYLocation& xy) {
     return matrix.set_size(xy);
 }
 
-void XYEnvironment::add_to(Object* eo, XYLocation& loc) {
+void XYEnvironment::add_to(Object* eo, const XYLocation& loc) {
     matrix.add_object(eo, loc);
     add_obj(eo);
 }
@@ -36,11 +36,11 @@ void XYEnvironment::move_object(Object* eo, const XYLocation::Direction& dir) {
     matrix.move_object(eo, dir);
 }
 
-bool XYEnvironment::is_blocked(XYLocation &xy) {
+bool XYEnvironment::is_blocked(const XYLocation &xy) {
     return matrix.is_blocked(xy);
 }
 
-bool XYEnvironment::is_blocked(XYLocation &&xy) {
+bool XYEnvironment::is_blocked(const XYLocation &&xy) {
     return is_blocked(xy);
 }
 
@@ -61,7 +61,7 @@ std::set<Object*>& XYEnvironment::get_objects_near(Object* obj, unsigned rad) {
     return *near_set;
 }
 
-bool XYEnvironment::in_radius(unsigned rad, XYLocation& loca, XYLocation& locb) {
+bool XYEnvironment::in_radius(unsigned rad, const XYLocation& loca, const XYLocation& locb) {
     int xdiff = loca.getx() - locb.getx();
     int ydiff = loca.gety() - locb.gety();
 

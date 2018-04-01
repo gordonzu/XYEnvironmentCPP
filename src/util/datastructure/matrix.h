@@ -27,15 +27,15 @@ namespace xy {
     public:
         Matrix(unsigned w, unsigned h);
         virtual ~Matrix();
-        std::set<Object*>*  get_set(XYLocation& loc);
+        std::set<Object*>*  get_set(const XYLocation& loc);
         Vector&             get_vector();
-        Vector::iterator    has_xy(XYLocation& loc);
+        Vector::iterator    has_xy(const XYLocation& loc);
         void                check_for_object(Object* obj);
-        void                add_object(Object* obj, XYLocation& xy);
+        void                add_object(Object* obj, const XYLocation& xy);
         XYLocation*         get_object_location(Object* obj);
         void                move_object(Object* obj, const XYLocation::Direction& dir);
-        bool                is_blocked(XYLocation& xy);
-        size_t              set_size(XYLocation& xy);
+        bool                is_blocked(const XYLocation& xy);
+        size_t              set_size(const XYLocation& xy);
         size_t              vector_size();
     };
 }

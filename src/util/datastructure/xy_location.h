@@ -8,7 +8,6 @@ class XYLocation {
 public:
     XYLocation();
     XYLocation(int x, int y);
-    //XYLocation(XYLocation&& other);
     ~XYLocation();
     XYLocation(const XYLocation& other);
 
@@ -19,9 +18,8 @@ public:
     void print();
     enum class Direction: unsigned short{ NORTH, SOUTH, EAST, WEST };
 
-    int getx();
-    int gety();
-    void change_loc(int xx, int yy);
+    int getx() const;
+    int gety() const;
 
     XYLocation* west();
     XYLocation* east();

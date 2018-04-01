@@ -16,7 +16,7 @@ namespace xy {
 
     Matrix::~Matrix() = default;
 
-    void Matrix::add_object(Object* obj, XYLocation& xy) {
+    void Matrix::add_object(Object* obj, const XYLocation& xy) {
         check_for_object(obj);
         std::set<Object*>* theset = get_set(xy);
 
@@ -35,7 +35,7 @@ namespace xy {
         }
     }
 
-    std::set<Object*>* Matrix::get_set(XYLocation& xy) {
+    std::set<Object*>* Matrix::get_set(const XYLocation& xy) {
         if (has_xy(xy) != get_vector().end()) {
             return &(itv->second);
         }
@@ -47,7 +47,7 @@ namespace xy {
         }
     }
 
-    Vector::iterator Matrix::has_xy(XYLocation& loc) {
+    Vector::iterator Matrix::has_xy(const XYLocation& loc) {
         itv = std::find_if(
                 Matrix::get_vector().begin(),
                 Matrix::get_vector().end(),
@@ -77,7 +77,7 @@ namespace xy {
         }
     }
 
-    bool Matrix::is_blocked(XYLocation& xy) {
+    bool Matrix::is_blocked(const XYLocation& xy) {
         for (auto& eo : *(get_set(xy))) {
             if (static_cast<Wall*>(eo)) {
                 return true;
@@ -90,9 +90,8 @@ namespace xy {
         return vec;
     }
 
-    size_t Matrix::set_size(XYLocation& xy) {
+    size_t Matrix::set_size(const XYLocation& xy) {
         return has_xy(xy)->second.size();
-        //return get_set(xy)->size();
     }
 
     size_t Matrix::vector_size() {

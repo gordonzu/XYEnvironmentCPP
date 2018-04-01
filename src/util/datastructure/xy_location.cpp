@@ -10,16 +10,6 @@ XYLocation::XYLocation(int x, int y): x_{x}, y_{y}
 {
 }
 
-/*XYLocation::XYLocation(XYLocation&& other): x_{0}, y_{0}
-{
-    x_ = other.x_;
-    y_ = other.y_;
-
-    other.x_ = 0;
-    other.y_ = 0;
-}
-*/
-
 XYLocation::~XYLocation()
 {
 }
@@ -35,12 +25,12 @@ void XYLocation::print()
     std::cout << "XYLocation: width= " << x_ << " height= " << y_ << std::endl;
 }
 
-int XYLocation::getx()
+int XYLocation::getx() const
 {
     return x_;
 }
 
-int XYLocation::gety()
+int XYLocation::gety() const
 {
     return y_;
 }
@@ -137,10 +127,5 @@ XYLocation* XYLocation::location_at(const Direction& direction)
     return xy;
 }
 
-void XYLocation::change_loc(int xx, int yy)
-{
-    x_ = xx;
-    y_ = yy;
-}
 
 
