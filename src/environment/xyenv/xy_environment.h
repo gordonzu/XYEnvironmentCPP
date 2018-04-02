@@ -4,7 +4,7 @@
 #define XY_ENVIRONMENT_H
 
 #include <memory>
-#include "agent/environment.h"
+#include "environment/environment.h"
 #include "util/datastructure/xy_location.h"
 #include "util/datastructure/matrix.h"
 

@@ -4,7 +4,10 @@
 #include <set>
 #include <memory>
 #include <iostream>
-#include "object.h"
+#include "agent/object.h"
+#include "agent/agent.h"
+
+using namespace::ag;
 
 class Environment {
 public:

@@ -7,12 +7,6 @@ public:
     virtual char* talk()=0;
 };
 
-class Agent: public Object {
-public:
-    virtual ~Agent() {}
-    virtual char* talk();
-};
-
 class Wall: public Object {
 public:
     virtual ~Wall() {}

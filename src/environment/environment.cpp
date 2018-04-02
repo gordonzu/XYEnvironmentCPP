@@ -1,7 +1,7 @@
 // AbstractEnvironment.h
 
 #include <iostream>
-#include "environment.h"
+#include "environment/environment.h"
 
 std::set<Agent*>& Environment::get_agents()
 {
