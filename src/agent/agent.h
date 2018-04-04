@@ -8,7 +8,6 @@
 #include "object.h"
 #include "action.h"
 
-namespace ag {
 
     class NoOpAction: public Action {
         NoOpAction() = default;
@@ -66,19 +65,23 @@ namespace ag {
             return const_cast<char *>("Agent...");
         }
 
-        const Action& execute(Percept p) {
+        /*const Action& execute(Percept p) {
             if (program)
                 return program->execute(p);
             return NoOpAction::NO_OP;
-        }
+        }*/
 
+        const char* execute(Percept p) {
+            //if (program)
+                return "name";
+            //return NoOpAction::NO_OP;
+        }
 
 
     };
 
 /////////////////////////////////////////////////////////////////////////////////
 
-}
 
 
 #endif //AICPP_AGENT_H

@@ -7,7 +7,7 @@
 #include "agent/object.h"
 #include "agent/agent.h"
 
-using namespace::ag;
+//using namespace::ag;
 
 class Environment {
 public:

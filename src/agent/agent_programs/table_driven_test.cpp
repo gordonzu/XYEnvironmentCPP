@@ -5,7 +5,6 @@
 #include "agent/agent.h"
 
 using namespace::testing;
-using namespace::ag;
 
 class TableDrivenAgentTest: public Test {
 public:
@@ -22,16 +21,17 @@ TEST_F(TableDrivenAgentTest, testAgentTalks) {
     ASSERT_STREQ(agent.talk(), "Agent...");
 }
 
-/*
+
 TEST_F(TableDrivenAgentTest, testExistingSequences) {
-    DynamicPercept dp{"key1", "value1"};
-    ASSERT_EQ(agent.execute(dp), ACTION_1)
+    //DynamicPercept dp{"key1", "value1"};
+    Percept dp;
+    ASSERT_EQ(agent.execute(dp), "name");
 
 
 
 
 }
-*/
+
 
 
 
