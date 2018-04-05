@@ -20,7 +20,6 @@ public:
     Table () = default;
     Table(std::vector<std::string>& rh, std::vector<std::string>& ch);
     void set_values(const std::string& rowh, const std::string& colh, T val);
-    //bool get_values(const std::string& rowh, const std::string& colh);
     T* get_values(const std::string& rowh, const std::string& colh);
     T get_val();
     const char* talk();

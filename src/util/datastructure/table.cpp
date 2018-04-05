@@ -68,40 +68,6 @@ size_t Table<T>::map_size() {
 }
 
 
-/*template<class std::string, class std::string, class TVal>
-TVal* Table<std::string, std::string, TVal>::get(const std::string& rowh, const std::string& colh) {
-    std::unordered_map<std::string, TVal> m;
-    auto it = rows.find(rowh);
-
-    if (it != rows.end()) {
-        m = it->second;
-    } else {
-        std::cout << "row header not found!" << std::endl;
-        int* x;
-        x = nullptr;
-        return x;
-    }
-
-    auto i = m.find(colh);
-    if (i != m.end()) {
-        TVal value = i->second;
-        std::unique_ptr<TVal> vptr = std::make_unique<TVal>(value);
-        return vptr.get();
-    } else {
-        std::cout << "column header not found!" << std::endl;
-        int* x;
-        x = nullptr;
-        return x;
-    }
-    return nullptr;
-}*/
-
-
-
-
-
-
-
 
 
 
