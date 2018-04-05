@@ -19,7 +19,7 @@ set(sources
     src/agent/agent_programs/table_driven_test.cpp
     main.cpp
     src/agent/action.h
-    src/agent/agent.h)
+    src/agent/agent.h src/util/datastructure/table.cpp src/util/datastructure/table.h src/util/datastructure/table_test.cpp)
 
 add_executable(aicpp ${sources})
 target_link_libraries(aicpp gmock)
