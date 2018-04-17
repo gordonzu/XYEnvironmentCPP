@@ -1,87 +1,59 @@
 //
-// Created by gordonzu on 4/1/18.
+// Created by gordonzu on 4/15/18.
 //
 
 #ifndef AICPP_AGENT_H
 #define AICPP_AGENT_H
 
-#include "object.h"
-#include "action.h"
+#include "base_object.h"
+#include "base_action.h"
+#include "percept.h"
 
+class AgentProgram {
+public:
+    virtual ~AgentProgram()=default;
+    virtual const DynamicAction& execute(Percept* p)=0;
+};
 
-    class NoOpAction: public Action {
-        NoOpAction() = default;
+class TableDrivenProgram: public AgentProgram {
+public:
+    TableDrivenProgram()=default;
+    ~TableDrivenProgram() override =default;
 
-    public:
-        bool is_no_op() { return false; }
-        static NoOpAction& NO_OP;
-    };
+    virtual const DynamicAction& execute(Percept* p) {
+        return NoOpAction::NoOp();
+    }
+};
 
-///////////////////////////////////////////////////////////////////////
+class Agent : public Object {
+protected:
+    AgentProgram* ap;
 
-    class Percept {
+public:
+    Agent(): ap{nullptr} {}
+    Agent(AgentProgram* program): ap{program} {}
+    ~Agent() override =default;
 
-    };
+    const char* talk() { return "Agent..."; }
+    const char* execute() { return "name"; }
 
-////////////////////////////////////////////////////////////////////////
-
-    class AgentProgram {
-    public:
-        virtual ~AgentProgram() {}
-        virtual const Action& execute(Percept p)=0;
-    };
-
-/////////////////////////////////////////////////////////////////////////
-
-    class TableDrivenProgram: public AgentProgram {
-
-    public:
-        NoOpAction noOp;
-
-        virtual ~TableDrivenProgram() = default;
-
-        virtual const Action& execute(Percept p) {
-            return noOp;
+    bool set_program(AgentProgram* program) {
+        if (program) {
+            ap = program;
+            return true;
         }
+        return false;
+    }
 
-    };
-
-///////////////////////////////////////////////////////////////////////////
-
-    class Agent : public Object {
-        AgentProgram* program;
-
-    public:
-        Agent() {}
-        Agent(AgentProgram* p) {
-            program = p;
-        }
-
-        virtual ~Agent() {
-            //delete program;
-        }
-
-        char *talk() {
-            return const_cast<char *>("Agent...");
-        }
-
-        /*const Action& execute(Percept p) {
-            if (program)
-                return program->execute(p);
-            return NoOpAction::NO_OP;
-        }*/
-
-        const char* execute(Percept p) {
-            //if (program)
-                return "name";
-            //return NoOpAction::NO_OP;
-        }
-
-
-    };
-
-/////////////////////////////////////////////////////////////////////////////////
-
-
+    const DynamicAction& execute(Percept* per) {
+        if (ap != nullptr)
+            return ap->execute(per);
+        return NoOpAction::NoOp();
+    }
+};
 
 #endif //AICPP_AGENT_H
+
+
+
+

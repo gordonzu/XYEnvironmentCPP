@@ -10,7 +10,7 @@
 #include <vector>
 #include <set>
 #include <algorithm>
-#include "agent/object.h"
+#include "agent/base_object.h"
 #include "xy_location.h"
 
 using Vector = std::vector<std::pair<XYLocation, std::set<Object*>>>;

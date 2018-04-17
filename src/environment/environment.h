@@ -4,7 +4,6 @@
 #include <set>
 #include <memory>
 #include <iostream>
-#include "agent/object.h"
 #include "agent/agent.h"
 
 //using namespace::ag;

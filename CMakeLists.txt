@@ -10,16 +10,21 @@ link_directories   ("/home/gordonzu/.local/googletest-release-1.8.0/mybuild/goog
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -ggdb3 -Wall -Wno-unused-variable -O0 -fmax-errors=1")
 
 set(sources
-        src/environment/environment.cpp
-    src/agent/object.cpp
+    src/environment/environment.cpp
     src/environment/xyenv/xy_environment.cpp
     src/util/datastructure/xy_location.cpp
     src/util/datastructure/matrix.cpp
     src/environment/xyenv/xy_environment_test.cpp
     src/agent/agent_programs/table_driven_test.cpp
     main.cpp
-    src/agent/action.h
-    src/agent/agent.h src/util/datastructure/table.cpp src/util/datastructure/table.h src/util/datastructure/table_test.cpp)
+    src/util/datastructure/table.cpp
+    src/util/datastructure/table.h
+    src/util/datastructure/table_test.cpp
+    src/agent/base_object.h
+    src/agent/agent.h
+    src/agent/dynamic_attributes.h
+    src/agent/percept.h
+    src/agent/base_action.cpp)
 
 add_executable(aicpp ${sources})
 target_link_libraries(aicpp gmock)
@@ -32,7 +37,7 @@ add_custom_command(TARGET aicpp
 
 add_custom_command(TARGET aicpp
                  POST_BUILD
-                COMMAND valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all ./aicpp)
+                 COMMAND valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all ./aicpp)
 #                COMMAND valgrind --tool=memcheck --leak-check=yes ./aicpp)
-#                 COMMAND "aicpp")
+#                COMMAND "aicpp")
 
