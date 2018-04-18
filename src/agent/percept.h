@@ -7,7 +7,8 @@
 
 #include "dynamic_attributes.h"
 
-class Percept {
+class Percept
+{
 public:
     virtual ~Percept() {}
 
@@ -15,8 +16,8 @@ protected:
     Percept()=default;
 };
 
-class DynamicPercept: public Percept,
-                      public DynamicAttributes<const char*, const char*> {
+class DynamicPercept: public Percept, public DynamicAttributes
+{
 public:
     DynamicPercept()=default;
     ~DynamicPercept() override =default;

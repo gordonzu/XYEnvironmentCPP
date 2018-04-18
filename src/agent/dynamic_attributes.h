@@ -4,37 +4,25 @@
 
 #ifndef AICPP_DYNAMIC_ATTRIBUTES_H
 #define AICPP_DYNAMIC_ATTRIBUTES_H
-#include <unordered_map>
 #include <iostream>
+#include <map>
+#include <memory>
 
-template<class Tkey, class Tval>
-class DynamicAttributes {
-    std::unordered_map<Tkey, Tval> attributes;
+class DynamicAttributes
+{
+public:
+    virtual ~DynamicAttributes()=0;
+    void set_attribute(const char* key, const char* val);
+    const char* get_attribute(const char* key) const;
+    static std::multimap<const char*, const char*> create_attrib_map();
+    static std::multimap<const char*, const char*> get_map();
 
 protected:
     DynamicAttributes()=default;
 
-public:
-    void set_attribute(const Tkey& key, const Tval& val) {
-        attributes.emplace(key, val);
-        //std::cout << "Map size: " << attributes.size() << std::endl;
-        //auto it = attributes.find("name");
-        //std::cout << "Key: " << it->first << " Value: " << it->second << std::endl;
-    }
-
-    const Tval get_attribute(const Tkey& key) const {
-        auto it = attributes.find(key);
-        if (it != attributes.end()) {
-            return it->second;
-        }
-        return nullptr;
-    }
-
-    std::unordered_map<Tkey, Tval> get_map() const {
-        return attributes;
-    };
+private:
+    static std::multimap<const char*, const char*> attrib;
 };
-
 #endif //AICPP_DYNAMIC_ATTRIBUTES_H
 
 

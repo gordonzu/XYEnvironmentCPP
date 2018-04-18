@@ -13,8 +13,7 @@ public:
     virtual bool is_no_op()=0;
 };
 
-class DynamicAction: public virtual BaseAction,
-                     public virtual DynamicAttributes<const char*, const char*> {
+class DynamicAction: public virtual BaseAction, public virtual DynamicAttributes {
 public:
     static constexpr const char* ATTRIBUTE_NAME = "name";
 

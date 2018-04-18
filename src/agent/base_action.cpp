@@ -4,6 +4,9 @@
 
 #include "base_action.h"
 
+//TODO -- constructor parameter needs to be shared_ptr<const char*>
+//TODO -- static const char* ATTRIBUTE_NAME needs to be a shared_ptr<const char*>
+
 constexpr const char* DynamicAction::ATTRIBUTE_NAME;
 
 DynamicAction::DynamicAction(const char* name) {
