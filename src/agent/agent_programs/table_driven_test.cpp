@@ -76,26 +76,54 @@ TEST_F(TableDrivenAgentTest, testAgentTalks)
     ASSERT_STREQ(agent.talk(), "Agent...");
 }
 
-TEST_F(TableDrivenAgentTest, testNullAgentProgram)
+TEST_F(TableDrivenAgentTest, testNullPropram)
 {
-    auto action = NoOpAction::NoOp();
-    auto m = action.get_map();
-    std::cout << "Map size: " << m.size() << std::endl;
+    std::unique_ptr<Percept> per = std::make_unique<DynamicPercept>();
+    a.set_program(nullptr);
+    auto action = a.execute(per.get());
+    ASSERT_TRUE(action->is_no_op());
+}
 
-/*    const char* str = "name";
-
-    auto search = m.find(str);
-    if (search == m.end()) std::cout << "Past the end. " << std::endl;
-*/
-    ASSERT_TRUE(true);
+TEST_F(TableDrivenAgentTest, testLiveProgram)
+{
+    std::unique_ptr<Percept> per = std::make_unique<DynamicPercept>("key1", "value1");
+    std::unique_ptr<AgentProgram> p = std::make_unique<TableDrivenProgram>();
+    a.set_program(p.get());
+    auto action = a.execute(per.get());
+    ASSERT_FALSE(action->is_no_op());
 }
 
 TEST_F(TableDrivenAgentTest, testExistingSequences)
 {
-    ASSERT_STREQ(agent.execute(), "name");
+    //ASSERT_STREQ(agent.execute(), "name");
     ASSERT_EQ(NoOpAction::NoOp(), NoOpAction::NoOp());
 }
 
 //TODO: search for returning the address of a local variable as a pointer return value
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+    auto action = NoOpAction::NoOp();
+    auto m = action.get_map();
+    std::cout << "Map size: " << m.size() << std::endl;
+*/
+/*    const char* str = "name";
+
+    auto search = m.find(str);
+    if (search == m.end()) std::cout << "Past the end. " << std::endl;
+*/
+    //ASSERT_TRUE(true);
 

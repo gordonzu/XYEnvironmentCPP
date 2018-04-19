@@ -1,6 +1,5 @@
 //
 // Created by gordonzu on 4/15/18.
-//
 
 #ifndef AICPP_AGENT_H
 #define AICPP_AGENT_H
@@ -12,7 +11,7 @@
 class AgentProgram {
 public:
     virtual ~AgentProgram()=default;
-    virtual const DynamicAction& execute(Percept* p)=0;
+    virtual std::unique_ptr<BaseAction> execute(Percept* p)=0;
 };
 
 class TableDrivenProgram: public AgentProgram {
@@ -20,8 +19,8 @@ public:
     TableDrivenProgram()=default;
     ~TableDrivenProgram() override =default;
 
-    virtual const DynamicAction& execute(Percept* p) {
-        return NoOpAction::NoOp();
+    virtual std::unique_ptr<BaseAction> execute(Percept* p) {
+        return DynamicAction::DynamicPtr();
     }
 };
 
@@ -35,7 +34,6 @@ public:
     ~Agent() override =default;
 
     const char* talk() { return "Agent..."; }
-    const char* execute() { return "name"; }
 
     bool set_program(AgentProgram* program) {
         if (program) {
@@ -45,10 +43,10 @@ public:
         return false;
     }
 
-    const DynamicAction& execute(Percept* per) {
+    std::unique_ptr<BaseAction> execute(Percept* per) {
         if (ap != nullptr)
             return ap->execute(per);
-        return NoOpAction::NoOp();
+        return NoOpAction::NoOpPtr();
     }
 };
 

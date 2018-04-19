@@ -9,31 +9,54 @@
 
 constexpr const char* DynamicAction::ATTRIBUTE_NAME;
 
-DynamicAction::DynamicAction(const char* name) {
+DynamicAction::DynamicAction()
+{
+}
+
+DynamicAction::DynamicAction(const char* name)
+{
         set_attribute(ATTRIBUTE_NAME, name);
 }
 
-bool DynamicAction::is_no_op() {
+bool DynamicAction::is_no_op() const
+{
     return false;
 }
 
-bool DynamicAction::operator==(DynamicAction& lhs) {
+bool DynamicAction::operator==(DynamicAction& lhs)
+{
     return ((this->get_attribute(ATTRIBUTE_NAME)) == (lhs.get_attribute(ATTRIBUTE_NAME)));
 }
 
-NoOpAction::NoOpAction(): DynamicAction{"NoOp"} {
+std::unique_ptr<DynamicAction> DynamicAction::DynamicPtr()
+{
+    auto d = std::make_unique<DynamicAction>();
+    return d;
 }
 
-bool NoOpAction::is_no_op() {
-    return false;
+NoOpAction::NoOpAction(): DynamicAction{"NoOp"}
+{
 }
 
-const NoOpAction& NoOpAction::NoOp() {
+bool NoOpAction::is_no_op() const
+{
+    return true;
+}
+
+const NoOpAction& NoOpAction::NoOp()
+{
     static const NoOpAction _instance;
     return _instance;
 }
 
-bool NoOpAction::operator==(const NoOpAction& lhs) const {
+std::unique_ptr<NoOpAction> NoOpAction::NoOpPtr()
+{
+    auto n = std::make_unique<NoOpAction>();
+    return n;
+}
+
+bool NoOpAction::operator==(const NoOpAction& lhs) const
+{
     return ((this->get_attribute(ATTRIBUTE_NAME)) == (lhs.get_attribute(ATTRIBUTE_NAME)));
 }
 
