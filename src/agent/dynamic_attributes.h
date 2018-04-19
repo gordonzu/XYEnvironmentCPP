@@ -14,14 +14,21 @@ public:
     virtual ~DynamicAttributes()=0;
     void set_attribute(const char* key, const char* val);
     const char* get_attribute(const char* key) const;
-    static std::multimap<const char*, const char*> create_attrib_map();
-    static std::multimap<const char*, const char*> get_map();
+    std::string& get_type();
+    std::string& describe_attributes(std::string& type);
+    std::string& get_string();
+    unsigned long get_map_size();
+
+    std::multimap<const char*, const char*> create_attrib_map();
+    std::multimap<const char*, const char*> get_map() const;
+    void erase_map();
 
 protected:
     DynamicAttributes()=default;
 
 private:
-    static std::multimap<const char*, const char*> attrib;
+    std::string type;
+    std::multimap<const char*, const char*> attrib;
 };
 #endif //AICPP_DYNAMIC_ATTRIBUTES_H
 

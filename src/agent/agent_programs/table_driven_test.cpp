@@ -51,6 +51,11 @@ public:
                     ACTION_3.get());
     }
 
+    ~TableDrivenAgentTest()
+    {
+        //DynamicAttributes::erase_map();
+    }
+
     Agent agent;
     Agent a;
     std::unique_ptr<AgentProgram> program;

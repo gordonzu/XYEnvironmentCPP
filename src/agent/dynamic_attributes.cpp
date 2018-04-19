@@ -1,8 +1,7 @@
 // Created by gordonzu on 4/17/18.
 
+#include <assert.h>
 #include "dynamic_attributes.h"
-
-std::multimap<const char*, const char*> DynamicAttributes::attrib = DynamicAttributes::create_attrib_map();
 
 DynamicAttributes::~DynamicAttributes()
 {
@@ -22,17 +21,65 @@ const char* DynamicAttributes::get_attribute(const char* key) const
     return nullptr;
 }
 
-std::multimap<const char*, const char*> DynamicAttributes::get_map()
+std::multimap<const char*, const char*> DynamicAttributes::get_map() const
 {
-    return DynamicAttributes::attrib;
+    return attrib;
 }
-
 
 std::multimap<const char*, const char*> DynamicAttributes::create_attrib_map()
 {
     std::multimap<const char*, const char*> map;
     return map;
 }
+
+std::string& DynamicAttributes::get_type()
+{
+    type = typeid(*this).name();
+
+    if (type.size() <= size_t(10))
+        return type = type.substr(1, type.size());
+
+    return type = type.substr(2, type.size());
+}
+
+std::string& DynamicAttributes::describe_attributes(std::string& type)
+{
+    type.append("[");
+    bool first = true;
+    for (auto x : attrib) {
+        if (first) {
+            first = false;
+        } else {
+            type.append(", ");
+        }
+
+        type.append(x.first);
+        type.append("=");
+        type.append(x.second);
+    }
+    type.append("]");
+    return type;
+}
+
+std::string& DynamicAttributes::get_string()
+{
+    type.clear();
+    type = get_type();
+    return describe_attributes(type);
+}
+
+unsigned long DynamicAttributes::get_map_size()
+{
+    return attrib.size();
+}
+void DynamicAttributes::erase_map()
+{
+    auto it = attrib.begin();
+    while (it != attrib.end()) {
+        it  = attrib.erase(it);
+    }
+}
+
 
 
 /*
@@ -44,5 +91,6 @@ DynamicAttributes::AttribMap DynamicAttributes::attrib = []
 }();
 */
 
+//std::multimap<const char*, const char*> DynamicAttributes::attrib = DynamicAttributes::create_attrib_map();
 
 

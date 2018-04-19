@@ -22,8 +22,20 @@ public:
     DynamicPercept()=default;
     ~DynamicPercept() override =default;
 
-    DynamicPercept(const char* key, const char* val) {
+    DynamicPercept(const char* key, const char* val)
+    {
         set_attribute(key, val);
+    }
+
+    DynamicPercept(const char* key1, const char* val1, const char* key2, const char* val2)
+    {
+        set_attribute(key1, val1);
+        set_attribute(key2, val2);
+    }
+
+    bool operator==(const DynamicPercept& other) const
+    {
+        return (typeid(*this) == typeid(other)) && (get_map() == other.get_map());
     }
 };
 
