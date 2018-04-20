@@ -8,7 +8,7 @@
 
 using namespace::testing;
 
-class PerceptTest: public Test
+class DynamicPerceptTest: public Test
 {
 public:
     void SetUp() override
@@ -18,7 +18,7 @@ public:
     std::unique_ptr<DynamicPercept> percept;
 };
 
-TEST_F(PerceptTest, testString)
+TEST_F(DynamicPerceptTest, testString)
 {
     auto p  = std::make_unique<DynamicPercept>("key1", "value1");
     auto str = "DynamicPercept[key1=value1]";
@@ -29,7 +29,7 @@ TEST_F(PerceptTest, testString)
     ASSERT_STREQ(x->get_string().c_str(), str2);
 }
 
-TEST_F(PerceptTest, testEquals)
+TEST_F(DynamicPerceptTest, testEquals)
 {
     auto p1  = std::make_unique<DynamicPercept>();
     auto p2  = std::make_unique<DynamicPercept>();

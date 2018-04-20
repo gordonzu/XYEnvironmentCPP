@@ -21,7 +21,6 @@ public:
 
     std::multimap<const char*, const char*> create_attrib_map();
     std::multimap<const char*, const char*> get_map() const;
-    void erase_map();
 
 protected:
     DynamicAttributes()=default;

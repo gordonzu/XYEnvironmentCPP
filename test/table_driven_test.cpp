@@ -53,7 +53,6 @@ public:
 
     ~TableDrivenAgentTest()
     {
-        //DynamicAttributes::erase_map();
     }
 
     Agent agent;

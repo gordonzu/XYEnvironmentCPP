@@ -3,8 +3,8 @@
 //
 
 #include "gmock/gmock.h"
-#include "table.h"
-#include "table.cpp"
+#include "util/datastructure/table.h"
+#include "util/datastructure/table.cpp"
 
 using namespace::testing;
 

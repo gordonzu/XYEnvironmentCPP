@@ -14,18 +14,18 @@ set(sources
     src/environment/xyenv/xy_environment.cpp
     src/util/datastructure/xy_location.cpp
     src/util/datastructure/matrix.cpp
-    src/environment/xyenv/xy_environment_test.cpp
-    src/agent/agent_programs/table_driven_test.cpp
+    test/xy_environment_test.cpp
+        test/table_driven_test.cpp
     main.cpp
     src/util/datastructure/table.cpp
     src/util/datastructure/table.h
-    src/util/datastructure/table_test.cpp
+        test/table_test.cpp
     src/agent/base_object.h
     src/agent/agent.h
     src/agent/dynamic_attributes.h
     src/agent/percept.h
     src/agent/base_action.cpp
-    src/agent/dynamic_attributes.cpp src/agent/dynamic_percept_test.cpp)
+    src/agent/dynamic_attributes.cpp test/dynamic_percept_test.cpp test/percept_test.cpp)
 
 add_executable(aicpp ${sources})
 target_link_libraries(aicpp gmock)

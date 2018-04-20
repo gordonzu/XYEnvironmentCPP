@@ -72,6 +72,9 @@ unsigned long DynamicAttributes::get_map_size()
 {
     return attrib.size();
 }
+
+
+/*
 void DynamicAttributes::erase_map()
 {
     auto it = attrib.begin();
@@ -79,7 +82,7 @@ void DynamicAttributes::erase_map()
         it  = attrib.erase(it);
     }
 }
-
+*/
 
 
 /*
