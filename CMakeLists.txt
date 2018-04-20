@@ -25,7 +25,7 @@ set(sources
     src/agent/dynamic_attributes.h
     src/agent/percept.h
     src/agent/base_action.cpp
-    src/agent/dynamic_attributes.cpp test/dynamic_percept_test.cpp test/percept_test.cpp)
+    src/agent/dynamic_attributes.cpp test/dynamic_percept_test.cpp test/percept_sequence_test.cpp)
 
 add_executable(aicpp ${sources})
 target_link_libraries(aicpp gmock)
