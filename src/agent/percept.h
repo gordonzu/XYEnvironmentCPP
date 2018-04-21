@@ -11,6 +11,10 @@ class Percept: public DynamicAttributes
 {
 public:
     virtual ~Percept() {}
+    virtual bool operator==(const Percept& other) const
+    {
+        return (typeid(*this) == typeid(other));
+    }
 
 protected:
     Percept()=default;

@@ -4,6 +4,7 @@
 #include <agent/percept.h>
 #include <memory>
 #include "gmock/gmock.h"
+#include "util/algorithm/compares.h"
 
 using namespace::testing;
 
@@ -32,6 +33,12 @@ public:
         return str;
     }
 
+    static bool compare_vecs(std::vector<std::unique_ptr<Percept>> a,
+                             std::vector<std::unique_ptr<Percept>> b)
+    {
+        return util::vec_compare(std::move(a), std::move(b));
+    }
+
     static std::vector<Percept*> v;
     bool delete_vec;
 };
@@ -55,26 +62,27 @@ TEST_F(PerceptSequenceTest, testString)
     ASSERT_STREQ(PerceptSequenceTest::print_vec(str4).c_str(), str3);
     delete_vec = true;
 }
-/*
+
 TEST_F(PerceptSequenceTest, testEquals)
 {
-    //std::vector<std::unique_ptr<Percept>> v1;
-    //std::vector<std::unique_ptr<Percept>> v2;
-    std::vector<Percept*> v1;
-    std::vector<Percept*> v2;
-    ASSERT_TRUE(v2 == v1);
+    bool b;
+    std::vector<std::unique_ptr<Percept>> v1;
+    std::vector<std::unique_ptr<Percept>> v2;
 
-    //v1.emplace_back(std::make_unique<DynamicPercept>("key1", "value1"));
-    v1.emplace_back(new DynamicPercept("key1", "value1"));
-    ASSERT_FALSE(v2 == v1);
+    b = PerceptSequenceTest::compare_vecs(std::move(v1), std::move(v2));
+    ASSERT_TRUE(b);
 
-    //v2.emplace_back(std::make_unique<DynamicPercept>("key1", "value1"));
-    v2.emplace_back(new DynamicPercept("key1", "value1"));
+    v1.emplace_back(std::make_unique<DynamicPercept>("key1", "value1"));
+    b = PerceptSequenceTest::compare_vecs(std::move(v1), std::move(v2));
+    ASSERT_FALSE(b);
+
+    v2.emplace_back(std::make_unique<DynamicPercept>("key1", "value1"));
+    b = PerceptSequenceTest::compare_vecs(std::move(v1), std::move(v2));
     ASSERT_TRUE(v2 == v1);
 
     delete_vec = false;
 }
-*/
+
 
 
 

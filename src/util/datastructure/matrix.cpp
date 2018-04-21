@@ -2,9 +2,10 @@
 
 #include "matrix.h"
 
-namespace xy {
-
-    Matrix::Matrix(unsigned w, unsigned h) {
+namespace xy
+{
+    Matrix::Matrix(unsigned w, unsigned h)
+    {
         for (unsigned x = 1; x <= w; ++x) {
             for (unsigned y = 1; y <= h; ++y) {
                 std::unique_ptr<std::set<Object*>> myset = std::make_unique<std::set<Object*>>();
@@ -16,7 +17,8 @@ namespace xy {
 
     Matrix::~Matrix() = default;
 
-    void Matrix::add_object(Object* obj, const XYLocation& xy) {
+    void Matrix::add_object(Object* obj, const XYLocation& xy)
+    {
         check_for_object(obj);
         std::set<Object*>* theset = get_set(xy);
 
@@ -26,7 +28,8 @@ namespace xy {
         theset->insert(obj);
     }
 
-    void Matrix::check_for_object(Object *obj) {
+    void Matrix::check_for_object(Object *obj)
+    {
         for (itv = vec.begin(); itv != vec.end(); ++itv) {
             if ((its = itv->second.find(obj)) != itv->second.end()) {
                 itv->second.erase(its);
@@ -35,7 +38,8 @@ namespace xy {
         }
     }
 
-    std::set<Object*>* Matrix::get_set(const XYLocation& xy) {
+    std::set<Object*>* Matrix::get_set(const XYLocation& xy)
+    {
         if (has_xy(xy) != get_vector().end()) {
             return &(itv->second);
         }
@@ -47,7 +51,8 @@ namespace xy {
         }
     }
 
-    Vector::iterator Matrix::has_xy(const XYLocation& loc) {
+    Vector::iterator Matrix::has_xy(const XYLocation& loc)
+    {
         itv = std::find_if(
                 Matrix::get_vector().begin(),
                 Matrix::get_vector().end(),
@@ -57,7 +62,8 @@ namespace xy {
         return itv;
     }
 
-    XYLocation* Matrix::get_object_location(Object *obj) {
+    XYLocation* Matrix::get_object_location(Object *obj)
+    {
         for (itv = vec.begin(); itv != vec.end(); ++itv) {
             if ((its = itv->second.find(obj)) != itv->second.end()) {
                 return &(itv->first);
@@ -66,7 +72,8 @@ namespace xy {
         return nullptr;
     }
 
-    void Matrix::move_object(Object* obj, const XYLocation::Direction& dir) {
+    void Matrix::move_object(Object* obj, const XYLocation::Direction& dir)
+    {
         XYLocation* temp = get_object_location(obj);
 
         if (temp != nullptr) {
@@ -77,7 +84,8 @@ namespace xy {
         }
     }
 
-    bool Matrix::is_blocked(const XYLocation& xy) {
+    bool Matrix::is_blocked(const XYLocation& xy)
+    {
         for (auto& eo : *(get_set(xy))) {
             if (static_cast<Wall*>(eo)) {
                 return true;
@@ -86,15 +94,18 @@ namespace xy {
         return false;
     }
 
-    std::vector<std::pair<XYLocation, std::set<Object*>>>& Matrix::get_vector() {
+    std::vector<std::pair<XYLocation, std::set<Object*>>>& Matrix::get_vector()
+    {
         return vec;
     }
 
-    size_t Matrix::set_size(const XYLocation& xy) {
+    size_t Matrix::set_size(const XYLocation& xy)
+    {
         return has_xy(xy)->second.size();
     }
 
-    size_t Matrix::vector_size() {
+    size_t Matrix::vector_size()
+    {
         return Matrix::get_vector().size();
     }
 
