@@ -37,7 +37,7 @@ public:
         set_attribute(key2, val2);
     }
 
-    bool operator==(const DynamicPercept& other) const
+    bool operator==(const Percept& other) const override
     {
         return (typeid(*this) == typeid(other)) && (get_map() == other.get_map());
     }

@@ -12,8 +12,8 @@
 
 namespace util
 {
-    bool vec_compare(std::vector<std::unique_ptr<Percept>>, std::vector<std::unique_ptr<Percept>>);
-
+    bool vec_compare(std::vector<std::unique_ptr<DynamicPercept>>, std::vector<std::unique_ptr<DynamicPercept>>);
+    std::string& print_vec(std::vector<std::unique_ptr<DynamicPercept>>, std::string&);
 }
 
 
