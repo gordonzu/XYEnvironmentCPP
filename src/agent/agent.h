@@ -7,22 +7,7 @@
 #include "base_object.h"
 #include "base_action.h"
 #include "percept.h"
-
-class AgentProgram {
-public:
-    virtual ~AgentProgram()=default;
-    virtual std::unique_ptr<BaseAction> execute(Percept* p)=0;
-};
-
-class TableDrivenProgram: public AgentProgram {
-public:
-    TableDrivenProgram()=default;
-    ~TableDrivenProgram() override =default;
-
-    virtual std::unique_ptr<BaseAction> execute(Percept* p) {
-        return DynamicAction::DynamicPtr();
-    }
-};
+#include "agent_programs/agent_program.h"
 
 class Agent : public Object {
 protected:

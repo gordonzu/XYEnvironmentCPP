@@ -6,10 +6,11 @@
 #include <memory>
 #include "gmock/gmock.h"
 #include "agent/agent.h"
+#include "agent/agent_programs/agent_program.h"
 
 using namespace::testing;
 
-class TableDrivenAgentTest: public Test
+class TableDrivenAgentProgramTest: public Test
 {
 
     void create_map(std::initializer_list<Percept*> p,
@@ -33,7 +34,7 @@ public:
         percept4 = std::make_unique<DynamicPercept>("key1", "value1");
         percept5 = std::make_unique<DynamicPercept>("key1", "value2");
         percept6 = std::make_unique<DynamicPercept>("key1", "value3");
-        program = std::make_unique<TableDrivenProgram>();
+        program = std::make_unique<TableDrivenAgentProgram>();
 
         create_map({percept1.get()},
                     vec1,
@@ -51,7 +52,7 @@ public:
                     ACTION_3.get());
     }
 
-    ~TableDrivenAgentTest()
+    ~TableDrivenAgentProgramTest()
     {
     }
 
@@ -75,12 +76,12 @@ public:
     std::map<std::vector<Percept*>, BaseAction*> sequences;
 };
 
-TEST_F(TableDrivenAgentTest, testAgentTalks)
+TEST_F(TableDrivenAgentProgramTest, testAgentTalks)
 {
     ASSERT_STREQ(agent.talk(), "Agent...");
 }
 
-TEST_F(TableDrivenAgentTest, testNullPropram)
+TEST_F(TableDrivenAgentProgramTest, testNullPropram)
 {
     std::unique_ptr<Percept> per = std::make_unique<DynamicPercept>();
     a.set_program(nullptr);
@@ -88,16 +89,16 @@ TEST_F(TableDrivenAgentTest, testNullPropram)
     ASSERT_TRUE(action->is_no_op());
 }
 
-TEST_F(TableDrivenAgentTest, testLiveProgram)
+TEST_F(TableDrivenAgentProgramTest, testLiveProgram)
 {
     std::unique_ptr<Percept> per = std::make_unique<DynamicPercept>("key1", "value1");
-    std::unique_ptr<AgentProgram> p = std::make_unique<TableDrivenProgram>();
+    std::unique_ptr<AgentProgram> p = std::make_unique<TableDrivenAgentProgram>();
     a.set_program(p.get());
     auto action = a.execute(per.get());
     ASSERT_FALSE(action->is_no_op());
 }
 
-TEST_F(TableDrivenAgentTest, testExistingSequences)
+TEST_F(TableDrivenAgentProgramTest, testExistingSequences)
 {
     //ASSERT_STREQ(agent.execute(), "name");
     ASSERT_EQ(NoOpAction::NoOp(), NoOpAction::NoOp());
