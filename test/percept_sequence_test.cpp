@@ -13,7 +13,7 @@ class PerceptSequenceTest: public Test
 
 TEST_F(PerceptSequenceTest, testString)
 {
-    std::vector<std::unique_ptr<DynamicPercept>> vec;
+    std::vector<std::unique_ptr<Percept>> vec;
     std::string str4;
 
     vec.emplace_back(std::make_unique<DynamicPercept>("key1", "value1"));
@@ -29,8 +29,8 @@ TEST_F(PerceptSequenceTest, testString)
 TEST_F(PerceptSequenceTest, testEquals)
 {
     bool b;
-    std::vector<std::unique_ptr<DynamicPercept>> v1;
-    std::vector<std::unique_ptr<DynamicPercept>> v2;
+    std::vector<std::unique_ptr<Percept>> v1;
+    std::vector<std::unique_ptr<Percept>> v2;
 
     b = util::vec_compare(std::move(v1), std::move(v2));
     ASSERT_TRUE(b);
@@ -50,6 +50,25 @@ TEST_F(PerceptSequenceTest, testEquals)
     b = util::vec_compare(std::move(v1), std::move(v2));
     ASSERT_FALSE(b);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

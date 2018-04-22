@@ -46,7 +46,6 @@ namespace xy
         else {
             set = std::make_unique<std::set<Object*>>();
             vec.emplace_back(xy, *set);
-            //return set.get();
             return &((has_xy(xy))->second);
         }
     }
