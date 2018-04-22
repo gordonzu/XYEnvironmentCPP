@@ -5,11 +5,10 @@
 
 namespace util
 {
-    bool vec_compare(std::vector<std::unique_ptr<Percept>> a,
-                     std::vector<std::unique_ptr<Percept>> b)
+    bool vec_compare(const std::vector<std::unique_ptr<Percept>>& a,
+                     const std::vector<std::unique_ptr<Percept>>& b)
     {
-        if (a.size() != b.size())
-            return false;
+        if (a.size() != b.size()) return false;
 
         for (unsigned i = 0; i < a.size(); ++i)
             if (!(*(a[i]) == *(b[i]))) return false;
@@ -17,7 +16,7 @@ namespace util
         return true;
     }
 
-    std::string& print_vec(std::vector<std::unique_ptr<Percept>> v, std::string& str)
+    std::string& print_vec(const std::vector<std::unique_ptr<Percept>>& v, std::string& str)
     {
         for (unsigned i = 0; i <= v.size(); ++i) {
             str.append(v[i]->get_string());

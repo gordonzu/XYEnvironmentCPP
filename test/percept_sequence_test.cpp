@@ -39,14 +39,12 @@ TEST_F(PerceptSequenceTest, testEquals)
     b = util::vec_compare(std::move(v1), std::move(v2));
     ASSERT_FALSE(b);
 
-    v1.emplace_back(std::make_unique<DynamicPercept>("key1", "value1"));
     v2.emplace_back(std::make_unique<DynamicPercept>("key1", "value1"));
     b = util::vec_compare(std::move(v1), std::move(v2));
     ASSERT_TRUE(b);
 
-    v1.emplace_back(std::make_unique<DynamicPercept>("key1", "value1"));
+    v2.clear();
     v2.emplace_back(std::make_unique<DynamicPercept>("key2", "value1"));
-
     b = util::vec_compare(std::move(v1), std::move(v2));
     ASSERT_FALSE(b);
 }
