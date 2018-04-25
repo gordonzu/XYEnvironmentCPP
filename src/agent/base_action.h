@@ -19,13 +19,11 @@ public:
 
     DynamicAction();
     explicit DynamicAction(const char* name);
-    ~DynamicAction() override =default;
-    bool operator==(DynamicAction&);
+    virtual ~DynamicAction() override =default;
+    bool operator==(const DynamicAction&) const;
     bool is_no_op() const override;
-    static std::unique_ptr<DynamicAction> DynamicPtr();
+    static DynamicAction* DynamicPtr();
 };
-
-
 
 class NoOpAction: public DynamicAction {
 public:
@@ -34,7 +32,7 @@ public:
     bool operator==(const NoOpAction&) const;
     bool is_no_op() const override;
     static const NoOpAction& NoOp();
-    static std::unique_ptr<NoOpAction> NoOpPtr();
+    static NoOpAction* NoOpPtr();
 };
 
 #endif //AICPP_BASE_ACTION_H

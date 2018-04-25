@@ -41,6 +41,25 @@ public:
     {
         return (typeid(*this) == typeid(other)) && (get_map() == other.get_map());
     }
+
+    bool operator<(const Percept& other) const
+    {
+        return get_map() > other.get_map() ? true : false;
+    }
 };
 
 #endif //AICPP_PERCEPT_H
+
+
+
+
+
+
+
+
+
+
+
+
+
+

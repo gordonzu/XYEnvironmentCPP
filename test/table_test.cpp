@@ -17,45 +17,32 @@ public:
         col_headers.emplace_back("col1");
         col_headers.emplace_back("iq");
         col_headers.emplace_back("age");
-        t = Table<int>{row_headers, col_headers};
+        t = Table<std::string, std::string, int>{row_headers, col_headers};
    	}
 
-    Table<int> t;
+    Table<std::string, std::string, int> t;
     std::vector<std::string> row_headers;
     std::vector<std::string> col_headers;
 };
 
-TEST_F(TableTest, testTableSize) {
+TEST_F(TableTest, testTableSize)
+{
 	ASSERT_EQ(t.map_size(), unsigned(3));
 }
 
-TEST_F(TableTest, testTableInitialize) {
-    ASSERT_EQ(t.get_values("gordonzu", "iq"), nullptr);
+TEST_F(TableTest, testTableInitialize)
+{
+    int n = 0;
+    int y = 50;
 
-    t.set_values("gordonzu", "iq", 50);
-    auto x = t.get_values("gordonzu", "iq");
-    if (x) {
-        ASSERT_EQ(*x, 50);
-    } else {
-        ASSERT_TRUE(false);
-    }
-}
+    auto b = t.get_values("gordonzu", "iq", n);
+    ASSERT_FALSE(b);
+    ASSERT_EQ(n, 0);
 
-TEST_F(TableTest, testNullAccess) {
-    ASSERT_EQ(t.get_values("row1", "col2"), nullptr);
-
-    t.set_values("row1", "col2", 1);
-    int* x = t.get_values("row1", "col2");
-
-    if (x) {
-        ASSERT_EQ(*(t.get_values("row1", "col2")), 1);
-    } else {
-        ASSERT_TRUE(false);
-    }
-}
-
-TEST_F(TableTest, testTalk) {
-    ASSERT_STREQ(t.talk(), "Hello Table.");
+    t.set_values("gordonzu", "iq", y);
+    auto x = t.get_values("gordonzu", "iq",n);
+    ASSERT_TRUE(x);
+    ASSERT_EQ(n, y);
 }
 
 

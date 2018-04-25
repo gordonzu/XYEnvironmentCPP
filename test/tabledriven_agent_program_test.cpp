@@ -1,20 +1,18 @@
-//
 // Created by gordonzu on 4/1/18.
 
-#include <agent/percept.h>
-#include <agent/base_action.h>
 #include <memory>
 #include "gmock/gmock.h"
 #include "agent/agent.h"
+#include "agent/percept.h"
+#include "agent/base_action.h"
 #include "agent/agent_programs/agent_program.h"
 
 using namespace::testing;
 
 class TableDrivenAgentProgramTest: public Test
 {
-
-    void create_map(std::initializer_list<Percept*> p,
-                    std::vector<Percept*> v,
+    void load_map(std::initializer_list<DynamicPercept> p,
+                    std::vector<DynamicPercept> v,
                     DynamicAction* action)
     {
         v.insert(v.end(), p.begin(), p.end());
@@ -27,53 +25,29 @@ public:
         ACTION_1 = std::make_unique<DynamicAction>("action1");
         ACTION_2 = std::make_unique<DynamicAction>("action2");
         ACTION_3 = std::make_unique<DynamicAction>("action3");
+        percept1 = DynamicPercept{"key1", "value1"};
+        percept2 = DynamicPercept{"key1", "value2"};
+        percept3 = DynamicPercept{"key1", "value3"};
 
-        percept1 = std::make_unique<DynamicPercept>("key1", "value1");
-        percept2 = std::make_unique<DynamicPercept>("key1", "value1");
-        percept3 = std::make_unique<DynamicPercept>("key1", "value2");
-        percept4 = std::make_unique<DynamicPercept>("key1", "value1");
-        percept5 = std::make_unique<DynamicPercept>("key1", "value2");
-        percept6 = std::make_unique<DynamicPercept>("key1", "value3");
-        program = std::make_unique<TableDrivenAgentProgram>();
-
-        create_map({percept1.get()},
-                    vec1,
-                    ACTION_1.get());
-
-        create_map({percept2.get(),
-                    percept3.get()},
-                    vec2,
-                    ACTION_2.get());
-
-        create_map({percept4.get(),
-                    percept5.get(),
-                    percept6.get()},
-                    vec3,
-                    ACTION_3.get());
+        load_map({percept1}, vec1, ACTION_1.get());
+        load_map({percept1, percept2}, vec2, ACTION_2.get());
+        load_map({percept1, percept2, percept3}, vec3, ACTION_3.get());
+        program = std::make_unique<TableDrivenAgentProgram>(sequences);
+        agent = Agent{program.get()};
     }
 
-    ~TableDrivenAgentProgramTest()
-    {
-    }
-
-    Agent agent;
-    Agent a;
-    std::unique_ptr<AgentProgram> program;
-
-    std::unique_ptr<Percept> percept1;
-    std::unique_ptr<Percept> percept2;
-    std::unique_ptr<Percept> percept3;
-    std::unique_ptr<Percept> percept4;
-    std::unique_ptr<Percept> percept5;
-    std::unique_ptr<Percept> percept6;
+    std::multimap<std::vector<DynamicPercept>, DynamicAction*> sequences;
+    std::vector<DynamicPercept> vec1;
+    std::vector<DynamicPercept> vec2;
+    std::vector<DynamicPercept> vec3;
     std::unique_ptr<DynamicAction> ACTION_1;
     std::unique_ptr<DynamicAction> ACTION_2;
     std::unique_ptr<DynamicAction> ACTION_3;
-
-    std::vector<Percept*> vec1;
-    std::vector<Percept*> vec2;
-    std::vector<Percept*> vec3;
-    std::map<std::vector<Percept*>, BaseAction*> sequences;
+    std::unique_ptr<AgentProgram> program;
+    DynamicPercept percept1;
+    DynamicPercept percept2;
+    DynamicPercept percept3;
+    Agent agent;
 };
 
 TEST_F(TableDrivenAgentProgramTest, testAgentTalks)
@@ -83,52 +57,33 @@ TEST_F(TableDrivenAgentProgramTest, testAgentTalks)
 
 TEST_F(TableDrivenAgentProgramTest, testNullPropram)
 {
-    std::unique_ptr<Percept> per = std::make_unique<DynamicPercept>();
+    Agent a;
     a.set_program(nullptr);
-    auto action = a.execute(per.get());
+    auto action = a.execute(DynamicPercept{});
     ASSERT_TRUE(action->is_no_op());
 }
 
 TEST_F(TableDrivenAgentProgramTest, testLiveProgram)
 {
-    std::unique_ptr<Percept> per = std::make_unique<DynamicPercept>("key1", "value1");
-    std::unique_ptr<AgentProgram> p = std::make_unique<TableDrivenAgentProgram>();
-    a.set_program(p.get());
-    auto action = a.execute(per.get());
+    agent.set_program(program.get());
+    auto action = agent.execute(DynamicPercept{"key1", "value1"});
     ASSERT_FALSE(action->is_no_op());
 }
 
 TEST_F(TableDrivenAgentProgramTest, testExistingSequences)
 {
-    //ASSERT_STREQ(agent.execute(), "name");
-    ASSERT_EQ(NoOpAction::NoOp(), NoOpAction::NoOp());
+    agent.set_program(program.get());
+    ASSERT_EQ(*(agent.execute(DynamicPercept{"key1", "value1"})), *ACTION_1);
+    ASSERT_EQ(*(agent.execute(DynamicPercept{"key1", "value2"})), *ACTION_2);
+    ASSERT_EQ(*(agent.execute(DynamicPercept{"key1", "value3"})), *ACTION_3);
+}
+
+TEST_F(TableDrivenAgentProgramTest, testNonExistingSequences)
+{
+    agent.set_program(program.get());
+    ASSERT_EQ(*(agent.execute(DynamicPercept{"key1", "value1"})), *ACTION_1);
+    ASSERT_EQ(*(agent.execute(DynamicPercept{"key1", "value3"})), *NoOpAction::NoOpPtr());
 }
 
 //TODO: search for returning the address of a local variable as a pointer return value
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-    auto action = NoOpAction::NoOp();
-    auto m = action.get_map();
-    std::cout << "Map size: " << m.size() << std::endl;
-*/
-/*    const char* str = "name";
-
-    auto search = m.find(str);
-    if (search == m.end()) std::cout << "Past the end. " << std::endl;
-*/
-    //ASSERT_TRUE(true);
 

@@ -9,7 +9,8 @@
 #include "percept.h"
 #include "agent_programs/agent_program.h"
 
-class Agent : public Object {
+class Agent : public Object
+{
 protected:
     AgentProgram* ap;
 
@@ -20,7 +21,8 @@ public:
 
     const char* talk() { return "Agent..."; }
 
-    bool set_program(AgentProgram* program) {
+    bool set_program(AgentProgram* program)
+    {
         if (program) {
             ap = program;
             return true;
@@ -28,9 +30,9 @@ public:
         return false;
     }
 
-    std::unique_ptr<BaseAction> execute(Percept* per) {
-        if (ap != nullptr)
-            return ap->execute(per);
+    DynamicAction* execute(const DynamicPercept& per)
+    {
+        if (ap != nullptr) return ap->execute(per);
         return NoOpAction::NoOpPtr();
     }
 };
