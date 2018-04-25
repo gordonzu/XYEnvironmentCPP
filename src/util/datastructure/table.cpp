@@ -43,21 +43,6 @@ bool Table<Trow, Tcol, Tval>::get_values(const Trow& rowh, const Tcol& colh, Tva
     return false;
 }
 
-/*
-template<class T>
-bool Table<T>::get_values(const std::string& rowh, const std::string& colh) {
-
-    auto it = rows.find(rowh);
-    if (it != rows.end()) {
-        auto i = it->second.find(colh);
-        if (i != it->second.end()) {
-            val = i->second;
-            return true;
-        }
-    }
-    return false;
-}
-*/
 template<class Trow, class Tcol, class Tval>
 Tval Table<Trow, Tcol, Tval>::get_val() {
     return val;
@@ -74,7 +59,21 @@ size_t Table<Trow, Tcol, Tval>::map_size() {
 }
 
 
+/*
+template<class T>
+bool Table<T>::get_values(const std::string& rowh, const std::string& colh) {
 
+    auto it = rows.find(rowh);
+    if (it != rows.end()) {
+        auto i = it->second.find(colh);
+        if (i != it->second.end()) {
+            val = i->second;
+            return true;
+        }
+    }
+    return false;
+}
+*/
 
 
 

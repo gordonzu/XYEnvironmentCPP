@@ -13,17 +13,17 @@ set(sources
     src/environment/environment.cpp
     src/environment/xyenv/xy_environment.cpp
     src/util/datastructure/xy_location.cpp
-    src/util/datastructure/matrix.cpp
+        src/environment/xyenv/xy_environment_state.cpp
     test/xy_environment_test.cpp
     test/tabledriven_agent_program_test.cpp
     main.cpp
     src/util/datastructure/table.cpp
     test/table_test.cpp
-    src/agent/base_object.h
+        src/environment/environment_object.h
     src/agent/agent.h
     src/agent/percept.h
-    src/agent/base_action.cpp
-    src/agent/dynamic_attributes.cpp
+        src/agent/action.cpp
+        src/agent/dynamic_object.cpp
     test/dynamic_percept_test.cpp
     test/percept_sequence_test.cpp
     src/util/algorithm/compares.cpp

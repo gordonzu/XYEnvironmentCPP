@@ -6,18 +6,16 @@
 #include <iostream>
 #include "agent/agent.h"
 
-//using namespace::ag;
-
 class Environment {
 public:
-    void                 add_obj(Object* eo);
-    void                 add_agent(Agent* a);
-    std::set<Object*>&   get_objs();
-    std::set<Agent*>&    get_agents();
+    void                            add_obj(EnvironmentObject* eo);
+    void                            add_agent(Agent* a);
+    std::set<EnvironmentObject*>&   get_objs();
+    std::set<Agent*>&               get_agents();
 
 protected:
-    std::set<Object*>    objs;
-    std::set<Agent*>     agents;
+    std::set<EnvironmentObject*>    objs;
+    std::set<Agent*>                agents;
 };
 #endif
 

@@ -1,38 +1,38 @@
 // Created by gordonzu on 4/17/18.
 
 #include <assert.h>
-#include "dynamic_attributes.h"
+#include "dynamic_object.h"
 
-DynamicAttributes::~DynamicAttributes()
+DynamicObject::~DynamicObject()
 {
 }
 
-void DynamicAttributes::set_attribute(const char* key, const char* val)
+void DynamicObject::set_attribute(const char* key, const char* val)
 {
-    DynamicAttributes::attrib.emplace(key, val);
+    DynamicObject::attrib.emplace(key, val);
 }
 
-const char* DynamicAttributes::get_attribute(const char* key) const
+const char* DynamicObject::get_attribute(const char* key) const
 {
-    auto it = DynamicAttributes::attrib.find(key);
-    if (it != DynamicAttributes::attrib.end()) {
+    auto it = DynamicObject::attrib.find(key);
+    if (it != DynamicObject::attrib.end()) {
         return it->second;
     }
     return nullptr;
 }
 
-std::multimap<const char*, const char*> DynamicAttributes::get_map() const
+std::multimap<const char*, const char*> DynamicObject::get_map() const
 {
     return attrib;
 }
 
-std::multimap<const char*, const char*> DynamicAttributes::create_attrib_map()
+std::multimap<const char*, const char*> DynamicObject::create_attrib_map()
 {
     std::multimap<const char*, const char*> map;
     return map;
 }
 
-std::string& DynamicAttributes::get_type()
+std::string& DynamicObject::get_type()
 {
     type = typeid(*this).name();
 
@@ -42,7 +42,7 @@ std::string& DynamicAttributes::get_type()
     return type = type.substr(2, type.size());
 }
 
-std::string& DynamicAttributes::describe_attributes(std::string& type)
+std::string& DynamicObject::describe_attributes(std::string& type)
 {
     type.append("[");
     bool first = true;
@@ -61,21 +61,21 @@ std::string& DynamicAttributes::describe_attributes(std::string& type)
     return type;
 }
 
-std::string& DynamicAttributes::get_string()
+std::string& DynamicObject::get_string()
 {
     type.clear();
     type = get_type();
     return describe_attributes(type);
 }
 
-unsigned long DynamicAttributes::get_map_size()
+unsigned long DynamicObject::get_map_size()
 {
     return attrib.size();
 }
 
 
 /*
-void DynamicAttributes::erase_map()
+void DynamicObject::erase_map()
 {
     auto it = attrib.begin();
     while (it != attrib.end()) {
@@ -87,13 +87,13 @@ void DynamicAttributes::erase_map()
 
 /*
 template<class Tkey, class Tval>
-DynamicAttributes::AttribMap DynamicAttributes::attrib = []
+DynamicObject::AttribMap DynamicAttributes::attrib = []
 {
     AttribMap map;
     return map;
 }();
 */
 
-//std::multimap<const char*, const char*> DynamicAttributes::attrib = DynamicAttributes::create_attrib_map();
+//std::multimap<const char*, const char*> DynamicObject::attrib = DynamicAttributes::create_attrib_map();
 
 

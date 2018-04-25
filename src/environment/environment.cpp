@@ -8,7 +8,7 @@ std::set<Agent*>& Environment::get_agents()
     return agents;
 }
 
-std::set<Object*>& Environment::get_objs()
+std::set<EnvironmentObject*>& Environment::get_objs()
 {
     return objs;
 }
@@ -18,7 +18,7 @@ void Environment::add_agent(Agent* a)
     agents.insert(a);
 }
 
-void Environment::add_obj(Object* eo)
+void Environment::add_obj(EnvironmentObject* eo)
 {
     objs.insert(eo);
     if (auto a = dynamic_cast<Agent*>(eo)) {

@@ -5,7 +5,7 @@
 #ifndef AICPP_RULE_H
 #define AICPP_RULE_H
 
-#include "agent/dynamic_attributes.h"
+#include "agent/dynamic_object.h"
 
 class Condition
 {

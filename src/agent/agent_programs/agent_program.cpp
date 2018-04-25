@@ -6,13 +6,13 @@
 constexpr const char* TableDrivenAgentProgram::ACTION;
 
 TableDrivenAgentProgram::TableDrivenAgentProgram(
-        std::multimap<std::vector<DynamicPercept>, DynamicAction*> m)
+        std::multimap<std::vector<Percept>, Action*> m)
 {
     set_table(m);
 }
 
 void TableDrivenAgentProgram::set_table(
-        std::multimap<std::vector<DynamicPercept>, DynamicAction*> m)
+        std::multimap<std::vector<Percept>, Action*> m)
 {
     std::transform(
         m.begin(), m.end(), std::back_inserter(row_headers),
@@ -20,8 +20,8 @@ void TableDrivenAgentProgram::set_table(
     );
 
     col_headers.emplace_back(ACTION);
-    table = Table<std::vector<DynamicPercept>,
-                  std::string, DynamicAction*>(row_headers, col_headers);
+    table = Table<std::vector<Percept>,
+                  std::string, Action*>(row_headers, col_headers);
 
     for (auto& x: row_headers) {
         auto y = (m.find(x)->second);
@@ -29,17 +29,17 @@ void TableDrivenAgentProgram::set_table(
     }
 }
 
-DynamicAction* TableDrivenAgentProgram::lookup_action()
+Action* TableDrivenAgentProgram::lookup_action()
 {
-    DynamicAction* action = nullptr;
+    Action* action = nullptr;
     bool b = table.get_values(percepts, ACTION, action);
 
-    if (b == false) return NoOpAction::NoOpPtr();
+    if (b == false) return ag::NoOpAction::NoOpPtr();
 
     return action;
 }
 
-DynamicAction* TableDrivenAgentProgram::execute(const DynamicPercept& p)
+Action* TableDrivenAgentProgram::execute(const Percept& p)
 {
     percepts.emplace_back(p);
     return lookup_action();

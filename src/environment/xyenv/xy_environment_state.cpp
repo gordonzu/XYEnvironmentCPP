@@ -1,26 +1,27 @@
 // Created by gordonzu on 3/23/18.
 
-#include "matrix.h"
+#include "environment/xyenv/xy_environment_state.h"
 
 namespace xy
 {
-    Matrix::Matrix(unsigned w, unsigned h)
+    XYState::XYState(unsigned w, unsigned h)
     {
         for (unsigned x = 1; x <= w; ++x) {
             for (unsigned y = 1; y <= h; ++y) {
-                std::unique_ptr<std::set<Object*>> myset = std::make_unique<std::set<Object*>>();
+                std::unique_ptr<std::set<EnvironmentObject*>> myset =
+                        std::make_unique<std::set<EnvironmentObject*>>();
                 std::unique_ptr<XYLocation> myloc = std::make_unique<XYLocation>(x, y);
                 vec.emplace_back(*myloc, *myset);
             }
         }
     }
 
-    Matrix::~Matrix() = default;
+    XYState::~XYState() = default;
 
-    void Matrix::add_object(Object* obj, const XYLocation& xy)
+    void XYState::add_object(EnvironmentObject* obj, const XYLocation& xy)
     {
         check_for_object(obj);
-        std::set<Object*>* theset = get_set(xy);
+        std::set<EnvironmentObject*>* theset = get_set(xy);
 
         if ((its = theset->find(obj)) != theset->end()) {
             theset->erase(its);
@@ -28,7 +29,7 @@ namespace xy
         theset->insert(obj);
     }
 
-    void Matrix::check_for_object(Object *obj)
+    void XYState::check_for_object(EnvironmentObject *obj)
     {
         for (itv = vec.begin(); itv != vec.end(); ++itv) {
             if ((its = itv->second.find(obj)) != itv->second.end()) {
@@ -38,30 +39,30 @@ namespace xy
         }
     }
 
-    std::set<Object*>* Matrix::get_set(const XYLocation& xy)
+    std::set<EnvironmentObject*>* XYState::get_set(const XYLocation& xy)
     {
         if (has_xy(xy) != get_vector().end()) {
             return &(itv->second);
         }
         else {
-            set = std::make_unique<std::set<Object*>>();
+            set = std::make_unique<std::set<EnvironmentObject*>>();
             vec.emplace_back(xy, *set);
             return &((has_xy(xy))->second);
         }
     }
 
-    Vector::iterator Matrix::has_xy(const XYLocation& loc)
+    Vector::iterator XYState::has_xy(const XYLocation& loc)
     {
         itv = std::find_if(
-                Matrix::get_vector().begin(),
-                Matrix::get_vector().end(),
-                [loc](std::pair<XYLocation, std::set<Object*>>& mypair) {
+                XYState::get_vector().begin(),
+                XYState::get_vector().end(),
+                [loc](std::pair<XYLocation, std::set<EnvironmentObject*>>& mypair) {
                     return (mypair.first == loc);
                 });
         return itv;
     }
 
-    XYLocation* Matrix::get_object_location(Object *obj)
+    XYLocation* XYState::get_object_location(EnvironmentObject *obj)
     {
         for (itv = vec.begin(); itv != vec.end(); ++itv) {
             if ((its = itv->second.find(obj)) != itv->second.end()) {
@@ -71,7 +72,7 @@ namespace xy
         return nullptr;
     }
 
-    void Matrix::move_object(Object* obj, const XYLocation::Direction& dir)
+    void XYState::move_object(EnvironmentObject* obj, const XYLocation::Direction& dir)
     {
         XYLocation* temp = get_object_location(obj);
 
@@ -83,7 +84,7 @@ namespace xy
         }
     }
 
-    bool Matrix::is_blocked(const XYLocation& xy)
+    bool XYState::is_blocked(const XYLocation& xy)
     {
         for (auto& eo : *(get_set(xy))) {
             if (static_cast<Wall*>(eo)) {
@@ -93,19 +94,19 @@ namespace xy
         return false;
     }
 
-    std::vector<std::pair<XYLocation, std::set<Object*>>>& Matrix::get_vector()
+    std::vector<std::pair<XYLocation, std::set<EnvironmentObject*>>>& XYState::get_vector()
     {
         return vec;
     }
 
-    size_t Matrix::set_size(const XYLocation& xy)
+    size_t XYState::set_size(const XYLocation& xy)
     {
         return has_xy(xy)->second.size();
     }
 
-    size_t Matrix::vector_size()
+    size_t XYState::vector_size()
     {
-        return Matrix::get_vector().size();
+        return XYState::get_vector().size();
     }
 
 }

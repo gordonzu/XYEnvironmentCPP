@@ -6,36 +6,38 @@
 
 #include "util/datastructure/table.h"
 #include "util/datastructure/table.cpp"
-#include "agent/base_action.h"
+#include "agent/action.h"
 #include "agent/percept.h"
 #include <algorithm>
+
+using namespace::ag;
 
 class AgentProgram
 {
 public:
     virtual ~AgentProgram()=default;
-    virtual DynamicAction* execute(const DynamicPercept& p)=0;
+    virtual Action* execute(const Percept& p)=0;
 };
 
 class TableDrivenAgentProgram: public AgentProgram
 {
     static constexpr const char* ACTION = "action";
-    std::vector<DynamicPercept> percepts;
-    std::vector<std::vector<DynamicPercept>> row_headers;
+    std::vector<Percept> percepts;
+    std::vector<std::vector<Percept>> row_headers;
     std::vector<std::string> col_headers;
 
-    Table<std::vector<DynamicPercept>, std::string, DynamicAction*> table;
+    Table<std::vector<Percept>, std::string, Action*> table;
 
-    DynamicAction* lookup_action();
+    ag::Action* lookup_action();
 
 public:
     TableDrivenAgentProgram()=delete;
     ~TableDrivenAgentProgram() override =default;
-    TableDrivenAgentProgram(std::multimap<std::vector<DynamicPercept>,
-                            DynamicAction*> m);
+    TableDrivenAgentProgram(std::multimap<std::vector<Percept>,
+                            Action*> m);
 
-    void set_table(std::multimap<std::vector<DynamicPercept>, DynamicAction*> m);
-    virtual DynamicAction* execute(const DynamicPercept& p);
+    void set_table(std::multimap<std::vector<Percept>, Action*> m);
+    virtual Action* execute(const Percept& p);
 };
 
 #endif //AICPP_AGENT_PROGRAM_H

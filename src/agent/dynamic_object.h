@@ -8,10 +8,10 @@
 #include <map>
 #include <memory>
 
-class DynamicAttributes
+class DynamicObject
 {
 public:
-    virtual ~DynamicAttributes()=0;
+    virtual ~DynamicObject()=0;
     void set_attribute(const char* key, const char* val);
     const char* get_attribute(const char* key) const;
     std::string& get_type();
@@ -23,7 +23,7 @@ public:
     std::multimap<const char*, const char*> get_map() const;
 
 protected:
-    DynamicAttributes()=default;
+    DynamicObject()=default;
 
 private:
     std::string type;

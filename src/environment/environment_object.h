@@ -5,16 +5,16 @@
 #ifndef ENVIRONMENT_OBJECT_H
 #define ENVIRONMENT_OBJECT_H
 
-class Object {
+class EnvironmentObject {
 protected:
-    Object()=default;
+    EnvironmentObject()=default;
 public:
-    virtual ~Object()=default;
+    virtual ~EnvironmentObject()=default;
     virtual const char* talk()=0;
 };
 
 
-class Wall: public Object {
+class Wall: public EnvironmentObject {
 public:
     ~Wall() override =default;
     virtual const char* talk() { return "Wall..."; }

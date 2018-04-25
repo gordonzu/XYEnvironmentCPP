@@ -163,10 +163,10 @@ TEST_F(XYEnvironmentTest, testGetObjectsNear) {
     env.add_to(c.get(), loc3);
     env.add_to(w.get(), loc4);
 
-    std::set<Object*> agentset = env.get_objects_near(agent.get(), 3);
+    std::set<EnvironmentObject*> agentset = env.get_objects_near(agent.get(), 3);
     ASSERT_EQ(agentset.size(), size_t(2));
 
-    std::set<Object*> bset = env.get_objects_near(b.get(), 3);
+    std::set<EnvironmentObject*> bset = env.get_objects_near(b.get(), 3);
     ASSERT_EQ(bset.size(), size_t(1));
 
     env.move_object(b.get(), XYLocation::Direction::SOUTH);
@@ -175,7 +175,7 @@ TEST_F(XYEnvironmentTest, testGetObjectsNear) {
     ASSERT_EQ(bset.size(), size_t(2));
 
     env.add_to(c.get(), loc5);
-    std::set<Object*> cset = env.get_objects_near(c.get(), 4);
+    std::set<EnvironmentObject*> cset = env.get_objects_near(c.get(), 4);
     ASSERT_EQ(cset.size(), size_t(1));
 }
 

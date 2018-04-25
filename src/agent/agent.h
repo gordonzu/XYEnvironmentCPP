@@ -4,12 +4,12 @@
 #ifndef AICPP_AGENT_H
 #define AICPP_AGENT_H
 
-#include "base_object.h"
-#include "base_action.h"
+#include "environment/environment_object.h"
+#include "action.h"
 #include "percept.h"
 #include "agent_programs/agent_program.h"
 
-class Agent : public Object
+class Agent : public EnvironmentObject
 {
 protected:
     AgentProgram* ap;
@@ -30,7 +30,7 @@ public:
         return false;
     }
 
-    DynamicAction* execute(const DynamicPercept& per)
+    Action* execute(const Percept& per)
     {
         if (ap != nullptr) return ap->execute(per);
         return NoOpAction::NoOpPtr();
