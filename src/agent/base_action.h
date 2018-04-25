@@ -36,3 +36,7 @@ public:
 };
 
 #endif //AICPP_BASE_ACTION_H
+
+//TODO: have both action classes inherit from base_action and dynamicAttributes
+//TODO: Better yet, have dynamic attributes contained in the base class and have both
+//TODO: derived actions inherit from simply the single base.

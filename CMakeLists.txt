@@ -27,7 +27,7 @@ set(sources
     test/dynamic_percept_test.cpp
     test/percept_sequence_test.cpp
     src/util/algorithm/compares.cpp
-    src/agent/agent_programs/agent_program.cpp)
+    src/agent/agent_programs/agent_program.cpp test/simple_rule_test.cpp src/agent/agent_programs/simple_rule/Rule.h)
 
 add_executable(aicpp ${sources})
 target_link_libraries(aicpp gmock)
