@@ -27,11 +27,11 @@ public:
 
 TEST_F(SimpleRuleTest, TestEQUALRule)
 {
+   ASSERT_TRUE(true);
+}
     /*
     Rule r = Rule{EQUALCondition{ATTRIBUTE_CAR_IN_FRONT_IS_BRAKING, true},
                   ACTION_INITIATE_BREAKING};
     ASSERT_
     */
-    ASSERT_TRUE(true);
-}
 

@@ -6,11 +6,15 @@
 #include <algorithm>
 #include "environment/xyenv/xy_environment.h"
 
-XYEnvironment::XYEnvironment(unsigned w, unsigned h): width{w}, height{h}, state{w,h}
+XYEnvironment::XYEnvironment(unsigned w, unsigned h):
+                            width{w},
+                            height{h},
+                            state{w,h}
+                            //wall_fac{util::DynamicFactory<Wall>(w, h)},
+                            //xy_fac{util::DynamicFactory<XYLocation>(w, h)}
 {
     assert (width > 0);
     assert (height > 0);
-
 }
 
 XYEnvironment::~XYEnvironment() { }
@@ -40,12 +44,29 @@ void XYEnvironment::add_to(EnvironmentObject* eo, const XYLocation& loc)
     add_obj(eo);
 }
 
+void XYEnvironment::add_to(EnvironmentObject& eo, const XYLocation& loc)
+{
+    state.add_object(eo, loc);
+    add_obj(&eo);
+}
+
+
 XYLocation* XYEnvironment::get_location(EnvironmentObject* eo)
 {
     return state.get_object_location(eo);
 }
 
+XYLocation* XYEnvironment::get_location(EnvironmentObject& eo)
+{
+    return state.get_object_location(eo);
+}
+
 void XYEnvironment::move_object(EnvironmentObject* eo, const XYLocation::Direction& dir)
+{
+    state.move_object(eo, dir);
+}
+
+void XYEnvironment::move_object(EnvironmentObject& eo, const XYLocation::Direction& dir)
 {
     state.move_object(eo, dir);
 }
@@ -78,6 +99,24 @@ std::set<EnvironmentObject*>& XYEnvironment::get_objects_near(EnvironmentObject*
     return *near_set;
 }
 
+std::set<EnvironmentObject*>& XYEnvironment::get_objects_near(EnvironmentObject& obj, unsigned rad)
+{
+    near_set = std::make_unique<std::set<EnvironmentObject*>>();
+    XYLocation* xy = get_location(obj);
+
+    for (auto& v : get_vector()) {
+        if (in_radius(rad, *xy, v.first)) {
+            near_set->insert(v.second.begin(), v.second.end());
+        }
+    }
+
+    auto search = near_set->find(&obj);
+    if (search != near_set->end())
+        near_set->erase(search);
+
+    return *near_set;
+}
+
 bool XYEnvironment::in_radius(unsigned rad, const XYLocation& loca, const XYLocation& locb)
 {
     int xdiff = loca.getx() - locb.getx();
@@ -88,24 +127,15 @@ bool XYEnvironment::in_radius(unsigned rad, const XYLocation& loca, const XYLoca
 
 void XYEnvironment::make_perimeter()
 {
+    state.perimeter(width, height);
 
-    for (unsigned i = 0; i < width; ++i) {
-        std::unique_ptr<XYLocation> xy1 = std::make_unique<XYLocation>(i, 0);
-        std::unique_ptr<XYLocation> xy2 = std::make_unique<XYLocation>(i, height - 1);
-        std::unique_ptr<EnvironmentObject> wall1 = std::make_unique<Wall>();
-        std::unique_ptr<EnvironmentObject> wall2 = std::make_unique<Wall>();
-        add_to(wall1.get(), *xy1);
-        add_to(wall2.get(), *xy2);
-    }
+    //std::cout << "---------------------------" << std::endl;
+    //std::cout << "Set size for 0,0 leaving make_perimeter: " << get_set_size(XYLocation{0, 11}) << std::endl;
+    //std::cout << "Set size for 0,11 leaving make_perimeter: " << get_set_size(XYLocation{0, 0}) << std::endl;
+    //std::cout << "Set size for 1,0 leaving make_perimeter: " << get_set_size(XYLocation{0, 11}) << std::endl;
+    //std::cout << "Set size for 1,11 leaving make_perimeter: " << get_set_size(XYLocation{0, 0}) << std::endl;
 
-    for (unsigned i = 0; i < height; ++i) {
-        std::unique_ptr<XYLocation> xy1 = std::make_unique<XYLocation>(0, i);
-        std::unique_ptr<XYLocation> xy2 = std::make_unique<XYLocation>(width - 1, i);
-        std::unique_ptr<EnvironmentObject> wall1 = std::make_unique<Wall>();
-        std::unique_ptr<EnvironmentObject> wall2 = std::make_unique<Wall>();
-        add_to(wall1.get(), *xy1);
-        add_to(wall2.get(), *xy2);
-    }
+    //std::cout << "Leaving make_perimeter. " << std::endl;
 }
 
 Vector& XYEnvironment::get_vector()
@@ -113,6 +143,11 @@ Vector& XYEnvironment::get_vector()
     return state.get_vector();
 }
 
+/*Wall& XYEnvironment::make_wall()
+{
+    static Wall w;
+    return w;
+}*/
 
 
 

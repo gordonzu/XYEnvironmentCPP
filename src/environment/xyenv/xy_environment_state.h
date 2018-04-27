@@ -10,6 +10,7 @@
 #include <vector>
 #include <set>
 #include <algorithm>
+#include <map>
 #include "environment/environment_object.h"
 #include "util/datastructure/xy_location.h"
 
@@ -19,10 +20,13 @@ namespace xy {
 
     class XYState {
     private:
-        Vector                                          vec;
-        Vector::iterator                                itv;
-        std::unique_ptr<std::set<EnvironmentObject*>>   set;
-        std::set<EnvironmentObject*>::iterator          its;
+        Vector vec;
+        Vector::iterator itv;
+        std::unique_ptr<std::set<EnvironmentObject*>> set;
+        std::set<EnvironmentObject*>::iterator its;
+        std::vector<Wall*> walls;
+        std::vector<XYLocation*> locs;
+
 
     public:
         XYState(unsigned w, unsigned h);
@@ -32,11 +36,15 @@ namespace xy {
         Vector::iterator                has_xy(const XYLocation& loc);
         void                            check_for_object(EnvironmentObject* obj);
         void                            add_object(EnvironmentObject* obj, const XYLocation& xy);
+        void                            add_object(EnvironmentObject& obj, const XYLocation& xy);
         XYLocation*                     get_object_location(EnvironmentObject* obj);
+        XYLocation*                     get_object_location(EnvironmentObject& obj);
         void                            move_object(EnvironmentObject* obj, const XYLocation::Direction& dir);
+        void                            move_object(EnvironmentObject& obj, const XYLocation::Direction& dir);
         bool                            is_blocked(const XYLocation& xy);
         size_t                          set_size(const XYLocation& xy);
         size_t                          vector_size();
+        void                            perimeter(unsigned w, unsigned h);
     };
 }
 

@@ -13,21 +13,23 @@ set(sources
     src/environment/environment.cpp
     src/environment/xyenv/xy_environment.cpp
     src/util/datastructure/xy_location.cpp
-        src/environment/xyenv/xy_environment_state.cpp
+    src/environment/xyenv/xy_environment_state.cpp
     test/xy_environment_test.cpp
     test/tabledriven_agent_program_test.cpp
     main.cpp
     src/util/datastructure/table.cpp
     test/table_test.cpp
-        src/environment/environment_object.h
+    src/environment/environment_object.h
     src/agent/agent.h
     src/agent/percept.h
-        src/agent/action.cpp
-        src/agent/dynamic_object.cpp
+    src/agent/action.cpp
+    src/agent/dynamic_object.cpp
     test/dynamic_percept_test.cpp
     test/percept_sequence_test.cpp
     src/util/algorithm/compares.cpp
-    src/agent/agent_programs/agent_program.cpp test/simple_rule_test.cpp src/agent/agent_programs/simple_rule/Rule.h)
+    src/agent/agent_programs/agent_program.cpp
+    test/simple_rule_test.cpp
+    src/agent/agent_programs/simple_rule/Rule.h)
 
 add_executable(aicpp ${sources})
 target_link_libraries(aicpp gmock)
@@ -40,7 +42,7 @@ add_custom_command(TARGET aicpp
 
 add_custom_command(TARGET aicpp
                  POST_BUILD
-                 COMMAND valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all ./aicpp)
+#                COMMAND valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all ./aicpp)
 #                COMMAND valgrind --tool=memcheck --leak-check=yes ./aicpp)
-#                COMMAND "aicpp")
+                 COMMAND ./aicpp)
 

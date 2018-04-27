@@ -9,35 +9,26 @@
 
 namespace ag {
 
-    class Action : public DynamicObject {
+    class Action : public DynamicObject
+    {
     public:
         static constexpr const char *ATTRIBUTE_NAME = "name";
-
         Action();
-
         explicit Action(const char *name);
-
         virtual ~Action() override = default;
-
         bool operator==(const Action &) const;
-
         virtual bool is_no_op() const;
-
         static Action *DynamicPtr();
     };
 
-    class NoOpAction : public Action {
+    class NoOpAction : public Action
+    {
     public:
         NoOpAction();
-
         ~NoOpAction() override = default;
-
         bool operator==(const NoOpAction &) const;
-
         bool is_no_op() const override;
-
         static const NoOpAction &NoOp();
-
         static NoOpAction *NoOpPtr();
     };
 }
