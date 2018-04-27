@@ -20,19 +20,4 @@ public:
 
     virtual const char* talk() { return "Wall..."; }
 };
-
-/*class WallFactory
-{
-    std::shared_ptr<Wall> wall;
-
-public:
-    WallFactory()=default;
-
-    std::shared_ptr<Wall> create()
-    {
-        wall = std::make_shared<Wall>();
-        return wall;
-    }
-};
-*/
 #endif //AICPP_OBJECT_H

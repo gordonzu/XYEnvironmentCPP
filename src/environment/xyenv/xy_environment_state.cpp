@@ -8,50 +8,33 @@ namespace xy
     {
         for (unsigned x = 1; x <= w; ++x) {
             for (unsigned y = 1; y <= h; ++y) {
-                std::unique_ptr<std::set<EnvironmentObject*>> myset =
-                        std::make_unique<std::set<EnvironmentObject*>>();
-                std::unique_ptr<XYLocation> myloc = std::make_unique<XYLocation>(x, y);
-                vec.emplace_back(*myloc, *myset);
+                vec.emplace_back(
+                        XYLocation{static_cast<int>(x), static_cast<int>(y)},
+                        std::set<EnvironmentObject*>());
             }
         }
     }
 
     XYState::~XYState()
     {
-        std::for_each(walls.begin(), walls.end(), [](Wall* w){ delete w; });
-        std::for_each(locs.begin(), locs.end(), [](XYLocation* xy){ delete xy; });
-    }
+        if (walls.size())
+            std::for_each(walls.begin(), walls.end(), [](Wall* w){ delete w; });
 
-    void XYState::add_object(EnvironmentObject* obj, const XYLocation& xy)
-    {
-        check_for_object(obj);
-        std::set<EnvironmentObject*>* theset = get_set(xy);
-
-        // why am I checking the set AGAIN for the object?????
-        /*if ((its = theset->find(obj)) != theset->end()) {
-            theset->erase(its);
-        }*/
-        //std::cout << "Type of the eo: " << typeid(obj).name() << std::endl;
-        theset->insert(obj);
+        if (locs.size())
+            std::for_each(locs.begin(), locs.end(), [](XYLocation* xy){ delete xy; });
     }
 
     void XYState::add_object(EnvironmentObject& obj, const XYLocation& xy)
     {
-        check_for_object(&obj);
+        check_for_object(obj);
         std::set<EnvironmentObject*>* theset = get_set(xy);
-
-        // why am I checking the set AGAIN for the object?????
-        if ((its = theset->find(&obj)) != theset->end()) {
-            theset->erase(its);
-        }
-        //std::cout << "Type of the eo: " << typeid(obj).name() << std::endl;
         theset->insert(&obj);
-        //std::cout << "The set size after insertion: " << theset->size() << std::endl;
     }
-    void XYState::check_for_object(EnvironmentObject *obj)
+
+    void XYState::check_for_object(EnvironmentObject& obj)
     {
         for (itv = vec.begin(); itv != vec.end(); ++itv) {
-            if ((its = itv->second.find(obj)) != itv->second.end()) {
+            if ((its = itv->second.find(&obj)) != itv->second.end()) {
                 itv->second.erase(its);
                 break;
             }
@@ -61,11 +44,9 @@ namespace xy
     std::set<EnvironmentObject*>* XYState::get_set(const XYLocation& xy)
     {
         if (has_xy(xy) != get_vector().end()) {
-            //std::cout << "Found the xy location, returning the vector..." << std::endl;
             return &(itv->second);
         }
         else {
-            //std::cout << "The xy location not found, returning new vector of eo's..." << std::endl;
             set = std::make_unique<std::set<EnvironmentObject*>>();
             vec.emplace_back(xy, *set);
             return &((has_xy(xy))->second);
@@ -83,16 +64,6 @@ namespace xy
         return itv;
     }
 
-    XYLocation* XYState::get_object_location(EnvironmentObject *obj)
-    {
-        for (itv = vec.begin(); itv != vec.end(); ++itv) {
-            if ((its = itv->second.find(obj)) != itv->second.end()) {
-                return &(itv->first);
-            }
-        }
-        return nullptr;
-    }
-
     XYLocation* XYState::get_object_location(EnvironmentObject& obj)
     {
         for (itv = vec.begin(); itv != vec.end(); ++itv) {
@@ -101,18 +72,6 @@ namespace xy
             }
         }
         return nullptr;
-    }
-
-    void XYState::move_object(EnvironmentObject* obj, const XYLocation::Direction& dir)
-    {
-        XYLocation* temp = get_object_location(obj);
-
-        if (temp != nullptr) {
-            temp = temp->location_at(dir);
-            if (!(is_blocked(*temp))) {
-                add_object(obj, *temp);
-            }
-        }
     }
 
     void XYState::move_object(EnvironmentObject& obj, const XYLocation::Direction& dir)
@@ -129,19 +88,11 @@ namespace xy
 
     bool XYState::is_blocked(const XYLocation& xy)
     {
-        //std::cout << "-----------------------------------" << std::endl;
-        //std::cout << "size of set_size()... " <<  set_size(xy) << std::endl;
-        //std::cout << "-----------------------------------" << std::endl;
-
         for (auto& eo : *(get_set(xy))) {
             if (static_cast<Wall*>(eo)) {
                 return true;
-            } else {
-                //std::cout << "eo's type: " << typeid(eo).name() << std::endl;
             }
         }
-
-        //std::cout << "Returning FALSE..." << std::endl;
         return false;
     }
 

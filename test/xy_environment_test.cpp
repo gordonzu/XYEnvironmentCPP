@@ -10,8 +10,6 @@ using namespace::testing;
 class XYEnvironmentTest: public Test {
 public:
     void SetUp() override {
-        agent = Agent{};
-        wall = Wall{};
         env.add_to(agent, loc);
    	}
 

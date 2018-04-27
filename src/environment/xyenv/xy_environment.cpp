@@ -10,8 +10,6 @@ XYEnvironment::XYEnvironment(unsigned w, unsigned h):
                             width{w},
                             height{h},
                             state{w,h}
-                            //wall_fac{util::DynamicFactory<Wall>(w, h)},
-                            //xy_fac{util::DynamicFactory<XYLocation>(w, h)}
 {
     assert (width > 0);
     assert (height > 0);
@@ -38,32 +36,15 @@ size_t XYEnvironment::get_set_size(const XYLocation& xy)
     return state.set_size(xy);
 }
 
-void XYEnvironment::add_to(EnvironmentObject* eo, const XYLocation& loc)
-{
-    state.add_object(eo, loc);
-    add_obj(eo);
-}
-
 void XYEnvironment::add_to(EnvironmentObject& eo, const XYLocation& loc)
 {
     state.add_object(eo, loc);
     add_obj(&eo);
 }
 
-
-XYLocation* XYEnvironment::get_location(EnvironmentObject* eo)
-{
-    return state.get_object_location(eo);
-}
-
 XYLocation* XYEnvironment::get_location(EnvironmentObject& eo)
 {
     return state.get_object_location(eo);
-}
-
-void XYEnvironment::move_object(EnvironmentObject* eo, const XYLocation::Direction& dir)
-{
-    state.move_object(eo, dir);
 }
 
 void XYEnvironment::move_object(EnvironmentObject& eo, const XYLocation::Direction& dir)
@@ -79,24 +60,6 @@ bool XYEnvironment::is_blocked(const XYLocation &xy)
 bool XYEnvironment::is_blocked(const XYLocation &&xy)
 {
     return is_blocked(xy);
-}
-
-std::set<EnvironmentObject*>& XYEnvironment::get_objects_near(EnvironmentObject* obj, unsigned rad)
-{
-    near_set = std::make_unique<std::set<EnvironmentObject*>>();
-    XYLocation* xy = get_location(obj);
-
-    for (auto& v : get_vector()) {
-        if (in_radius(rad, *xy, v.first)) {
-            near_set->insert(v.second.begin(), v.second.end());
-        }
-    }
-
-    auto search = near_set->find(obj);
-    if (search != near_set->end())
-        near_set->erase(search);
-
-    return *near_set;
 }
 
 std::set<EnvironmentObject*>& XYEnvironment::get_objects_near(EnvironmentObject& obj, unsigned rad)
@@ -128,14 +91,6 @@ bool XYEnvironment::in_radius(unsigned rad, const XYLocation& loca, const XYLoca
 void XYEnvironment::make_perimeter()
 {
     state.perimeter(width, height);
-
-    //std::cout << "---------------------------" << std::endl;
-    //std::cout << "Set size for 0,0 leaving make_perimeter: " << get_set_size(XYLocation{0, 11}) << std::endl;
-    //std::cout << "Set size for 0,11 leaving make_perimeter: " << get_set_size(XYLocation{0, 0}) << std::endl;
-    //std::cout << "Set size for 1,0 leaving make_perimeter: " << get_set_size(XYLocation{0, 11}) << std::endl;
-    //std::cout << "Set size for 1,11 leaving make_perimeter: " << get_set_size(XYLocation{0, 0}) << std::endl;
-
-    //std::cout << "Leaving make_perimeter. " << std::endl;
 }
 
 Vector& XYEnvironment::get_vector()
@@ -143,11 +98,6 @@ Vector& XYEnvironment::get_vector()
     return state.get_vector();
 }
 
-/*Wall& XYEnvironment::make_wall()
-{
-    static Wall w;
-    return w;
-}*/
 
 
 
