@@ -7,17 +7,45 @@ DynamicObject::~DynamicObject()
 {
 }
 
-void DynamicObject::set_attribute(const char* key, const char* val)
+void DynamicObject::set_attribute(const char* key,  const char* val)
 {
+    //std::cout << "setting in attrib value: " << key << "  " << val << std::endl;
     DynamicObject::attrib.emplace(key, val);
+    //std::cout << "size of attrib: " << attrib.size() << std::endl;
+    //std::multimap<const char*, const char*>::const_iterator cit = attrib.begin();
+
+    //std::cout << "-----------------------------------------------------" << std::endl;
+    //std::cout << "-------------------------print the map----------------------------" << std::endl;
+    /*while (cit != attrib.end()) {
+        std::cout << "Key: " << cit->first << "  " << "Value: " << cit->second << std::endl;
+        ++cit;
+    }*/
+    //std::cout << "-----------------------------------------------------" << std::endl;
 }
 
 const char* DynamicObject::get_attribute(const char* key) const
 {
+
+    //std::cout << "--------------------------------------------- " << std::endl;
+    //std::cout << "Calling get_attributes()... " << std::endl;
+    //std::cout << "--------------------------------------------- " << std::endl;
+    //std::cout << "size of attrib: " << attrib.size() << std::endl;
+    //std::cout << "The key being used to search: " << key << std::endl;
+
+    //std::multimap<const char*, const char*>::const_iterator cit = attrib.begin();
+    //std::cout << "-----------------------------------------------------" << std::endl;
+    /*while (cit != attrib.end()) {
+        std::cout << "Key: " << cit->first << "  " << "Value: " << cit->second << std::endl;
+        ++cit;
+    }
+    std::cout << "-----------------------------------------------------" << std::endl;
+*/
     auto it = DynamicObject::attrib.find(key);
+    //std::cout << "Printing the value: " << it->second << std::endl;
     if (it != DynamicObject::attrib.end()) {
         return it->second;
     }
+   // std::cout << "returning nullptr..." << std::endl;
     return nullptr;
 }
 

@@ -20,6 +20,7 @@ public:
     bool                            in_radius(unsigned rad, const XYLocation& loca, const XYLocation& locb);
     void                            move_object(EnvironmentObject& eo, const XYLocation::Direction& dir);
     void                            add_to(EnvironmentObject& eo, const XYLocation& loc);
+
     void                            make_perimeter();
     XYLocation*                     get_location(EnvironmentObject& eo);
     size_t                          get_vector_size();

@@ -12,13 +12,14 @@ namespace ag {
     class Action : public DynamicObject
     {
     public:
-        static constexpr const char *ATTRIBUTE_NAME = "name";
+        static constexpr const char* ATTRIBUTE_NAME = "name";
         Action();
-        explicit Action(const char *name);
+        explicit Action(const char* name);
         virtual ~Action() override = default;
         bool operator==(const Action &) const;
         virtual bool is_no_op() const;
         static Action *DynamicPtr();
+        std::string string();
     };
 
     class NoOpAction : public Action

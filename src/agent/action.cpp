@@ -26,6 +26,17 @@ namespace ag {
         return &instance;
     }
 
+    std::string Action::string()
+    {
+        std::string out;
+        out.append("Action[");
+        out.append(Action::ATTRIBUTE_NAME);
+        out.append("=");
+        out.append(this->get_attribute(Action::ATTRIBUTE_NAME));
+        out.append("]");
+        return out;
+    }
+
     NoOpAction::NoOpAction() : Action{"NoOp"} {
     }
 

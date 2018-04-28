@@ -29,7 +29,7 @@ set(sources
     src/util/algorithm/compares.cpp
     src/agent/agent_programs/agent_program.cpp
     test/simple_rule_test.cpp
-    src/agent/agent_programs/simple_rule/Rule.h)
+        src/agent/agent_programs/simple_rule/rule.h src/agent/agent_programs/simple_rule/condition.h)
 
 add_executable(aicpp ${sources})
 target_link_libraries(aicpp gmock)

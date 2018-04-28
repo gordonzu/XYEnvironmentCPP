@@ -18,6 +18,7 @@ public:
         set_attribute(key, val);
     }
 
+
     Percept(const char* key1, const char* val1, const char* key2, const char* val2)
     {
         set_attribute(key1, val1);
