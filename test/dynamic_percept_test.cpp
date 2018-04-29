@@ -14,26 +14,28 @@ class DynamicPerceptTest: public Test
 
 TEST_F(DynamicPerceptTest, testString)
 {
-    auto p  = std::make_unique<Percept>("key1", "value1");
     auto str = "Percept[key1=value1]";
-    ASSERT_STREQ(p->get_string().c_str(), str);
+    auto percept1 = Percept{"key1", "value1"};
+    ASSERT_STREQ(percept1.get_string().c_str(), str);
 
-    auto x = std::make_unique<Percept>("key1", "value1", "key2", "value2");
     auto str2 = "Percept[key1=value1, key2=value2]";
-    ASSERT_STREQ(x->get_string().c_str(), str2);
+    auto percept2 = Percept{"key1", "value1", "key2", "value2"};
+    ASSERT_STREQ(percept2.get_string().c_str(), str2);
+
 }
 
 TEST_F(DynamicPerceptTest, testEquals)
 {
-    auto p1  = std::make_unique<Percept>();
-    auto p2  = std::make_unique<Percept>();
-    ASSERT_TRUE(*p1 == *p2);
+    auto p3  = Percept{};
+    auto p4  = Percept{};
 
-    auto p3  = std::make_unique<Percept>("key1", "value1");
-    ASSERT_FALSE(*p1 == *p3);
+    ASSERT_TRUE(p3 == p4);
 
-    auto p4  = std::make_unique<Percept>("key1", "value1");
-    ASSERT_TRUE(*p3 == *p4);
+    auto p5  = Percept{"key1", "value1"};
+    ASSERT_FALSE(p3 == p5);
+
+    auto p6  = Percept{"key1", "value1"};
+    ASSERT_TRUE(p6 == p5);
 }
 
 

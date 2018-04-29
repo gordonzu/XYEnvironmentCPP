@@ -13,39 +13,39 @@ class PerceptSequenceTest: public Test
 
 TEST_F(PerceptSequenceTest, testString)
 {
-    std::vector<std::unique_ptr<Percept>> vec;
+    std::vector<Percept> vec;
     std::string str4;
 
-    vec.emplace_back(std::make_unique<Percept>("key1", "value1"));
+    vec.emplace_back(Percept{"key1", "value1"});
     auto str1 = "Percept[key1=value1]";
-    auto str2 = vec[0]->get_string();
+    auto str2 = vec[0].get_string();
     ASSERT_STREQ(str2.c_str(), str1);
 
-    vec.emplace_back(std::make_unique<Percept>("key1", "value1", "key2", "value2"));
+    vec.emplace_back(Percept{"key1", "value1", "key2", "value2"});
     auto str3 = "Percept[key1=value1], Percept[key1=value1, key2=value2]";
-    ASSERT_STREQ(util::print_vec(std::move(vec), str4).c_str(), str3);
+    ASSERT_STREQ(util::print_vec(vec, str4).c_str(), str3);
 }
 
 TEST_F(PerceptSequenceTest, testEquals)
 {
     bool b;
-    std::vector<std::unique_ptr<Percept>> v1;
-    std::vector<std::unique_ptr<Percept>> v2;
+    std::vector<Percept> v1;
+    std::vector<Percept> v2;
 
-    b = util::vec_compare(std::move(v1), std::move(v2));
+    b = util::vec_compare(v1, v2);
     ASSERT_TRUE(b);
 
-    v1.emplace_back(std::make_unique<Percept>("key1", "value1"));
-    b = util::vec_compare(std::move(v1), std::move(v2));
+    v1.emplace_back(Percept{"key1", "value1"});
+    b = util::vec_compare(v1, v2);
     ASSERT_FALSE(b);
 
-    v2.emplace_back(std::make_unique<Percept>("key1", "value1"));
-    b = util::vec_compare(std::move(v1), std::move(v2));
+    v2.emplace_back(Percept{"key1", "value1"});
+    b = util::vec_compare(v1, v2);
     ASSERT_TRUE(b);
 
     v2.clear();
-    v2.emplace_back(std::make_unique<Percept>("key2", "value1"));
-    b = util::vec_compare(std::move(v1), std::move(v2));
+    v2.emplace_back(Percept{"key2", "value1"});
+    b = util::vec_compare(v1, v2);
     ASSERT_FALSE(b);
 }
 

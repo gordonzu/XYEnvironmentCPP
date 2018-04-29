@@ -9,7 +9,8 @@ using namespace::testing;
 
 class XYEnvironmentTest: public Test {
 public:
-    void SetUp() override {
+    void SetUp() override
+    {
         env.add_to(agent, loc);
    	}
 
@@ -19,7 +20,8 @@ public:
     XYEnvironment env{10, 12};
 };
 
-TEST_F(XYEnvironmentTest, testMatrixConstruction) {
+TEST_F(XYEnvironmentTest, testMatrixConstruction)
+{
     ASSERT_EQ(env.get_vector_size(), size_t(120));
     ASSERT_EQ(env.get_set_size(loc), size_t(1));
     env.add_to(wall, loc);
@@ -27,14 +29,16 @@ TEST_F(XYEnvironmentTest, testMatrixConstruction) {
 }
 
 
-TEST_F(XYEnvironmentTest, testObjectIsUnique) {
+TEST_F(XYEnvironmentTest, testObjectIsUnique)
+{
     auto xy = XYLocation{5, 6};
     env.add_to(agent, xy);
     ASSERT_EQ(env.get_set_size(xy), size_t(1));
     ASSERT_EQ(env.get_set_size(loc), size_t(0));
 }
 
-TEST_F(XYEnvironmentTest, testBaseClassContainers) {
+TEST_F(XYEnvironmentTest, testBaseClassContainers)
+{
     Agent a;
     Wall w;
     env.add_to(a, loc);
@@ -43,12 +47,14 @@ TEST_F(XYEnvironmentTest, testBaseClassContainers) {
     ASSERT_EQ(env.get_objs().size(), size_t(3));
 }
 
-TEST_F(XYEnvironmentTest, testGetCurrentLocation) {
+TEST_F(XYEnvironmentTest, testGetCurrentLocation)
+{
     auto xy = XYLocation{3, 4};
     ASSERT_EQ(*(env.get_location(agent)), xy);
 }
 
-TEST_F(XYEnvironmentTest, testAddObject2) {
+TEST_F(XYEnvironmentTest, testAddObject2)
+{
     auto xyloc = XYLocation{9, 9};
     env.add_to(wall, xyloc);
     ASSERT_EQ(env.get_agents().size(), size_t(1));
@@ -58,7 +64,8 @@ TEST_F(XYEnvironmentTest, testAddObject2) {
     ASSERT_EQ(env.get_set_size(xy), size_t(1));
 }
 
-TEST_F(XYEnvironmentTest, testAddObjectTwice) {
+TEST_F(XYEnvironmentTest, testAddObjectTwice)
+{
     ASSERT_EQ(env.get_agents().size(), size_t(1));
 
     Agent agent1;
@@ -70,7 +77,8 @@ TEST_F(XYEnvironmentTest, testAddObjectTwice) {
     ASSERT_EQ(*(env.get_location(agent1)), xy);
 }
 
-TEST_F(XYEnvironmentTest, testMoveObjectToAbsoluteLocation) {
+TEST_F(XYEnvironmentTest, testMoveObjectToAbsoluteLocation)
+{
     Agent a;
     auto xyloc = XYLocation{5, 5};
     auto xy = XYLocation{5, 5};
@@ -79,7 +87,8 @@ TEST_F(XYEnvironmentTest, testMoveObjectToAbsoluteLocation) {
     ASSERT_EQ(*(env.get_location(a)), xy);
 }
 
-TEST_F(XYEnvironmentTest, testMoveObject) {
+TEST_F(XYEnvironmentTest, testMoveObject)
+{
     auto xyloc = XYLocation{5, 5};
     auto xy = XYLocation{5, 5};
 
@@ -100,7 +109,8 @@ TEST_F(XYEnvironmentTest, testMoveObject) {
     ASSERT_EQ(*(env.get_location(agent)), xy);
 }
 
-TEST_F(XYEnvironmentTest, testIsBlocked) {
+TEST_F(XYEnvironmentTest, testIsBlocked)
+{
     auto loc = XYLocation{5, 5};
     ASSERT_EQ(env.get_set_size(loc), size_t(0));
     ASSERT_EQ(env.is_blocked(loc), false);
@@ -110,7 +120,8 @@ TEST_F(XYEnvironmentTest, testIsBlocked) {
     ASSERT_EQ(env.is_blocked(loc), true);
 }
 
-TEST_F(XYEnvironmentTest, testMoveWithBlockingWalls) {
+TEST_F(XYEnvironmentTest, testMoveWithBlockingWalls)
+{
     auto loc = XYLocation{5, 5};
     env.add_to(agent, loc);
 
@@ -136,7 +147,8 @@ TEST_F(XYEnvironmentTest, testMoveWithBlockingWalls) {
     ASSERT_EQ(*(env.get_location(agent)), endloc);
 }
 
-TEST_F(XYEnvironmentTest, testGetSet) {
+TEST_F(XYEnvironmentTest, testGetSet)
+{
     auto loc = XYLocation{5, 7};
     env.add_to(agent, loc);
     ASSERT_EQ(env.get_set_size(loc), size_t(1));
@@ -145,7 +157,8 @@ TEST_F(XYEnvironmentTest, testGetSet) {
     ASSERT_EQ(env.get_set_size(loc), size_t(2));
 }
 
-TEST_F(XYEnvironmentTest, testGetObjectsNear) {
+TEST_F(XYEnvironmentTest, testGetObjectsNear)
+{
     auto loc = XYLocation{5, 5};
     auto loc2 = XYLocation{7, 4};
     auto loc3 = XYLocation{5, 7};
@@ -178,7 +191,8 @@ TEST_F(XYEnvironmentTest, testGetObjectsNear) {
     ASSERT_EQ(cset.size(), size_t(1));
 }
 
-TEST_F(XYEnvironmentTest, testOutOfRangeXYLocations) {
+TEST_F(XYEnvironmentTest, testOutOfRangeXYLocations)
+{
     auto loc = XYLocation{11, 13};
     auto loc2 = XYLocation{25, 30};
     auto loc3 = XYLocation{0, 0};
@@ -196,7 +210,8 @@ TEST_F(XYEnvironmentTest, testOutOfRangeXYLocations) {
     ASSERT_EQ(env.get_set_size(loc3), size_t(1));
 }
 
-TEST_F(XYEnvironmentTest, testMakePerimeter) {
+TEST_F(XYEnvironmentTest, testMakePerimeter)
+{
     env.make_perimeter();
     ASSERT_TRUE(env.is_blocked(XYLocation{0, 0}));
     ASSERT_TRUE(env.is_blocked(XYLocation{0, 6}));
