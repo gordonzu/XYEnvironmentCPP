@@ -26,10 +26,10 @@ set(sources
     src/agent/dynamic_object.cpp
     test/dynamic_percept_test.cpp
     test/percept_sequence_test.cpp
-    src/util/algorithm/compares.cpp
+        src/util/algorithm/utils.cpp
     src/agent/agent_programs/agent_program.cpp
     test/simple_rule_test.cpp
-        src/agent/agent_programs/simple_rule/rule.h src/agent/agent_programs/simple_rule/condition.h)
+        src/agent/agent_programs/simple_rule/rule.h src/agent/agent_programs/simple_rule/condition.h src/agent/dyn_object.cpp src/agent/dyn_object.h src/agent/dyn_percept.h src/util/boolean.h src/util/string.h test/dyn_percept_test.cpp)
 
 add_executable(aicpp ${sources})
 target_link_libraries(aicpp gmock)

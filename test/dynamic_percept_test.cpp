@@ -4,6 +4,7 @@
 
 #include <agent/percept.h>
 #include <memory>
+#include <agent/dyn_percept.h>
 #include "gmock/gmock.h"
 
 using namespace::testing;
@@ -37,5 +38,6 @@ TEST_F(DynamicPerceptTest, testEquals)
     auto p6  = Percept{"key1", "value1"};
     ASSERT_TRUE(p6 == p5);
 }
+
 
 
