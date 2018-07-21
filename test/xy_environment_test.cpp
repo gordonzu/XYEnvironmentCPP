@@ -1,4 +1,5 @@
-// XYEnvironmentTest.cpp
+// xy_environment_test.cpp
+// Gordon Zuehlke May 2017
 
 #include <string>
 #include <vector>
