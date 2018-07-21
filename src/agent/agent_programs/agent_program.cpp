@@ -5,14 +5,12 @@
 
 constexpr const char* TableDrivenAgentProgram::ACTION;
 
-TableDrivenAgentProgram::TableDrivenAgentProgram(
-        std::multimap<std::vector<Percept>, Action*> m)
+TableDrivenAgentProgram::TableDrivenAgentProgram(std::multimap<std::vector<Percept>, Action*> m)
 {
     set_table(m);
 }
 
-void TableDrivenAgentProgram::set_table(
-        std::multimap<std::vector<Percept>, Action*> m)
+void TableDrivenAgentProgram::set_table(std::multimap<std::vector<Percept>, Action*> m)
 {
     std::transform(
         m.begin(), m.end(), std::back_inserter(row_headers),

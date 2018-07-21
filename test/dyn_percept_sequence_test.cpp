@@ -1,19 +1,22 @@
-// Created by gordonzu on 4/19/18.
+//
+// Created by gordonzu on 4/30/18.
+//
 
 #include <agent/percept.h>
 #include <memory>
 #include <agent/dyn_percept.h>
 #include <util/string.h>
+#include <gtest/gtest.h>
 #include "gmock/gmock.h"
 #include "util/algorithm/utils.h"
 
 using namespace::testing;
 
-class PerceptSequenceTest: public Test
+class DynPerceptSequenceTest: public Test
 {
 };
 
-TEST_F(PerceptSequenceTest, testString)
+TEST_F(DynPerceptSequenceTest, testString)
 {
     std::vector<Percept> vec;
     std::string str4;
@@ -28,7 +31,7 @@ TEST_F(PerceptSequenceTest, testString)
     ASSERT_STREQ(util::print_vec(vec, str4).c_str(), str3);
 }
 
-TEST_F(PerceptSequenceTest, testEquals)
+TEST_F(DynPerceptSequenceTest, testEquals)
 {
     bool b;
     std::vector<Percept> v1;
@@ -50,28 +53,4 @@ TEST_F(PerceptSequenceTest, testEquals)
     b = util::vec_compare(v1, v2);
     ASSERT_FALSE(b);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

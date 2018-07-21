@@ -1,9 +1,8 @@
-//
 // Created by gordonzu on 3/23/18.
 //
 
-#ifndef XYENVIRONMENT_MATRIX_H
-#define XYENVIRONMENT_MATRIX_H
+#ifndef XYSTATE_H
+#define XYSTATE_H
 
 #include <memory>
 #include <iostream>
@@ -44,4 +43,4 @@ namespace xy {
     };
 }
 
-#endif //XYENVIRONMENT_MATRIX_H
+#endif //XYSTATE_H
