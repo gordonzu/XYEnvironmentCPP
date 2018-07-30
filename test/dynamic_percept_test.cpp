@@ -4,7 +4,6 @@
 
 #include <agent/percept.h>
 #include <memory>
-#include <agent/dyn_percept.h>
 #include "gmock/gmock.h"
 
 using namespace::testing;

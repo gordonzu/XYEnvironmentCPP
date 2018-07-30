@@ -2,7 +2,6 @@
 
 #include <agent/percept.h>
 #include <memory>
-#include <agent/dyn_percept.h>
 #include <util/string.h>
 #include "gmock/gmock.h"
 #include "util/algorithm/utils.h"
